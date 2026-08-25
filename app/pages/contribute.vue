@@ -2,6 +2,7 @@
 import { LINKS } from '#shared/constants/project'
 
 const { loggedIn } = useUserSession()
+const { discordUrl, hasDiscord } = useCommunityLinks()
 
 const areas = [
   { icon: 'i-lucide-code', label: 'Java and Fabric', text: 'Mixins, gameplay systems, networking and the four first-party mods.' },
@@ -178,7 +179,10 @@ useSeoMeta({
           </UButton>
         </div>
 
-        <div class="rounded-xl border border-[var(--ui-border)] p-6">
+        <div
+          v-if="hasDiscord"
+          class="rounded-xl border border-[var(--ui-border)] p-6"
+        >
           <UIcon
             name="i-simple-icons-discord"
             class="size-5 text-gold-400"
@@ -190,7 +194,7 @@ useSeoMeta({
             Design conversations happen on Discord before they become proposals. Playtest sessions are organised there too.
           </p>
           <UButton
-            :to="LINKS.discord"
+            :to="discordUrl"
             target="_blank"
             rel="noopener"
             color="neutral"

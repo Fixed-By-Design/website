@@ -1,6 +1,7 @@
 <script setup lang="ts">
 defineProps<{
   title: string
+  headingLevel?: 2 | 3
   vanilla: string
   problem: string
   solution: string
@@ -11,9 +12,12 @@ defineProps<{
 <template>
   <article class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] overflow-hidden">
     <header class="flex items-center justify-between gap-4 border-b border-[var(--ui-border)] px-6 py-4">
-      <h3 class="font-semibold text-[var(--ui-text-highlighted)]">
+      <component
+        :is="`h${headingLevel ?? 3}`"
+        class="font-semibold text-[var(--ui-text-highlighted)]"
+      >
         {{ title }}
-      </h3>
+      </component>
       <UButton
         v-if="to"
         :to="to"

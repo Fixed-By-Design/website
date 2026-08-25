@@ -39,6 +39,7 @@ export default defineNuxtConfig({
     adminGithubLogins: '',
     public: {
       siteUrl: 'http://localhost:3000',
+      discordUrl: '',
     },
   },
 

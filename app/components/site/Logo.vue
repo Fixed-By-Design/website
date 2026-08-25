@@ -1,6 +1,8 @@
 <script setup lang="ts">
+const ASPECT_RATIO = 1444 / 640
+
 const props = withDefaults(defineProps<{ height?: number }>(), { height: 28 })
-const width = computed(() => Math.round(props.height * 2.14))
+const width = computed(() => Math.round(props.height * ASPECT_RATIO))
 </script>
 
 <template>

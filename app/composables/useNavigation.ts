@@ -14,6 +14,8 @@ export function usePrimaryNavigation() {
 }
 
 export function useFooterNavigation(): FooterColumn[] {
+  const { discordUrl, hasDiscord } = useCommunityLinks()
+
   return [
     {
       label: 'Project',
@@ -32,7 +34,7 @@ export function useFooterNavigation(): FooterColumn[] {
         { label: 'Contribute', to: '/contribute' },
         { label: 'Send feedback', to: '/feedback' },
         { label: 'Report a bug', to: '/feedback?type=bug' },
-        { label: 'Discord', to: LINKS.discord, target: '_blank' },
+        ...(hasDiscord ? [{ label: 'Discord', to: discordUrl, target: '_blank' }] : []),
       ],
     },
     {

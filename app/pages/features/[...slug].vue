@@ -94,6 +94,7 @@ useSeoMeta({
       <UPage>
         <UPageBody>
           <SiteRedesignExample
+            :heading-level="2"
             :title="`${feature.title}: the reasoning`"
             :vanilla="feature.vanilla"
             :problem="feature.problem"

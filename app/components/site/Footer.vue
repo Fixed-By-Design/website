@@ -2,6 +2,7 @@
 import { LINKS, PROJECT } from '#shared/constants/project'
 
 const columns = useFooterNavigation()
+const { discordUrl, hasDiscord } = useCommunityLinks()
 const year = new Date().getFullYear()
 </script>
 
@@ -37,7 +38,8 @@ const year = new Date().getFullYear()
                 aria-label="Modrinth"
               />
               <UButton
-                :to="LINKS.discord"
+                v-if="hasDiscord"
+                :to="discordUrl"
                 target="_blank"
                 rel="noopener"
                 icon="i-simple-icons-discord"

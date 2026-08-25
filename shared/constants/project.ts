@@ -14,7 +14,6 @@ export const LINKS = {
   modrinthOrg: 'https://modrinth.com/organization/fixed-by-design',
   github: 'https://github.com/Fixed-By-Design',
   githubWebsite: 'https://github.com/Fixed-By-Design/website',
-  discord: 'https://discord.gg/fixed-by-design',
   kofi: 'https://ko-fi.com/akitain',
 } as const
 

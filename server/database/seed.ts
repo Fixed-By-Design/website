@@ -1,4 +1,5 @@
 import { createHash } from 'node:crypto'
+import { sql } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
 import * as schema from './schema'
@@ -231,16 +232,20 @@ const FEEDBACK = [
   },
 ]
 
-await db.delete(schema.feedbackTags)
-await db.delete(schema.problemTags)
-await db.delete(schema.feedback)
-await db.delete(schema.roadmapItems)
-await db.delete(schema.externalLinks)
-await db.delete(schema.proposals)
-await db.delete(schema.designDecisions)
-await db.delete(schema.problems)
-await db.delete(schema.tags)
-await db.delete(schema.serverApiKeys)
+await db.execute(sql`
+  truncate table
+    ${schema.feedbackTags},
+    ${schema.problemTags},
+    ${schema.feedback},
+    ${schema.roadmapItems},
+    ${schema.externalLinks},
+    ${schema.proposals},
+    ${schema.designDecisions},
+    ${schema.problems},
+    ${schema.tags},
+    ${schema.serverApiKeys}
+  restart identity cascade
+`)
 
 const insertedTags = await db.insert(schema.tags).values(TAGS).returning()
 const tagBySlug = new Map(insertedTags.map(tag => [tag.slug, tag]))
@@ -273,18 +278,6 @@ await db.insert(schema.problemTags).values([
   { problemId: problemBySlug.get('treasure-fishing-unreachable-without-bait')!.id, tagId: tagBySlug.get('balance')!.id },
   { problemId: problemBySlug.get('rail-networks-lose-to-elytra')!.id, tagId: tagBySlug.get('transportation')!.id },
   { problemId: problemBySlug.get('enchantment-discovery-has-no-in-game-signal')!.id, tagId: tagBySlug.get('enchanting')!.id },
-])
-
-await db.insert(schema.externalLinks).values([
-  {
-    entityType: 'problem',
-    entityId: problemBySlug.get('treasure-fishing-unreachable-without-bait')!.id,
-    kind: 'issue',
-    repository: 'Fixed-By-Design/exploration-reloaded',
-    number: 42,
-    url: 'https://github.com/Fixed-By-Design/exploration-reloaded/issues/42',
-    label: 'Fishing treasure unreachable without bait',
-  },
 ])
 
 const devKey = 'fbd_localdevelopmentkeydonotuseinprod'

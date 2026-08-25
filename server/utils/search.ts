@@ -1,6 +1,7 @@
 import type { H3Event } from 'h3'
 import { queryCollection, queryCollectionSearchSections } from '@nuxt/content/server'
 import type { SearchGroup, SearchResult, SearchSourceId } from '#shared/types/search'
+import { rankSearchResults, searchTerms, SEARCH_MIN_LENGTH } from '#shared/utils/searchScore'
 import { FEATURE_CATEGORY_LABELS, type FeatureCategory } from '#shared/constants/features'
 import { ROADMAP_STATUS_LABELS } from '#shared/constants/workflow'
 
@@ -19,34 +20,16 @@ export function registerSearchSource(source: SearchSource) {
   sources.sort((a, b) => a.order - b.order)
 }
 
-function score(result: SearchResult, terms: string[]) {
-  const title = result.title.toLowerCase()
-  const haystack = [title, result.description?.toLowerCase() ?? '', ...(result.breadcrumb ?? []).map(s => s.toLowerCase())].join(' ')
-
-  let total = 0
-  for (const term of terms) {
-    if (title.startsWith(term)) total += 100
-    else if (title.includes(term)) total += 60
-    else if (haystack.includes(term)) total += 20
-    else return 0
-  }
-  return total
-}
-
 export async function runSearch(event: H3Event, query: string, limitPerSource = 6): Promise<SearchGroup[]> {
-  const terms = query.toLowerCase().split(/\s+/).filter(Boolean)
-  if (!terms.length) return []
+  const terms = searchTerms(query)
+  if (query.trim().length < SEARCH_MIN_LENGTH || !terms.length) return []
 
-  const groups = await Promise.all(sources.map(async (source) => {
-    const items = (await source.fetch(event))
-      .map(item => ({ item, rank: score(item, terms) }))
-      .filter(entry => entry.rank > 0)
-      .sort((a, b) => b.rank - a.rank)
-      .slice(0, limitPerSource)
-      .map(entry => entry.item)
-
-    return { id: source.id, label: source.label, icon: source.icon, items }
-  }))
+  const groups = await Promise.all(sources.map(async source => ({
+    id: source.id,
+    label: source.label,
+    icon: source.icon,
+    items: rankSearchResults(await source.fetch(event), terms, limitPerSource),
+  })))
 
   return groups.filter(group => group.items.length > 0)
 }

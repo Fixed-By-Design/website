@@ -2,6 +2,7 @@
 import { refDebounced } from '@vueuse/core'
 import type { CommandPaletteGroup, CommandPaletteItem } from '@nuxt/ui'
 import type { SearchGroup } from '#shared/types/search'
+import { SEARCH_MIN_LENGTH } from '#shared/utils/searchScore'
 
 const { open } = useContentSearch()
 const searchTerm = ref('')
@@ -9,15 +10,26 @@ const debounced = refDebounced(searchTerm, 150)
 
 defineShortcuts({ meta_k: () => (open.value = !open.value) })
 
-const { data, status } = await useFetch<SearchGroup[]>('/api/search', {
+const canSearch = computed(() => debounced.value.trim().length >= SEARCH_MIN_LENGTH)
+
+const { data, status, refresh } = await useFetch<SearchGroup[]>('/api/search', {
+  key: 'site-search',
   query: { q: debounced },
   immediate: false,
   default: () => [],
-  watch: [debounced],
+  watch: false,
+})
+
+watch(debounced, () => {
+  if (!canSearch.value) {
+    data.value = []
+    return
+  }
+  refresh()
 })
 
 const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => {
-  if (debounced.value.length < 2) {
+  if (!canSearch.value) {
     return [{
       id: 'shortcuts',
       label: 'Jump to',
