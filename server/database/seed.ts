@@ -31,11 +31,11 @@ const PROBLEMS = [
     affectedSystems: ['multiplayer'],
   },
   {
-    slug: 'treasure-fishing-unreachable-without-bait',
-    title: 'Fishing treasure is unreachable without bait',
-    summary: 'The pool selection maths puts the treasure band at zero width when no bait is held, so a player fishing normally can never roll a treasure result.',
-    context: 'Bait is a new concept introduced by the fishing redesign. A player who has not discovered it experiences fishing as strictly worse than vanilla, with no signal explaining why.',
-    evidence: 'Derived from the pool selection formula: with no bait, chanceGood is zero, so the treasure band cannot be reached.',
+    slug: 'bait-is-not-discoverable',
+    title: 'Players do not discover that fishing uses bait',
+    summary: 'The fishing rework introduces bait as a new concept, but nothing in game names it. Players fish without bait, conclude fishing is worse than vanilla, and stop.',
+    context: 'Bait power is shown on the items that carry it, but only if a player already knows to look. Nothing at the rod, the water or the catch points at the mechanic.',
+    evidence: 'Playtest sessions during the 1.8 cycle. Every tested player fished for a while without bait and none worked out that bait existed.',
     status: 'confirmed' as const,
     severity: 'high' as const,
     affectedSystems: ['fishing'],
@@ -86,11 +86,11 @@ const ROADMAP = [
   {
     slug: 'make-bait-discoverable',
     title: 'Make fishing bait discoverable',
-    summary: 'Surface the bait system so that fishing without it is a choice rather than an accident, and treasure becomes reachable through normal play.',
+    summary: 'Surface the bait system in game so that fishing without it is a deliberate choice rather than something a player never learns about.',
     status: 'planned' as const,
     domain: 'Fishing',
     targetVersion: '1.9.0',
-    problemSlug: 'treasure-fishing-unreachable-without-bait',
+    problemSlug: 'bait-is-not-discoverable',
     sortOrder: 3,
   },
   {
@@ -164,7 +164,7 @@ const FEEDBACK = [
     problemSlug: null,
   },
   {
-    message: 'Spent two hours fishing and never got a single treasure item. Is treasure fishing actually implemented?',
+    message: 'Fished for two hours and the catches were all cod and junk. Is fishing meant to be this thin now?',
     type: 'bug' as const,
     source: 'minecraft' as const,
     version: '1.8.0',
@@ -174,7 +174,7 @@ const FEEDBACK = [
     x: -812.3,
     y: 63,
     z: 1204.9,
-    problemSlug: 'treasure-fishing-unreachable-without-bait',
+    problemSlug: 'bait-is-not-discoverable',
   },
   {
     message: 'I put an enchanted book in a chiseled bookshelf expecting to lose it and was confused when it stayed. Nothing tells you that.',
@@ -275,7 +275,7 @@ await db.insert(schema.feedbackTags).values([
 
 await db.insert(schema.problemTags).values([
   { problemId: problemBySlug.get('multiplayer-sleep-interrupts-everyone')!.id, tagId: tagBySlug.get('multiplayer')!.id },
-  { problemId: problemBySlug.get('treasure-fishing-unreachable-without-bait')!.id, tagId: tagBySlug.get('balance')!.id },
+  { problemId: problemBySlug.get('bait-is-not-discoverable')!.id, tagId: tagBySlug.get('balance')!.id },
   { problemId: problemBySlug.get('rail-networks-lose-to-elytra')!.id, tagId: tagBySlug.get('transportation')!.id },
   { problemId: problemBySlug.get('enchantment-discovery-has-no-in-game-signal')!.id, tagId: tagBySlug.get('enchanting')!.id },
 ])

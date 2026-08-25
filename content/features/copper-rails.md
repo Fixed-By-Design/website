@@ -68,7 +68,3 @@ The 1.21.2 improved minecart movement is forced on in every world, with no exper
 - Landing off-rail uses real block friction, so carts slide on ice and grip on stone
 - A cart with passengers zeroes fall damage for itself and everyone in it
 - Powered and activator rails hard-brake non-furnace carts back to 8 b/s, which is how you build a station
-
-::warning
-The `max_minecart_speed` gamerule is visible in world creation but has no effect. Speed is decided by the rail under the cart.
-::

@@ -34,7 +34,11 @@ pnpm db:seed
 pnpm dev
 ```
 
-`.env` needs a `NUXT_SESSION_PASSWORD` of at least 32 characters, a `NUXT_DATABASE_URL`, and a GitHub OAuth application with `http://localhost:3000/auth/github` as its callback URL. Put your own GitHub login in `NUXT_ADMIN_GITHUB_LOGINS` to be promoted to admin on first sign-in.
+`.env` needs a `NUXT_SESSION_PASSWORD` of at least 32 characters, a `NUXT_DATABASE_URL`, and a GitHub OAuth application with `http://localhost:3000/auth/github` as its callback URL.
+
+`NUXT_ADMIN_GITHUB_LOGINS` must contain your GitHub login before you sign in for the first time, otherwise the account is created as `player` and the dashboard stays locked. It accepts a comma-separated list and is re-checked on every sign-in, so setting it later and signing in again also works.
+
+`NUXT_PUBLIC_DISCORD_URL` is optional. Every Discord link on the site is hidden while it is empty.
 
 The seed script prints a development server API key you can use against the Minecraft endpoint.
 
