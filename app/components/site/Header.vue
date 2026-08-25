@@ -46,6 +46,7 @@ const links = usePrimaryNavigation()
 
       <SiteDownloadButton
         label="Download"
+        pending-label="Soon"
         class="hidden shrink-0 sm:inline-flex"
       />
 

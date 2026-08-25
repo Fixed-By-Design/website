@@ -3,11 +3,13 @@ import { LINKS, MODPACK_AVAILABLE } from '#shared/constants/project'
 
 withDefaults(defineProps<{
   label?: string
+  pendingLabel?: string
   size?: 'sm' | 'md' | 'lg' | 'xl'
   block?: boolean
   variant?: 'solid' | 'subtle'
 }>(), {
   label: 'Download on Modrinth',
+  pendingLabel: 'Soon on Modrinth',
   size: 'md',
   block: false,
   variant: 'solid',
@@ -39,6 +41,6 @@ withDefaults(defineProps<{
     class="font-medium"
     aria-label="The modpack is not released yet"
   >
-    Soon on Modrinth
+    {{ pendingLabel }}
   </UButton>
 </template>
