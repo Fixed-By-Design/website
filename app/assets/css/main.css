@@ -1,0 +1,99 @@
+@import "tailwindcss";
+@import "@nuxt/ui";
+
+@theme static {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --color-gold-50: #fffbeb;
+  --color-gold-100: #fef3c7;
+  --color-gold-200: #fde68a;
+  --color-gold-300: #f7d65c;
+  --color-gold-400: #f3c947;
+  --color-gold-500: #ebac22;
+  --color-gold-600: #dd7709;
+  --color-gold-700: #b45c07;
+  --color-gold-800: #92470b;
+  --color-gold-900: #78390d;
+  --color-gold-950: #451d05;
+
+  --color-navy-50: #eeedfa;
+  --color-navy-100: #dcdaf4;
+  --color-navy-200: #b8b2e6;
+  --color-navy-300: #918ad3;
+  --color-navy-400: #6c62b8;
+  --color-navy-500: #4f4596;
+  --color-navy-600: #3b3178;
+  --color-navy-700: #2a215d;
+  --color-navy-800: #1b1348;
+  --color-navy-900: #100839;
+  --color-navy-950: #0a0047;
+
+  --brand-navy: #0a0047;
+  --brand-gold: #ebac22;
+  --brand-gold-light: #f3c947;
+  --brand-gold-deep: #dd7709;
+}
+
+:root {
+  --ui-radius: 0.5rem;
+}
+
+.dark {
+  --ui-bg: var(--color-navy-950);
+  --ui-bg-muted: #0d0450;
+  --ui-bg-elevated: #150c56;
+  --ui-bg-accented: #1e1465;
+  --ui-bg-inverted: var(--color-navy-50);
+
+  --ui-border: #241a6b;
+  --ui-border-muted: #1b1160;
+  --ui-border-accented: #322676;
+  --ui-border-inverted: var(--color-navy-100);
+
+  --ui-text-dimmed: #8e88c4;
+  --ui-text-muted: #a9a4d5;
+  --ui-text-toned: #c4c0e4;
+  --ui-text: #ebe9f8;
+  --ui-text-highlighted: #ffffff;
+  --ui-text-inverted: var(--color-navy-950);
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem;
+}
+
+body {
+  background-color: var(--ui-bg);
+  color: var(--ui-text);
+  -webkit-font-smoothing: antialiased;
+}
+
+.brand-gradient-text {
+  background: linear-gradient(180deg, var(--color-gold-500) 0%, var(--color-gold-300) 55%, #fdf0b8 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.brand-grid {
+  background-image:
+    linear-gradient(to right, color-mix(in oklab, var(--color-navy-500) 22%, transparent) 1px, transparent 1px),
+    linear-gradient(to bottom, color-mix(in oklab, var(--color-navy-500) 22%, transparent) 1px, transparent 1px);
+  background-size: 64px 64px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
