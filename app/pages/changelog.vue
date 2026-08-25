@@ -92,23 +92,15 @@ useSeoMeta({
               v-if="release.highlights?.length"
               class="rounded-xl border border-gold-500/25 bg-gold-500/[0.05] p-5"
             >
-              <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-gold-400">
-                <UIcon
-                  name="i-lucide-sparkles"
-                  class="size-3.5"
-                />
+              <h3 class="text-sm font-semibold uppercase tracking-wider text-gold-400">
                 Highlights
               </h3>
               <ul class="mt-3 space-y-2 text-sm text-[var(--ui-text-toned)]">
                 <li
                   v-for="item in release.highlights"
                   :key="item"
-                  class="flex gap-2"
+                  class="border-s border-gold-500/30 ps-3"
                 >
-                  <UIcon
-                    name="i-lucide-plus"
-                    class="mt-1 size-3 shrink-0 text-gold-400"
-                  />
                   {{ item }}
                 </li>
               </ul>
@@ -118,23 +110,15 @@ useSeoMeta({
               v-if="release.fixes?.length"
               class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-5"
             >
-              <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-                <UIcon
-                  name="i-lucide-wrench"
-                  class="size-3.5"
-                />
+              <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
                 Fixes
               </h3>
               <ul class="mt-3 space-y-2 text-sm text-[var(--ui-text-muted)]">
                 <li
                   v-for="item in release.fixes"
                   :key="item"
-                  class="flex gap-2"
+                  class="border-s border-[var(--ui-border-accented)] ps-3"
                 >
-                  <UIcon
-                    name="i-lucide-check"
-                    class="mt-1 size-3 shrink-0"
-                  />
                   {{ item }}
                 </li>
               </ul>
@@ -144,23 +128,15 @@ useSeoMeta({
               v-if="release.breaking?.length"
               class="rounded-xl border border-red-500/25 bg-red-500/[0.05] p-5"
             >
-              <h3 class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-red-400">
-                <UIcon
-                  name="i-lucide-triangle-alert"
-                  class="size-3.5"
-                />
+              <h3 class="text-sm font-semibold uppercase tracking-wider text-red-400">
                 Breaking changes
               </h3>
               <ul class="mt-3 space-y-2 text-sm text-[var(--ui-text-toned)]">
                 <li
                   v-for="item in release.breaking"
                   :key="item"
-                  class="flex gap-2"
+                  class="border-s border-red-500/40 ps-3"
                 >
-                  <UIcon
-                    name="i-lucide-alert-circle"
-                    class="mt-1 size-3 shrink-0 text-red-400"
-                  />
                   {{ item }}
                 </li>
               </ul>
@@ -175,7 +151,6 @@ useSeoMeta({
 
       <UEmpty
         v-else
-        icon="i-lucide-tag"
         title="No releases yet"
         description="Release notes appear here as versions ship."
       />

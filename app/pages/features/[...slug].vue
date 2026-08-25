@@ -70,14 +70,12 @@ useSeoMeta({
             :label="MOD_LABELS[feature.mod as ModId]"
             color="neutral"
             variant="subtle"
-            icon="i-lucide-package"
           />
           <UBadge
             v-if="feature.since"
             :label="`Since ${feature.since}`"
             color="neutral"
             variant="subtle"
-            icon="i-lucide-tag"
           />
         </div>
 

@@ -32,11 +32,7 @@ defineProps<{
 
     <dl class="grid divide-y divide-[var(--ui-border)] md:grid-cols-3 md:divide-x md:divide-y-0">
       <div class="p-6">
-        <dt class="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-          <UIcon
-            name="i-lucide-box"
-            class="size-3.5"
-          />
+        <dt class="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
           Vanilla
         </dt>
         <dd class="text-sm leading-relaxed text-[var(--ui-text-muted)]">
@@ -45,11 +41,7 @@ defineProps<{
       </div>
 
       <div class="p-6">
-        <dt class="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-          <UIcon
-            name="i-lucide-triangle-alert"
-            class="size-3.5"
-          />
+        <dt class="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
           Problem
         </dt>
         <dd class="text-sm leading-relaxed text-[var(--ui-text-muted)]">
@@ -58,11 +50,7 @@ defineProps<{
       </div>
 
       <div class="bg-gold-500/[0.04] p-6">
-        <dt class="mb-2 flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-gold-400">
-          <UIcon
-            name="i-lucide-wrench"
-            class="size-3.5"
-          />
+        <dt class="mb-2 text-xs font-semibold uppercase tracking-wider text-gold-400">
           Fixed by Design
         </dt>
         <dd class="text-sm leading-relaxed text-[var(--ui-text-toned)]">

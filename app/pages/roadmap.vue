@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { ROADMAP_BOARD_STATUSES, ROADMAP_STATUS_LABELS } from '#shared/constants/workflow'
 import type { PublicRoadmapItem } from '#shared/types/roadmap'
 
 const { data: items } = await useFetch<PublicRoadmapItem[]>('/api/roadmap', { default: () => [] })
@@ -14,18 +13,12 @@ const domains = computed(() => [
 const filtered = computed(() =>
   domain.value === 'all' ? items.value : items.value.filter(item => item.domain === domain.value))
 
-const columns = computed(() =>
-  ROADMAP_BOARD_STATUSES.map(status => ({
-    status,
-    label: ROADMAP_STATUS_LABELS[status],
-    items: filtered.value.filter(item => item.status === status),
-  })))
-
+const milestones = computed(() => buildRoadmapTimeline(filtered.value))
 const rejected = computed(() => filtered.value.filter(item => item.status === 'rejected'))
 
 useSeoMeta({
   title: 'Roadmap',
-  description: 'The public roadmap for Fixed by Design: what is being explored, designed, built, playtested and released.',
+  description: 'What Fixed by Design is building next, what is being explored, and what has already shipped.',
 })
 </script>
 
@@ -35,7 +28,7 @@ useSeoMeta({
       <UContainer>
         <UPageHeader
           title="Roadmap"
-          description="Product and game design initiatives, not every technical task. Development work lives on GitHub."
+          description="Product and game design initiatives, in the order we expect to reach them. Development tasks live on GitHub."
         />
       </UContainer>
     </div>
@@ -53,69 +46,70 @@ useSeoMeta({
         </p>
       </div>
 
-      <div class="mt-8 hidden gap-4 xl:grid xl:grid-cols-6">
-        <section
-          v-for="column in columns"
-          :key="column.status"
-          class="min-w-0"
+      <ol
+        v-if="milestones.length"
+        class="mt-10 space-y-10 border-s border-[var(--ui-border)] ps-6 sm:ps-8"
+      >
+        <li
+          v-for="milestone in milestones"
+          :key="milestone.id"
+          class="relative"
         >
-          <div class="mb-3 flex items-center justify-between gap-2 border-b border-[var(--ui-border)] pb-2">
-            <h2 class="text-sm font-semibold text-[var(--ui-text-highlighted)]">
-              {{ column.label }}
-            </h2>
-            <span class="text-xs tabular-nums text-[var(--ui-text-dimmed)]">{{ column.items.length }}</span>
-          </div>
-          <div class="space-y-3">
-            <RoadmapCard
-              v-for="item in column.items"
-              :key="item.slug"
-              :item="item"
-            />
-            <p
-              v-if="!column.items.length"
-              class="rounded-lg border border-dashed border-[var(--ui-border)] p-4 text-center text-xs text-[var(--ui-text-dimmed)]"
-            >
-              Nothing here
-            </p>
-          </div>
-        </section>
-      </div>
+          <span
+            class="absolute -start-6 top-2 size-2.5 rounded-full ring-4 ring-[var(--ui-bg)] sm:-start-8"
+            :class="milestone.shipped ? 'bg-[var(--ui-border-accented)]' : 'bg-gold-500'"
+            aria-hidden="true"
+          />
 
-      <div class="mt-8 space-y-8 xl:hidden">
-        <section
-          v-for="column in columns.filter(c => c.items.length)"
-          :key="column.status"
-        >
-          <h2 class="mb-3 flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-gold-400">
-            {{ column.label }}
-            <span class="text-xs tabular-nums text-[var(--ui-text-dimmed)]">{{ column.items.length }}</span>
-          </h2>
-          <div class="grid gap-3 md:grid-cols-2">
+          <header class="mb-4">
+            <p
+              class="text-xs font-semibold uppercase tracking-wider"
+              :class="milestone.shipped ? 'text-[var(--ui-text-dimmed)]' : 'text-gold-400'"
+            >
+              {{ milestone.horizon }}
+            </p>
+            <h2 class="mt-1 text-xl font-semibold text-[var(--ui-text-highlighted)]">
+              {{ milestone.version ? `Version ${milestone.version}` : 'Unscheduled' }}
+            </h2>
+            <p class="mt-1 text-sm text-[var(--ui-text-muted)]">
+              {{ milestone.description }}
+            </p>
+          </header>
+
+          <div class="grid gap-3 lg:grid-cols-2">
             <RoadmapCard
-              v-for="item in column.items"
+              v-for="item in milestone.items"
               :key="item.slug"
               :item="item"
+              :muted="milestone.shipped"
             />
           </div>
-        </section>
-      </div>
+        </li>
+      </ol>
+
+      <UEmpty
+        v-else
+        class="mt-16"
+        title="Nothing on the roadmap"
+        description="No initiative matches that system."
+      />
 
       <section
         v-if="rejected.length"
-        class="mt-12"
+        class="mt-16 border-t border-[var(--ui-border)] pt-10"
       >
-        <h2 class="mb-3 text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-          Rejected
+        <h2 class="text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
+          Not planned
         </h2>
-        <p class="mb-4 max-w-2xl text-sm text-[var(--ui-text-muted)]">
-          Ideas that were considered and turned down. Kept public so the reasoning is not lost.
+        <p class="mt-2 max-w-2xl text-sm text-[var(--ui-text-muted)]">
+          Considered and turned down. Kept public so the reasoning is not lost.
         </p>
-        <div class="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        <div class="mt-4 grid gap-3 lg:grid-cols-2">
           <RoadmapCard
             v-for="item in rejected"
             :key="item.slug"
             :item="item"
-            show-status
+            muted
           />
         </div>
       </section>

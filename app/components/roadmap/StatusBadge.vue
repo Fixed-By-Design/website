@@ -3,25 +3,25 @@ import { ROADMAP_STATUS_LABELS, type RoadmapStatus } from '#shared/constants/wor
 
 const props = defineProps<{ status: RoadmapStatus }>()
 
-const config: Record<RoadmapStatus, { color: 'neutral' | 'info' | 'primary' | 'warning' | 'success' | 'error', icon: string }> = {
-  'exploring': { color: 'neutral', icon: 'i-lucide-search' },
-  'accepted': { color: 'info', icon: 'i-lucide-check' },
-  'planned': { color: 'info', icon: 'i-lucide-calendar' },
-  'in-progress': { color: 'primary', icon: 'i-lucide-hammer' },
-  'playtesting': { color: 'warning', icon: 'i-lucide-gamepad-2' },
-  'released': { color: 'success', icon: 'i-lucide-check-circle-2' },
-  'rejected': { color: 'error', icon: 'i-lucide-x' },
+const colors: Record<RoadmapStatus, 'neutral' | 'info' | 'primary' | 'warning' | 'success' | 'error'> = {
+  'exploring': 'neutral',
+  'accepted': 'info',
+  'planned': 'info',
+  'in-progress': 'primary',
+  'playtesting': 'warning',
+  'released': 'success',
+  'rejected': 'error',
 }
 
-const badge = computed(() => config[props.status])
+const color = computed(() => colors[props.status])
 </script>
 
 <template>
   <UBadge
     :label="ROADMAP_STATUS_LABELS[status]"
-    :color="badge.color"
-    :icon="badge.icon"
+    :color="color"
     variant="subtle"
     size="sm"
+    class="shrink-0"
   />
 </template>

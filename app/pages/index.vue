@@ -2,12 +2,20 @@
 import { LINKS, PROJECT } from '#shared/constants/project'
 import { PILLAR_DEFINITIONS } from '#shared/constants/pillars'
 
+const VISIBLE_EXAMPLES = 4
+const expanded = ref(false)
+
 const { data: examples } = await useAsyncData('home-examples', () =>
   queryCollection('features')
     .select('path', 'title', 'vanilla', 'problem', 'solution', 'order')
     .where('featured', '=', true)
     .order('order', 'ASC')
     .all(), { default: () => [] })
+
+const visibleExamples = computed(() =>
+  expanded.value ? examples.value : examples.value.slice(0, VISIBLE_EXAMPLES))
+
+const hiddenCount = computed(() => Math.max(examples.value.length - VISIBLE_EXAMPLES, 0))
 
 useSeoMeta({
   title: 'Minecraft Survival, fixed by design',
@@ -86,11 +94,7 @@ useSeoMeta({
         <div
           class="mx-auto mt-16 flex aspect-video max-w-5xl items-center justify-center rounded-xl border border-dashed border-[var(--ui-border-accented)] bg-[var(--ui-bg-muted)]"
         >
-          <p class="flex items-center gap-2 text-sm text-[var(--ui-text-dimmed)]">
-            <UIcon
-              name="i-lucide-image"
-              class="size-4"
-            />
+          <p class="text-sm text-[var(--ui-text-dimmed)]">
             Gameplay footage
           </p>
         </div>
@@ -122,23 +126,19 @@ useSeoMeta({
           <ul class="grid gap-3 sm:grid-cols-2 lg:content-start">
             <li
               v-for="item in [
-                { icon: 'i-lucide-trending-up', label: 'Dominant strategies', text: 'One correct answer crowds out every alternative.' },
-                { icon: 'i-lucide-fast-forward', label: 'Trivialised progression', text: 'A single item ends a whole progression curve.' },
-                { icon: 'i-lucide-users', label: 'Multiplayer friction', text: 'Rules built for one player, applied to twenty.' },
-                { icon: 'i-lucide-archive', label: 'Forgotten mechanics', text: 'Whole systems nobody has a reason to touch.' },
-                { icon: 'i-lucide-repeat', label: 'Tedium without decisions', text: 'Time spent that never asks you to choose.' },
-                { icon: 'i-lucide-unlink', label: 'Systems undermining systems', text: 'One feature quietly deleting another.' },
+                { label: 'Dominant strategies', text: 'One correct answer crowds out every alternative.' },
+                { label: 'Trivialised progression', text: 'A single item ends a whole progression curve.' },
+                { label: 'Multiplayer friction', text: 'Rules built for one player, applied to twenty.' },
+                { label: 'Forgotten mechanics', text: 'Whole systems nobody has a reason to touch.' },
+                { label: 'Tedium without decisions', text: 'Time spent that never asks you to choose.' },
+                { label: 'Systems undermining systems', text: 'One feature quietly deleting another.' },
               ]"
               :key="item.label"
               class="rounded-lg border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-4"
             >
-              <div class="flex items-center gap-2 text-sm font-medium text-[var(--ui-text-highlighted)]">
-                <UIcon
-                  :name="item.icon"
-                  class="size-4 text-gold-400"
-                />
+              <p class="text-sm font-medium text-[var(--ui-text-highlighted)]">
                 {{ item.label }}
-              </div>
+              </p>
               <p class="mt-1.5 text-sm text-[var(--ui-text-dimmed)]">
                 {{ item.text }}
               </p>
@@ -179,13 +179,13 @@ useSeoMeta({
             Vanilla, the problem, and the fix.
           </h2>
           <p class="mt-4 text-[var(--ui-text-muted)]">
-            Every feature is documented the same way. Here is what that looks like on four of them.
+            Every feature is documented the same way. Here is what that looks like in practice.
           </p>
         </div>
 
         <div class="mt-10 space-y-5">
           <SiteRedesignExample
-            v-for="example in examples"
+            v-for="example in visibleExamples"
             :key="example.path"
             :title="example.title"
             :vanilla="example.vanilla"
@@ -193,6 +193,20 @@ useSeoMeta({
             :solution="example.solution"
             :to="example.path"
           />
+        </div>
+
+        <div
+          v-if="hiddenCount"
+          class="mt-6 flex justify-center"
+        >
+          <UButton
+            color="neutral"
+            variant="subtle"
+            :trailing-icon="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
+            @click="expanded = !expanded"
+          >
+            {{ expanded ? 'Show less' : `Show ${hiddenCount} more` }}
+          </UButton>
         </div>
       </UContainer>
     </section>

@@ -55,7 +55,6 @@ function coordinates(entry: FeedbackEntry) {
         color="neutral"
         variant="outline"
         size="sm"
-        icon="i-lucide-tag"
       />
       <time
         :datetime="entry.createdAt"
