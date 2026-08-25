@@ -3,6 +3,7 @@ import type { DropdownMenuItem } from '@nuxt/ui'
 import { ROLE_RANK } from '#shared/constants/workflow'
 
 const { loggedIn, user, clear } = useUserSession()
+const { githubConfigured } = useAuthAvailability()
 
 const canTriage = computed(() => (user.value ? ROLE_RANK[user.value.role] >= ROLE_RANK.maintainer : false))
 
@@ -41,8 +42,8 @@ const items = computed<DropdownMenuItem[][]>(() => [
 
   <UButton
     v-else
-    to="/auth/github"
-    external
+    :to="githubConfigured ? '/auth/github' : '/signin'"
+    :external="githubConfigured"
     color="neutral"
     variant="ghost"
     icon="i-lucide-log-in"

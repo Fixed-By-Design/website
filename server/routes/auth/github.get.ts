@@ -46,6 +46,11 @@ export default defineOAuthGitHubEventHandler({
 
   onError(event, error) {
     console.error('GitHub OAuth failed:', error)
-    return sendRedirect(event, '/?auth=failed')
+
+    const reason = String(error?.message ?? '').includes('Missing NUXT_OAUTH_GITHUB')
+      ? 'not-configured'
+      : 'failed'
+
+    return sendRedirect(event, `/signin?error=${reason}`)
   },
 })

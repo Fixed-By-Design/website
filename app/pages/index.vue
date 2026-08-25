@@ -22,6 +22,10 @@ useSeoMeta({
   description: PROJECT.description,
   ogTitle: `${PROJECT.name} - ${PROJECT.tagline}`,
   ogDescription: PROJECT.description,
+  ogImage: '/media/og-catalogue.png',
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageAlt: 'The Catalogue enchanting screen in Fixed by Design',
 })
 </script>
 
@@ -94,14 +98,24 @@ useSeoMeta({
           </p>
         </div>
 
-        <div
+        <figure
           v-reveal="{ y: 26 }"
-          class="mx-auto mt-16 flex aspect-video max-w-5xl items-center justify-center rounded-xl border border-dashed border-[var(--ui-border-accented)] bg-[var(--ui-bg-muted)]"
+          class="mx-auto mt-16 max-w-5xl"
         >
-          <p class="text-sm text-[var(--ui-text-dimmed)]">
-            Gameplay footage
-          </p>
-        </div>
+          <NuxtImg
+            src="/media/catalogue-screen.png"
+            alt="The Catalogue in game: an enchanting table screen listing enchantments from the surrounding chiseled bookshelves, with a tooltip showing the reagent, experience and slot cost of Mending I"
+            width="2000"
+            height="1081"
+            sizes="100vw md:768px lg:1024px"
+            format="webp"
+            quality="85"
+            class="w-full rounded-xl border border-[var(--ui-border-accented)]"
+          />
+          <figcaption class="mt-3 text-center text-sm text-[var(--ui-text-dimmed)]">
+            The Catalogue: every enchantment your bookshelves can teach, with its exact price.
+          </figcaption>
+        </figure>
       </UContainer>
     </section>
 

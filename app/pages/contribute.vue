@@ -3,6 +3,7 @@ import { LINKS } from '#shared/constants/project'
 
 const { loggedIn } = useUserSession()
 const { discordUrl, hasDiscord } = useCommunityLinks()
+const { githubConfigured } = useAuthAvailability()
 
 const areas = [
   { icon: 'i-lucide-code', label: 'Java and Fabric', text: 'Mixins, gameplay systems, networking and the four first-party mods.' },
@@ -54,8 +55,8 @@ useSeoMeta({
         <div class="mt-6 flex flex-wrap gap-3">
           <UButton
             v-if="!loggedIn"
-            to="/auth/github"
-            external
+            :to="githubConfigured ? '/auth/github' : '/signin'"
+            :external="githubConfigured"
             size="lg"
             icon="i-simple-icons-github"
           >

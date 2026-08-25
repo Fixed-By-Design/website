@@ -1,0 +1,125 @@
+- generic [ref=f45e2]:
+  - link "Skip to content" [ref=f45e3] [cursor=pointer]:
+    - /url: "#main-content"
+  - banner [ref=f45e4]:
+    - generic [ref=f45e5]:
+      - link "Fixed by Design, home" [ref=f45e7] [cursor=pointer]:
+        - /url: /
+        - img "Fixed by Design" [ref=f45e8]
+      - navigation [ref=f45e10]:
+        - list [ref=f45e12]:
+          - listitem [ref=f45e13]:
+            - link "Features" [ref=f45e14] [cursor=pointer]:
+              - /url: /features
+          - listitem [ref=f45e16]:
+            - link "Wiki" [ref=f45e17] [cursor=pointer]:
+              - /url: /wiki
+          - listitem [ref=f45e19]:
+            - link "Roadmap" [ref=f45e20] [cursor=pointer]:
+              - /url: /roadmap
+          - listitem [ref=f45e22]:
+            - link "Changelog" [ref=f45e23] [cursor=pointer]:
+              - /url: /changelog
+          - listitem [ref=f45e25]:
+            - link "Contribute" [ref=f45e26] [cursor=pointer]:
+              - /url: /contribute
+      - generic [ref=f45e28]:
+        - button "Search… k" [ref=f45e29]:
+          - generic [ref=f45e31]: Search…
+          - generic [ref=f45e32]: k
+        - link "Fixed by Design on GitHub" [ref=f45e35] [cursor=pointer]:
+          - /url: https://github.com/Fixed-By-Design
+        - link "Download" [ref=f45e37] [cursor=pointer]:
+          - /url: https://modrinth.com/modpack/fixed-smp-modpack
+        - link "Sign in with GitHub" [ref=f45e39] [cursor=pointer]:
+          - /url: /signin
+  - main [ref=f45e41]:
+    - generic [ref=f45e43]:
+      - generic [ref=f45e44]:
+        - img "Fixed by Design" [ref=f45e45]
+        - heading "Sign in" [level=1] [ref=f45e46]
+        - paragraph [ref=f45e47]: Fixed by Design uses GitHub for authentication. Contributors and maintainers get access to the dashboard; everyone else gets an account for feedback and discussion.
+      - generic [ref=f45e48]:
+        - heading "GitHub sign-in is not configured on this instance" [level=2] [ref=f45e49]
+        - paragraph [ref=f45e50]: The server has no GitHub OAuth credentials, so there is nothing to redirect to. If you are running this locally, create an OAuth app and fill in three values.
+        - list [ref=f45e51]:
+          - listitem [ref=f45e52]:
+            - text: 1. Create an OAuth app at
+            - link "github.com/settings/developers" [ref=f45e53] [cursor=pointer]:
+              - /url: https://github.com/settings/developers
+            - text: "with this authorization callback URL:"
+            - code [ref=f45e54]: http://localhost:3000/auth/github
+          - listitem [ref=f45e55]:
+            - text: 2. Put the credentials in
+            - code [ref=f45e56]: .env
+            - text: ":"
+            - code [ref=f45e57]: NUXT_OAUTH_GITHUB_CLIENT_ID= NUXT_OAUTH_GITHUB_CLIENT_SECRET= NUXT_ADMIN_GITHUB_LOGINS=your-login
+          - listitem [ref=f45e58]: 3. Restart the server. Nuxt reads environment variables at boot, not on reload.
+        - paragraph [ref=f45e59]:
+          - text: Without your login in
+          - code [ref=f45e60]: NUXT_ADMIN_GITHUB_LOGINS
+          - text: ", the first sign-in creates a player account and the dashboard stays locked. It is re-checked on every sign-in."
+      - paragraph [ref=f45e61]:
+        - text: Everything except the dashboard works without an account.
+        - link "Send feedback" [ref=f45e62] [cursor=pointer]:
+          - /url: /feedback
+  - contentinfo [ref=f45e63]:
+    - generic [ref=f45e66]:
+      - generic [ref=f45e67]:
+        - img "Fixed by Design" [ref=f45e68]
+        - paragraph [ref=f45e69]: An opinionated redesign of Minecraft Survival, built for both solo and multiplayer. Built on Fabric for Minecraft 26.1.2.
+        - generic [ref=f45e70]:
+          - link "GitHub" [ref=f45e71] [cursor=pointer]:
+            - /url: https://github.com/Fixed-By-Design
+          - link "Modrinth" [ref=f45e73] [cursor=pointer]:
+            - /url: https://modrinth.com/modpack/fixed-smp-modpack
+      - navigation [ref=f45e75]:
+        - generic [ref=f45e76]:
+          - generic [ref=f45e77]:
+            - heading "Project" [level=3] [ref=f45e78]
+            - list [ref=f45e79]:
+              - listitem [ref=f45e80]:
+                - link "Features" [ref=f45e81] [cursor=pointer]:
+                  - /url: /features
+              - listitem [ref=f45e83]:
+                - link "Wiki" [ref=f45e84] [cursor=pointer]:
+                  - /url: /wiki
+              - listitem [ref=f45e86]:
+                - link "Roadmap" [ref=f45e87] [cursor=pointer]:
+                  - /url: /roadmap
+              - listitem [ref=f45e89]:
+                - link "Changelog" [ref=f45e90] [cursor=pointer]:
+                  - /url: /changelog
+              - listitem [ref=f45e92]:
+                - link "Design decisions" [ref=f45e93] [cursor=pointer]:
+                  - /url: /design
+              - listitem [ref=f45e95]:
+                - link "The modpack" [ref=f45e96] [cursor=pointer]:
+                  - /url: /modpack
+          - generic [ref=f45e98]:
+            - heading "Participate" [level=3] [ref=f45e99]
+            - list [ref=f45e100]:
+              - listitem [ref=f45e101]:
+                - link "Contribute" [ref=f45e102] [cursor=pointer]:
+                  - /url: /contribute
+              - listitem [ref=f45e104]:
+                - link "Send feedback" [ref=f45e105] [cursor=pointer]:
+                  - /url: /feedback
+              - listitem [ref=f45e107]:
+                - link "Report a bug" [ref=f45e108] [cursor=pointer]:
+                  - /url: /feedback?type=bug
+          - generic [ref=f45e110]:
+            - heading "Elsewhere" [level=3] [ref=f45e111]
+            - list [ref=f45e112]:
+              - listitem [ref=f45e113]:
+                - link "Modrinth" [ref=f45e114] [cursor=pointer]:
+                  - /url: https://modrinth.com/modpack/fixed-smp-modpack
+              - listitem [ref=f45e117]:
+                - link "GitHub" [ref=f45e118] [cursor=pointer]:
+                  - /url: https://github.com/Fixed-By-Design
+              - listitem [ref=f45e121]:
+                - link "Support the project" [ref=f45e122] [cursor=pointer]:
+                  - /url: https://ko-fi.com/akitain
+    - generic [ref=f45e125]:
+      - paragraph [ref=f45e127]: Fixed SMP 1.8.0 · Minecraft 26.1.2
+      - paragraph [ref=f45e129]: © 2026 Fixed by Design. Not affiliated with Mojang or Microsoft.
