@@ -20,6 +20,7 @@ const status = ref(String(route.query.status ?? 'new'))
 const type = ref('all')
 const source = ref('all')
 const version = ref('')
+const tag = ref('all')
 const page = ref(1)
 
 const query = computed(() => ({
@@ -27,6 +28,7 @@ const query = computed(() => ({
   ...(type.value !== 'all' && { type: type.value }),
   ...(source.value !== 'all' && { source: source.value }),
   ...(version.value && { version: version.value }),
+  ...(tag.value !== 'all' && { tag: tag.value }),
   page: page.value,
   perPage: 20,
 }))
@@ -38,7 +40,14 @@ const { data, refresh, status: fetchStatus } = await useFetch<FeedbackPage>('/ap
 
 const { data: problems, refresh: refreshProblems } = await useFetch<ProblemSummary[]>('/api/dashboard/problems', { default: () => [] })
 
-watch([status, type, source, version], () => (page.value = 1))
+watch([status, type, source, version, tag], () => (page.value = 1))
+
+const { data: tags } = await useFetch<{ slug: string, label: string }[]>('/api/dashboard/tags', { default: () => [] })
+
+const tagOptions = computed(() => [
+  { label: 'All tags', value: 'all' },
+  ...tags.value.map(entry => ({ label: entry.label, value: entry.slug })),
+])
 
 const statusOptions = [
   { label: 'All statuses', value: 'all' },
@@ -84,6 +93,27 @@ async function confirmAttach() {
   await triage(attachTarget.value, 'attach-problem', { problemId: selectedProblemId.value })
   attachTarget.value = null
   selectedProblemId.value = undefined
+}
+
+const duplicateTarget = ref<FeedbackEntry | null>(null)
+const duplicateOpen = computed({
+  get: () => duplicateTarget.value !== null,
+  set: (value: boolean) => {
+    if (!value) duplicateTarget.value = null
+  },
+})
+const selectedDuplicateId = ref<string | undefined>()
+
+const duplicateOptions = computed(() =>
+  data.value.items
+    .filter(item => item.id !== duplicateTarget.value?.id)
+    .map(item => ({ label: item.message.slice(0, 80), value: item.id })))
+
+async function confirmDuplicate() {
+  if (!duplicateTarget.value || !selectedDuplicateId.value) return
+  await triage(duplicateTarget.value, 'mark-duplicate', { duplicateOfId: selectedDuplicateId.value })
+  duplicateTarget.value = null
+  selectedDuplicateId.value = undefined
 }
 
 const createTarget = ref<FeedbackEntry | null>(null)
@@ -213,6 +243,12 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
         class="w-40"
         aria-label="Filter by source"
       />
+      <USelect
+        v-model="tag"
+        :items="tagOptions"
+        class="w-40"
+        aria-label="Filter by tag"
+      />
       <UInput
         v-model="version"
         placeholder="Version"
@@ -247,6 +283,7 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
         @triage="action => triage(entry, action)"
         @attach="attachTarget = entry"
         @create-problem="openCreate(entry)"
+        @mark-duplicate="duplicateTarget = entry"
       />
 
       <UPagination
@@ -299,6 +336,43 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
           @click="confirmAttach"
         >
           Attach
+        </UButton>
+      </template>
+    </UModal>
+
+    <UModal
+      v-model:open="duplicateOpen"
+      title="Mark as duplicate"
+      description="Point this entry at the feedback it repeats. Neither entry is deleted."
+    >
+      <template #body>
+        <UFormField
+          label="Duplicate of"
+          name="duplicate"
+          required
+        >
+          <USelectMenu
+            v-model="selectedDuplicateId"
+            :items="duplicateOptions"
+            value-key="value"
+            placeholder="Choose the original entry"
+            class="w-full"
+          />
+        </UFormField>
+      </template>
+      <template #footer>
+        <UButton
+          color="neutral"
+          variant="ghost"
+          @click="duplicateTarget = null"
+        >
+          Cancel
+        </UButton>
+        <UButton
+          :disabled="!selectedDuplicateId"
+          @click="confirmDuplicate"
+        >
+          Mark duplicate
         </UButton>
       </template>
     </UModal>

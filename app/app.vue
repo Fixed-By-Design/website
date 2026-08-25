@@ -30,9 +30,20 @@ useSeoMeta({
 <template>
   <UApp>
     <NuxtLoadingIndicator color="#ebac22" />
+
+    <a
+      href="#main-content"
+      class="sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-[60] focus:rounded-md focus:bg-gold-500 focus:px-4 focus:py-2 focus:font-medium focus:text-navy-950"
+    >
+      Skip to content
+    </a>
+
     <SiteHeader />
 
-    <UMain>
+    <UMain
+      id="main-content"
+      tabindex="-1"
+    >
       <NuxtPage />
     </UMain>
 

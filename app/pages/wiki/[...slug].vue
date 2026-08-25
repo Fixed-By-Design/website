@@ -54,7 +54,10 @@ useSeoMeta({
 
         <USeparator class="my-10" />
 
-        <UContentSurround v-if="surround" :surround="surround" />
+        <UContentSurround
+          v-if="surround"
+          :surround="surround"
+        />
 
         <p class="mt-8 text-sm text-[var(--ui-text-dimmed)]">
           <ULink

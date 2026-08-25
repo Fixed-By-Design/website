@@ -8,6 +8,7 @@ const emit = defineEmits<{
   triage: [action: 'dismiss' | 'archive' | 'reopen' | 'detach-problem']
   attach: []
   createProblem: []
+  markDuplicate: []
 }>()
 
 const formatter = new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeStyle: 'short' })
@@ -168,6 +169,16 @@ function coordinates(entry: FeedbackEntry) {
           @click="emit('createProblem')"
         >
           Create problem
+        </UButton>
+        <UButton
+          size="sm"
+          color="neutral"
+          variant="subtle"
+          icon="i-lucide-copy"
+          :loading="pending"
+          @click="emit('markDuplicate')"
+        >
+          Mark duplicate
         </UButton>
         <UButton
           size="sm"
