@@ -15,6 +15,17 @@ tags: [elytra, flight, campfire, smokestack, cloudskipper]
 related: [map-book]
 wiki: [/wiki/elytra-flight]
 decisions: [/design/why-rockets-no-longer-power-elytra]
+credits:
+  - name: Aileron
+    author: ryanhcode and Violunae
+    url: https://github.com/OrtusMC/Aileron
+    license: LGPL-3.0-only
+    note: The overhaul that got there first, and the reason this system exists at all. Campfire flight here is a port of its ideas and, in places, its code.
+  - name: Eleron
+    author: sindercube
+    url: https://codeberg.org/sindercube/eleron
+    license: LGPL-3.0-only
+    note: The Fabric rewrite of Aileron, and the version this implementation actually builds on.
 details:
   - label: Hearth power
     value: 0 to 12, from adjacent updraft blocks plus 4 for a hay bale signal fire
@@ -27,6 +38,16 @@ details:
   - label: Updraft column
     value: Scans down up to 38 blocks while gliding, range 10 plus 2 per hearth power
 ---
+
+## Where this comes from
+
+This system is not original to Fixed by Design. It is a port of [Aileron](https://github.com/OrtusMC/Aileron) by ryanhcode and Violunae, and of its Fabric rewrite [Eleron](https://codeberg.org/sindercube/eleron) by sindercube.
+
+They worked out the hard part: that the fix for rocket flight is not to nerf rockets but to move the cost onto the ground, where you can build against it. Campfires as launch pads, hearth geometry as a power budget, updraft columns as infrastructure. That design is theirs, and it is close to perfect.
+
+What Fixed by Design adds is the tie-in with the rest of the pack: the Smokestack and Cloudskipper enchantments live inside this project's [enchantment slot budget](/features/enchantment-slots), and the corridors you build interact with the [rail](/features/copper-rails) and [world progression](/features/world-progression) systems.
+
+Exploration Reloaded is licensed LGPL-3.0-only specifically so it can carry that code. Both upstream mods are worth installing on their own.
 
 ## What changed
 

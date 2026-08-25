@@ -55,6 +55,14 @@ Everything below is made by other people. Fixed by Design bundles and configures
 
 **Libraries.** Fabric API, Fabric Language Kotlin, Cloth Config API, Balm, CreativeCore, Forge Config API Port, Puzzles Lib, Prickle, M.R.U, Text Placeholder API, YetAnotherConfigLib, Language Reload.
 
+## Standing on other people's work
+
+Two projects are not bundled here but are part of why the pack looks the way it does.
+
+**[Aileron](https://github.com/OrtusMC/Aileron)** by ryanhcode and Violunae, and **[Eleron](https://codeberg.org/sindercube/eleron)** by sindercube, are elytra overhauls licensed LGPL-3.0-only. Exploration Reloaded's campfire flight is a port of their design and, in places, their code. Exploration Reloaded is LGPL-3.0-only specifically so it can carry that. Both are excellent on their own and worth installing outside this pack.
+
+**[Fixed Minecraft](https://github.com/GreenJAB/fixed-minecraft)** by green_jab is the MIT-licensed project several exploration systems were originally derived from, used with permission.
+
 ## Resource packs and shaders
 
 **Resource packs.** Bare Bones x Enchantment Overhaul, Bare Bones X PvP Pack, Fresh Animations, New Glowing Ores [Border], OreUI Recreation, Translations for Sodium, Vocal Villagers, and a bundled Low Fire pack that lowers the first-person fire overlay.

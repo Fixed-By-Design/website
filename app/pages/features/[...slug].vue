@@ -204,6 +204,47 @@ useSeoMeta({
             </div>
           </section>
 
+          <section
+            v-if="feature.credits?.length"
+            class="mt-12 rounded-xl border border-gold-500/25 bg-gold-500/[0.05] p-6"
+          >
+            <h2 class="text-lg font-semibold text-[var(--ui-text-highlighted)]">
+              Built on the work of others
+            </h2>
+            <p class="mt-1 text-sm text-[var(--ui-text-muted)]">
+              This system exists because someone else solved it first.
+            </p>
+
+            <ul class="mt-5 space-y-5">
+              <li
+                v-for="entry in feature.credits"
+                :key="entry.url"
+              >
+                <p class="flex flex-wrap items-baseline gap-x-2">
+                  <ULink
+                    :to="entry.url"
+                    target="_blank"
+                    rel="noopener"
+                    class="font-semibold text-gold-400 underline-offset-2 hover:underline"
+                  >
+                    {{ entry.name }}
+                  </ULink>
+                  <span class="text-sm text-[var(--ui-text-muted)]">by {{ entry.author }}</span>
+                  <UBadge
+                    v-if="entry.license"
+                    :label="entry.license"
+                    color="neutral"
+                    variant="subtle"
+                    size="sm"
+                  />
+                </p>
+                <p class="mt-1.5 text-sm leading-relaxed text-[var(--ui-text-toned)]">
+                  {{ entry.note }}
+                </p>
+              </li>
+            </ul>
+          </section>
+
           <section class="mt-12 rounded-xl border border-[var(--ui-border)] p-6">
             <h2 class="text-lg font-semibold">
               Implementation

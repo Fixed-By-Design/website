@@ -2,6 +2,14 @@ import { defineCollection, defineContentConfig } from '@nuxt/content'
 import { z } from 'zod/v4'
 import { FEATURE_CATEGORIES, FEATURE_STATUSES, MODS, PILLARS } from './shared/constants/features'
 
+const credit = z.object({
+  name: z.string(),
+  author: z.string(),
+  url: z.string(),
+  license: z.string().optional(),
+  note: z.string(),
+})
+
 const githubRef = z.object({
   repository: z.string(),
   number: z.number(),
@@ -23,6 +31,7 @@ const features = defineCollection({
     problem: z.string(),
     solution: z.string(),
     details: z.array(z.object({ label: z.string(), value: z.string() })).default([]),
+    credits: z.array(credit).default([]),
     tags: z.array(z.string()).default([]),
     related: z.array(z.string()).default([]),
     wiki: z.array(z.string()).default([]),

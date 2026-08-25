@@ -44,6 +44,8 @@ Flight sessions were observed to consist of a single input held for the duration
 
 ## Decision
 
+This one was not invented here. [Aileron](https://github.com/OrtusMC/Aileron) by ryanhcode and Violunae, and its Fabric rewrite [Eleron](https://codeberg.org/sindercube/eleron) by sindercube, had already reached the ground-based answer and implemented it well. Fixed by Design ports that design rather than reinventing a worse version of it, and relicensed Exploration Reloaded to LGPL-3.0-only in order to carry the code honestly.
+
 Firework rockets give **zero thrust** while gliding. They still exist and still work as fireworks.
 
 Flight is powered by campfires. Crouch in the smoke to charge, release to launch. How hard you are thrown depends on the **hearth** you built: each adjacent updraft block adds power, a hay bale adds four, and a full 3x3 signal hearth launches you almost four times as high as a lone campfire.
