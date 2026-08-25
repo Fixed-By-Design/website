@@ -1,10 +1,7 @@
-allowBuilds:
-  esbuild: set this to true or false
-  unrs-resolver: set this to true or false
-  vue-demi: set this to true or false
 onlyBuiltDependencies:
   - esbuild
   - unrs-resolver
+  - vue-demi
   - better-sqlite3
   - sharp
 

@@ -1,4 +1,4 @@
-import { createHash } from 'node:crypto'
+import { createHash, randomBytes } from 'node:crypto'
 import { sql } from 'drizzle-orm'
 import { drizzle } from 'drizzle-orm/postgres-js'
 import postgres from 'postgres'
@@ -280,15 +280,17 @@ await db.insert(schema.problemTags).values([
   { problemId: problemBySlug.get('enchantment-discovery-has-no-in-game-signal')!.id, tagId: tagBySlug.get('enchanting')!.id },
 ])
 
-const devKey = 'fbd_localdevelopmentkeydonotuseinprod'
+// A random key per seed run: a fixed one would be a known credential the moment
+// this database is anything but local.
+const apiKey = `fbd_${randomBytes(24).toString('base64url')}`
 await db.insert(schema.serverApiKeys).values({
-  name: 'Local playtest server',
-  keyPrefix: devKey.slice(0, 12),
-  keyHash: createHash('sha256').update(devKey).digest('hex'),
+  name: 'Playtest server',
+  keyPrefix: apiKey.slice(0, 12),
+  keyHash: createHash('sha256').update(apiKey).digest('hex'),
   serverLabel: 'playtest',
 })
 
 await client.end()
 
 console.log(`Seeded ${insertedTags.length} tags, ${insertedProblems.length} problems, ${ROADMAP.length} roadmap items, ${insertedFeedback.length} feedback entries.`)
-console.log(`Development API key: ${devKey}`)
+console.log(`Server API key (shown once): ${apiKey}`)
