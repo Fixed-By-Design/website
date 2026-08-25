@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LINKS, PROJECT } from '#shared/constants/project'
+import { LINKS, MODPACK_AVAILABLE, PROJECT } from '#shared/constants/project'
 import { PILLAR_DEFINITIONS } from '#shared/constants/pillars'
 
 const VISIBLE_EXAMPLES = 4
@@ -60,16 +60,17 @@ useSeoMeta({
           </p>
 
           <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <SiteDownloadButton size="xl" />
             <UButton
               to="/features"
               size="xl"
-              color="neutral"
-              variant="subtle"
+              :color="MODPACK_AVAILABLE ? 'neutral' : 'primary'"
+              :variant="MODPACK_AVAILABLE ? 'subtle' : 'solid'"
               trailing-icon="i-lucide-arrow-right"
+              class="font-semibold"
             >
               Explore the changes
             </UButton>
+            <SiteDownloadButton size="xl" />
           </div>
 
           <p class="mt-6 text-sm text-[var(--ui-text-dimmed)]">

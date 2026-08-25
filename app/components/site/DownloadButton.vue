@@ -39,6 +39,6 @@ withDefaults(defineProps<{
     class="font-medium"
     aria-label="The modpack is not released yet"
   >
-    Soon
+    Soon on Modrinth
   </UButton>
 </template>
