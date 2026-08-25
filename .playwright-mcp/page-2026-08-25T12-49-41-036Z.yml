@@ -1,0 +1,224 @@
+- generic [ref=f3e2]:
+  - banner [ref=f3e3]:
+    - generic [ref=f3e4]:
+      - link "Fixed by Design, home" [ref=f3e6] [cursor=pointer]:
+        - /url: /
+        - img "Fixed by Design" [ref=f3e7]
+      - navigation [ref=f3e9]:
+        - list [ref=f3e11]:
+          - listitem [ref=f3e12]:
+            - link "Features" [ref=f3e13] [cursor=pointer]:
+              - /url: /features
+          - listitem [ref=f3e15]:
+            - link "Wiki" [ref=f3e16] [cursor=pointer]:
+              - /url: /wiki
+          - listitem [ref=f3e18]:
+            - link "Roadmap" [ref=f3e19] [cursor=pointer]:
+              - /url: /roadmap
+          - listitem [ref=f3e21]:
+            - link "Changelog" [ref=f3e22] [cursor=pointer]:
+              - /url: /changelog
+          - listitem [ref=f3e24]:
+            - link "Contribute" [ref=f3e25] [cursor=pointer]:
+              - /url: /contribute
+      - generic [ref=f3e27]:
+        - button "Search… k" [ref=f3e28]:
+          - generic [ref=f3e30]: Search…
+          - generic [ref=f3e31]: k
+        - link "Fixed by Design on GitHub" [ref=f3e34] [cursor=pointer]:
+          - /url: https://github.com/Fixed-By-Design
+        - link "Download" [ref=f3e36] [cursor=pointer]:
+          - /url: https://modrinth.com/modpack/fixed-smp-modpack
+        - link "Sign in with GitHub" [ref=f3e38] [cursor=pointer]:
+          - /url: /auth/github
+  - main [ref=f3e40]:
+    - generic [ref=f3e41]:
+      - generic [ref=f3e43]:
+        - heading "Features" [level=1] [ref=f3e45]
+        - generic [ref=f3e46]: What actually changes in the game. Grouped by gameplay system, not by repository.
+      - generic [ref=f3e47]:
+        - generic [ref=f3e48]:
+          - textbox "Filter features by name" [ref=f3e50]:
+            - /placeholder: Filter features
+          - generic [ref=f3e53]:
+            - combobox "Filter by category" [ref=f3e54]:
+              - generic: All categories
+            - combobox "Filter by mod" [ref=f3e57]:
+              - generic: All mods
+            - combobox "Filter by status" [ref=f3e60]:
+              - generic: Any status
+          - paragraph [ref=f3e63]: 10 of 10
+        - generic [ref=f3e64]:
+          - generic [ref=f3e65]:
+            - heading "Enchanting" [level=2] [ref=f3e66]
+            - generic [ref=f3e67]:
+              - link "The Catalogue Stable The enchanting table becomes a catalogue of enchantments you have unlocked, paid for with reagents and experience instead of luck. Enchanting Enchantment Overhaul" [ref=f3e68] [cursor=pointer]:
+                - /url: /features/the-catalogue
+                - generic [ref=f3e69]:
+                  - heading "The Catalogue" [level=3] [ref=f3e70]
+                  - generic [ref=f3e71]: Stable
+                - paragraph [ref=f3e74]: The enchanting table becomes a catalogue of enchantments you have unlocked, paid for with reagents and experience instead of luck.
+                - generic [ref=f3e75]:
+                  - generic [ref=f3e76]: Enchanting
+                  - generic [ref=f3e78]: Enchantment Overhaul
+              - link "Enchantment Slots Stable Every item has a slot budget, every enchantment costs slots, and the grindstone permanently scars whatever you strip. Enchanting Enchantment Overhaul" [ref=f3e80] [cursor=pointer]:
+                - /url: /features/enchantment-slots
+                - generic [ref=f3e81]:
+                  - heading "Enchantment Slots" [level=3] [ref=f3e82]
+                  - generic [ref=f3e83]: Stable
+                - paragraph [ref=f3e86]: Every item has a slot budget, every enchantment costs slots, and the grindstone permanently scars whatever you strip.
+                - generic [ref=f3e87]:
+                  - generic [ref=f3e88]: Enchanting
+                  - generic [ref=f3e90]: Enchantment Overhaul
+          - generic [ref=f3e92]:
+            - heading "Equipment" [level=2] [ref=f3e93]
+            - link "Smithing Upgrades Stable Four templates move raw statistics out of enchanting and into the smithing table, where the ingot you use decides the level outright. Equipment Enchantment Overhaul" [ref=f3e95] [cursor=pointer]:
+              - /url: /features/smithing-upgrades
+              - generic [ref=f3e96]:
+                - heading "Smithing Upgrades" [level=3] [ref=f3e97]
+                - generic [ref=f3e98]: Stable
+              - paragraph [ref=f3e101]: Four templates move raw statistics out of enchanting and into the smithing table, where the ingot you use decides the level outright.
+              - generic [ref=f3e102]:
+                - generic [ref=f3e103]: Equipment
+                - generic [ref=f3e105]: Enchantment Overhaul
+          - generic [ref=f3e107]:
+            - heading "Combat" [level=2] [ref=f3e108]
+            - link "Material Resistances Stable Every armor material resists a specific kind of damage, so the set you wear is a decision about what you expect to fight. Combat Enchantment Overhaul" [ref=f3e110] [cursor=pointer]:
+              - /url: /features/material-resistances
+              - generic [ref=f3e111]:
+                - heading "Material Resistances" [level=3] [ref=f3e112]
+                - generic [ref=f3e113]: Stable
+              - paragraph [ref=f3e116]: Every armor material resists a specific kind of damage, so the set you wear is a decision about what you expect to fight.
+              - generic [ref=f3e117]:
+                - generic [ref=f3e118]: Combat
+                - generic [ref=f3e120]: Enchantment Overhaul
+          - generic [ref=f3e122]:
+            - heading "Elytra" [level=2] [ref=f3e123]
+            - link "Campfire Elytra Flight Stable Rockets no longer push you. Campfires do, and building a good one is now part of building a route. Elytra Exploration Reloaded" [ref=f3e125] [cursor=pointer]:
+              - /url: /features/campfire-elytra-flight
+              - generic [ref=f3e126]:
+                - heading "Campfire Elytra Flight" [level=3] [ref=f3e127]
+                - generic [ref=f3e128]: Stable
+              - paragraph [ref=f3e131]: Rockets no longer push you. Campfires do, and building a good one is now part of building a route.
+              - generic [ref=f3e132]:
+                - generic [ref=f3e133]: Elytra
+                - generic [ref=f3e135]: Exploration Reloaded
+          - generic [ref=f3e137]:
+            - heading "Maps & Navigation" [level=2] [ref=f3e138]
+            - link "Map Book Stable An atlas that holds every map you own, draws itself as you travel, and can be shared so a whole server edits the same world map. Maps & Navigation Exploration Reloaded" [ref=f3e140] [cursor=pointer]:
+              - /url: /features/map-book
+              - generic [ref=f3e141]:
+                - heading "Map Book" [level=3] [ref=f3e142]
+                - generic [ref=f3e143]: Stable
+              - paragraph [ref=f3e146]: An atlas that holds every map you own, draws itself as you travel, and can be shared so a whole server edits the same world map.
+              - generic [ref=f3e147]:
+                - generic [ref=f3e148]: Maps & Navigation
+                - generic [ref=f3e150]: Exploration Reloaded
+          - generic [ref=f3e152]:
+            - heading "Death" [level=2] [ref=f3e153]
+            - link "Death & Bonus Hearts Stable Death keeps your tools and half your experience, and takes the bonus hearts you spent real effort earning. Death Fairlands" [ref=f3e155] [cursor=pointer]:
+              - /url: /features/death-and-bonus-hearts
+              - generic [ref=f3e156]:
+                - heading "Death & Bonus Hearts" [level=3] [ref=f3e157]
+                - generic [ref=f3e158]: Stable
+              - paragraph [ref=f3e161]: Death keeps your tools and half your experience, and takes the bonus hearts you spent real effort earning.
+              - generic [ref=f3e162]:
+                - generic [ref=f3e163]: Death
+                - generic [ref=f3e165]: Fairlands
+          - generic [ref=f3e167]:
+            - heading "World Generation" [level=2] [ref=f3e168]
+            - link "World Progression Stable Ore is scarce near world spawn and abundant far from it, so distance from home becomes a resource you can spend. World Generation Fairlands" [ref=f3e170] [cursor=pointer]:
+              - /url: /features/world-progression
+              - generic [ref=f3e171]:
+                - heading "World Progression" [level=3] [ref=f3e172]
+                - generic [ref=f3e173]: Stable
+              - paragraph [ref=f3e176]: Ore is scarce near world spawn and abundant far from it, so distance from home becomes a resource you can spend.
+              - generic [ref=f3e177]:
+                - generic [ref=f3e178]: World Generation
+                - generic [ref=f3e180]: Fairlands
+          - generic [ref=f3e182]:
+            - heading "Minecarts & Trains" [level=2] [ref=f3e183]
+            - generic [ref=f3e184]:
+              - link "Copper Rails Stable Four rail tiers that oxidise over time, raising the speed ceiling from 8 blocks per second to 40 and making track a thing you maintain. Minecarts & Trains Minecarts Overhaul" [ref=f3e185] [cursor=pointer]:
+                - /url: /features/copper-rails
+                - generic [ref=f3e186]:
+                  - heading "Copper Rails" [level=3] [ref=f3e187]
+                  - generic [ref=f3e188]: Stable
+                - paragraph [ref=f3e191]: Four rail tiers that oxidise over time, raising the speed ceiling from 8 blocks per second to 40 and making track a thing you maintain.
+                - generic [ref=f3e192]:
+                  - generic [ref=f3e193]: Minecarts & Trains
+                  - generic [ref=f3e195]: Minecarts Overhaul
+              - link "Minecart Trains Stable A lit furnace minecart couples the carts behind it into a train of up to eight, and drags them through curves, slopes and portals. Minecarts & Trains Minecarts Overhaul" [ref=f3e197] [cursor=pointer]:
+                - /url: /features/minecart-trains
+                - generic [ref=f3e198]:
+                  - heading "Minecart Trains" [level=3] [ref=f3e199]
+                  - generic [ref=f3e200]: Stable
+                - paragraph [ref=f3e203]: A lit furnace minecart couples the carts behind it into a train of up to eight, and drags them through curves, slopes and portals.
+                - generic [ref=f3e204]:
+                  - generic [ref=f3e205]: Minecarts & Trains
+                  - generic [ref=f3e207]: Minecarts Overhaul
+  - contentinfo [ref=f3e209]:
+    - generic [ref=f3e212]:
+      - generic [ref=f3e213]:
+        - img "Fixed by Design" [ref=f3e214]
+        - paragraph [ref=f3e215]: An opinionated redesign of Minecraft Survival, built for both solo and multiplayer. Built on Fabric for Minecraft 26.1.2.
+        - generic [ref=f3e216]:
+          - link "GitHub" [ref=f3e217] [cursor=pointer]:
+            - /url: https://github.com/Fixed-By-Design
+          - link "Modrinth" [ref=f3e219] [cursor=pointer]:
+            - /url: https://modrinth.com/modpack/fixed-smp-modpack
+          - link "Discord" [ref=f3e221] [cursor=pointer]:
+            - /url: https://discord.gg/fixed-by-design
+      - navigation [ref=f3e223]:
+        - generic [ref=f3e224]:
+          - generic [ref=f3e225]:
+            - heading "Project" [level=3] [ref=f3e226]
+            - list [ref=f3e227]:
+              - listitem [ref=f3e228]:
+                - link "Features" [ref=f3e229] [cursor=pointer]:
+                  - /url: /features
+              - listitem [ref=f3e231]:
+                - link "Wiki" [ref=f3e232] [cursor=pointer]:
+                  - /url: /wiki
+              - listitem [ref=f3e234]:
+                - link "Roadmap" [ref=f3e235] [cursor=pointer]:
+                  - /url: /roadmap
+              - listitem [ref=f3e237]:
+                - link "Changelog" [ref=f3e238] [cursor=pointer]:
+                  - /url: /changelog
+              - listitem [ref=f3e240]:
+                - link "Design decisions" [ref=f3e241] [cursor=pointer]:
+                  - /url: /design
+              - listitem [ref=f3e243]:
+                - link "The modpack" [ref=f3e244] [cursor=pointer]:
+                  - /url: /modpack
+          - generic [ref=f3e246]:
+            - heading "Participate" [level=3] [ref=f3e247]
+            - list [ref=f3e248]:
+              - listitem [ref=f3e249]:
+                - link "Contribute" [ref=f3e250] [cursor=pointer]:
+                  - /url: /contribute
+              - listitem [ref=f3e252]:
+                - link "Send feedback" [ref=f3e253] [cursor=pointer]:
+                  - /url: /feedback
+              - listitem [ref=f3e255]:
+                - link "Report a bug" [ref=f3e256] [cursor=pointer]:
+                  - /url: /feedback?type=bug
+              - listitem [ref=f3e258]:
+                - link "Discord" [ref=f3e259] [cursor=pointer]:
+                  - /url: https://discord.gg/fixed-by-design
+          - generic [ref=f3e262]:
+            - heading "Elsewhere" [level=3] [ref=f3e263]
+            - list [ref=f3e264]:
+              - listitem [ref=f3e265]:
+                - link "Modrinth" [ref=f3e266] [cursor=pointer]:
+                  - /url: https://modrinth.com/modpack/fixed-smp-modpack
+              - listitem [ref=f3e269]:
+                - link "GitHub" [ref=f3e270] [cursor=pointer]:
+                  - /url: https://github.com/Fixed-By-Design
+              - listitem [ref=f3e273]:
+                - link "Support the project" [ref=f3e274] [cursor=pointer]:
+                  - /url: https://ko-fi.com/akitain
+    - generic [ref=f3e277]:
+      - paragraph [ref=f3e279]: Fixed SMP 1.8.0 · Minecraft 26.1.2
+      - paragraph [ref=f3e281]: © 2026 Fixed by Design. Not affiliated with Mojang or Microsoft.

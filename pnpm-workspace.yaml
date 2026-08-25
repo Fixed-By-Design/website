@@ -7,3 +7,6 @@ onlyBuiltDependencies:
   - unrs-resolver
   - better-sqlite3
   - sharp
+
+overrides:
+  typescript: 6.0.3

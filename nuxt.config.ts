@@ -12,17 +12,14 @@ export default defineNuxtConfig({
 
   css: ['~/assets/css/main.css'],
 
-  colorMode: { preference: 'dark', fallback: 'dark' },
-
-  ogImage: { enabled: false },
-  linkChecker: { enabled: false },
-
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
     name: 'Fixed by Design',
     description: 'An opinionated redesign of Minecraft Survival, built for both solo and multiplayer.',
     defaultLocale: 'en',
   },
+
+  colorMode: { preference: 'dark', fallback: 'dark' },
 
   content: {
     experimental: { sqliteConnector: 'native' },
@@ -67,4 +64,7 @@ export default defineNuxtConfig({
       sizeLimitKb: 512,
     },
   },
+  linkChecker: { enabled: false },
+
+  ogImage: { enabled: false },
 })

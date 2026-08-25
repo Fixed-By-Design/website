@@ -25,7 +25,7 @@ export default defineEventHandler(async (event) => {
 
   const { allowed, retryAfterSeconds } = consumeRateLimit(`api-key:${key.id}`, LIMIT, WINDOW_MS)
   if (!allowed) {
-    setResponseHeader(event, 'Retry-After', String(retryAfterSeconds))
+    setResponseHeader(event, 'retry-after', retryAfterSeconds)
     throw createError({ statusCode: 429, message: 'Rate limit exceeded for this server key' })
   }
 

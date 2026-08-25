@@ -10,12 +10,19 @@ const links = usePrimaryNavigation()
     mode="drawer"
   >
     <template #left>
-      <NuxtLink to="/" class="flex items-center gap-2" aria-label="Fixed by Design, home">
+      <NuxtLink
+        to="/"
+        class="flex items-center gap-2"
+        aria-label="Fixed by Design, home"
+      >
         <SiteLogo :height="26" />
       </NuxtLink>
     </template>
 
-    <UNavigationMenu :items="links" variant="link" />
+    <UNavigationMenu
+      :items="links"
+      variant="link"
+    />
 
     <template #right>
       <UContentSearchButton
@@ -53,12 +60,22 @@ const links = usePrimaryNavigation()
     </template>
 
     <template #body>
-      <UNavigationMenu :items="links" orientation="vertical" class="-mx-2.5" />
+      <UNavigationMenu
+        :items="links"
+        orientation="vertical"
+        class="-mx-2.5"
+      />
 
       <USeparator class="my-4" />
 
       <div class="flex flex-col gap-2">
-        <UButton :to="LINKS.modrinth" target="_blank" rel="noopener" icon="i-simple-icons-modrinth" block>
+        <UButton
+          :to="LINKS.modrinth"
+          target="_blank"
+          rel="noopener"
+          icon="i-simple-icons-modrinth"
+          block
+        >
           Download on Modrinth
         </UButton>
         <UButton

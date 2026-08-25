@@ -18,8 +18,12 @@ useHead({
 
 useSeoMeta({
   ogSiteName: PROJECT.name,
+  ogType: 'website',
   ogImage: '/brand/og-default.png',
-  twitterCard: 'summary_large_image',
+  ogImageWidth: 1200,
+  ogImageHeight: 630,
+  ogImageType: 'image/png',
+  ogImageAlt: 'Fixed by Design',
 })
 </script>
 

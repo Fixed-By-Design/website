@@ -32,11 +32,14 @@ useSeoMeta({
 
 <template>
   <div>
-    <UPageHeader
-      title="Contribute"
-      description="Fixed by Design is open source and accepts volunteer contributions. Development happens on GitHub; the reasoning happens here."
-      :ui="{ root: 'border-b border-[var(--ui-border)]' }"
-    />
+    <div class="border-b border-[var(--ui-border)]">
+      <UContainer>
+        <UPageHeader
+          title="Contribute"
+          description="Fixed by Design is open source and accepts volunteer contributions. Development happens on GitHub; the reasoning happens here."
+        />
+      </UContainer>
+    </div>
 
     <UContainer class="py-10">
       <div class="rounded-xl border border-gold-500/25 bg-gold-500/[0.06] p-8">
@@ -48,13 +51,31 @@ useSeoMeta({
           triage. You do not need an account to open a pull request.
         </p>
         <div class="mt-6 flex flex-wrap gap-3">
-          <UButton v-if="!loggedIn" to="/auth/github" external size="lg" icon="i-simple-icons-github">
+          <UButton
+            v-if="!loggedIn"
+            to="/auth/github"
+            external
+            size="lg"
+            icon="i-simple-icons-github"
+          >
             Continue with GitHub
           </UButton>
-          <UButton v-else to="/dashboard" size="lg" icon="i-lucide-layout-dashboard">
+          <UButton
+            v-else
+            to="/dashboard"
+            size="lg"
+            icon="i-lucide-layout-dashboard"
+          >
             Open the dashboard
           </UButton>
-          <UButton :to="LINKS.github" target="_blank" rel="noopener" size="lg" color="neutral" variant="subtle">
+          <UButton
+            :to="LINKS.github"
+            target="_blank"
+            rel="noopener"
+            size="lg"
+            color="neutral"
+            variant="subtle"
+          >
             Browse the repositories
           </UButton>
         </div>
@@ -65,8 +86,15 @@ useSeoMeta({
           Where help is needed
         </h2>
         <div class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-          <div v-for="area in areas" :key="area.label" class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-5">
-            <UIcon :name="area.icon" class="size-5 text-gold-400" />
+          <div
+            v-for="area in areas"
+            :key="area.label"
+            class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-5"
+          >
+            <UIcon
+              :name="area.icon"
+              class="size-5 text-gold-400"
+            />
             <h3 class="mt-3 font-semibold text-[var(--ui-text-highlighted)]">
               {{ area.label }}
             </h3>
@@ -104,7 +132,10 @@ useSeoMeta({
 
       <section class="mt-16 grid gap-4 md:grid-cols-3">
         <div class="rounded-xl border border-[var(--ui-border)] p-6">
-          <UIcon name="i-simple-icons-github" class="size-5 text-gold-400" />
+          <UIcon
+            name="i-simple-icons-github"
+            class="size-5 text-gold-400"
+          />
           <h3 class="mt-3 font-semibold">
             Good first contributions
           </h3>
@@ -126,27 +157,47 @@ useSeoMeta({
         </div>
 
         <div class="rounded-xl border border-[var(--ui-border)] p-6">
-          <UIcon name="i-lucide-book-open" class="size-5 text-gold-400" />
+          <UIcon
+            name="i-lucide-book-open"
+            class="size-5 text-gold-400"
+          />
           <h3 class="mt-3 font-semibold">
             Edit the wiki
           </h3>
           <p class="mt-2 text-sm text-[var(--ui-text-muted)]">
             Every wiki page is a Markdown file in this repository. There is an edit link at the bottom of each one.
           </p>
-          <UButton to="/wiki" color="neutral" variant="subtle" size="sm" class="mt-4">
+          <UButton
+            to="/wiki"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            class="mt-4"
+          >
             Open the wiki
           </UButton>
         </div>
 
         <div class="rounded-xl border border-[var(--ui-border)] p-6">
-          <UIcon name="i-simple-icons-discord" class="size-5 text-gold-400" />
+          <UIcon
+            name="i-simple-icons-discord"
+            class="size-5 text-gold-400"
+          />
           <h3 class="mt-3 font-semibold">
             Talk it through
           </h3>
           <p class="mt-2 text-sm text-[var(--ui-text-muted)]">
             Design conversations happen on Discord before they become proposals. Playtest sessions are organised there too.
           </p>
-          <UButton :to="LINKS.discord" target="_blank" rel="noopener" color="neutral" variant="subtle" size="sm" class="mt-4">
+          <UButton
+            :to="LINKS.discord"
+            target="_blank"
+            rel="noopener"
+            color="neutral"
+            variant="subtle"
+            size="sm"
+            class="mt-4"
+          >
             Join the Discord
           </UButton>
         </div>

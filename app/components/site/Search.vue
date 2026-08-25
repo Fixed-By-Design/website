@@ -46,7 +46,12 @@ const groups = computed<CommandPaletteGroup<CommandPaletteItem>[]>(() => {
 </script>
 
 <template>
-  <UModal v-model:open="open" :ui="{ content: 'sm:max-w-2xl' }" title="Search" description="Search the wiki, features and roadmap">
+  <UModal
+    v-model:open="open"
+    :ui="{ content: 'sm:max-w-2xl' }"
+    title="Search"
+    description="Search the wiki, features and roadmap"
+  >
     <template #content>
       <UCommandPalette
         v-model:search-term="searchTerm"

@@ -1,4 +1,4 @@
-import type { UserRole } from './shared/constants/workflow'
+import type { UserRole } from '../constants/workflow'
 
 declare module '#auth-utils' {
   interface User {

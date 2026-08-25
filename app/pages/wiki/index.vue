@@ -9,14 +9,21 @@ useSeoMeta({
 
 <template>
   <div>
-    <UPageHeader
-      title="Wiki"
-      description="How to use and understand each mechanic. For what changed and why, read the Features section."
-      :ui="{ root: 'border-b border-[var(--ui-border)]' }"
-    />
+    <div class="border-b border-[var(--ui-border)]">
+      <UContainer>
+        <UPageHeader
+          title="Wiki"
+          description="How to use and understand each mechanic. For what changed and why, read the Features section."
+        />
+      </UContainer>
+    </div>
 
     <UContainer class="py-10">
-      <div v-for="section in sections" :key="section.label" class="mb-10">
+      <div
+        v-for="section in sections"
+        :key="section.label"
+        class="mb-10"
+      >
         <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-gold-400">
           {{ section.label }}
         </h2>

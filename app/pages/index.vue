@@ -20,7 +20,10 @@ useSeoMeta({
 <template>
   <div>
     <section class="relative overflow-hidden border-b border-[var(--ui-border)]">
-      <div class="brand-grid pointer-events-none absolute inset-0 opacity-40" aria-hidden="true" />
+      <div
+        class="brand-grid pointer-events-none absolute inset-0 opacity-40"
+        aria-hidden="true"
+      />
       <div
         class="pointer-events-none absolute inset-x-0 top-0 h-96 bg-[radial-gradient(60%_60%_at_50%_0%,rgba(235,172,34,0.12),transparent)]"
         aria-hidden="true"
@@ -28,7 +31,10 @@ useSeoMeta({
 
       <UContainer class="relative py-20 sm:py-28">
         <div class="mx-auto max-w-3xl text-center">
-          <SiteLogo :height="72" class="mx-auto" />
+          <SiteLogo
+            :height="72"
+            class="mx-auto"
+          />
 
           <h1 class="mt-10 text-4xl font-bold tracking-tight text-balance sm:text-6xl">
             Minecraft Survival, <span class="brand-gradient-text">fixed by design</span>.
@@ -49,16 +55,30 @@ useSeoMeta({
             >
               Download on Modrinth
             </UButton>
-            <UButton to="/features" size="xl" color="neutral" variant="subtle" trailing-icon="i-lucide-arrow-right">
+            <UButton
+              to="/features"
+              size="xl"
+              color="neutral"
+              variant="subtle"
+              trailing-icon="i-lucide-arrow-right"
+            >
               Explore the changes
             </UButton>
           </div>
 
           <p class="mt-6 text-sm text-[var(--ui-text-dimmed)]">
-            <ULink :to="LINKS.github" target="_blank" rel="noopener" class="hover:text-gold-400">
+            <ULink
+              :to="LINKS.github"
+              target="_blank"
+              rel="noopener"
+              class="hover:text-gold-400"
+            >
               View on GitHub
             </ULink>
-            <span class="mx-2" aria-hidden="true">&middot;</span>
+            <span
+              class="mx-2"
+              aria-hidden="true"
+            >&middot;</span>
             Fabric {{ PROJECT.fabricLoaderVersion }} on Minecraft {{ PROJECT.minecraftVersion }}
           </p>
         </div>
@@ -67,7 +87,10 @@ useSeoMeta({
           class="mx-auto mt-16 flex aspect-video max-w-5xl items-center justify-center rounded-xl border border-dashed border-[var(--ui-border-accented)] bg-[var(--ui-bg-muted)]"
         >
           <p class="flex items-center gap-2 text-sm text-[var(--ui-text-dimmed)]">
-            <UIcon name="i-lucide-image" class="size-4" />
+            <UIcon
+              name="i-lucide-image"
+              class="size-4"
+            />
             Gameplay footage
           </p>
         </div>
@@ -110,7 +133,10 @@ useSeoMeta({
               class="rounded-lg border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-4"
             >
               <div class="flex items-center gap-2 text-sm font-medium text-[var(--ui-text-highlighted)]">
-                <UIcon :name="item.icon" class="size-4 text-gold-400" />
+                <UIcon
+                  :name="item.icon"
+                  class="size-4 text-gold-400"
+                />
                 {{ item.label }}
               </div>
               <p class="mt-1.5 text-sm text-[var(--ui-text-dimmed)]">
@@ -134,7 +160,11 @@ useSeoMeta({
         </div>
 
         <div class="mt-10 grid gap-5 md:grid-cols-2">
-          <SitePillarCard v-for="pillar in PILLAR_DEFINITIONS" :key="pillar.id" :pillar="pillar" />
+          <SitePillarCard
+            v-for="pillar in PILLAR_DEFINITIONS"
+            :key="pillar.id"
+            :pillar="pillar"
+          />
         </div>
       </UContainer>
     </section>
@@ -179,10 +209,19 @@ useSeoMeta({
               of third-party mods, shaders and quality-of-life improvements.
             </p>
             <div class="mt-6 flex flex-wrap gap-3">
-              <UButton :to="LINKS.modrinth" target="_blank" rel="noopener" icon="i-simple-icons-modrinth">
+              <UButton
+                :to="LINKS.modrinth"
+                target="_blank"
+                rel="noopener"
+                icon="i-simple-icons-modrinth"
+              >
                 Download
               </UButton>
-              <UButton to="/wiki/getting-started" color="neutral" variant="subtle">
+              <UButton
+                to="/wiki/getting-started"
+                color="neutral"
+                variant="subtle"
+              >
                 Installation guide
               </UButton>
             </div>
@@ -197,10 +236,19 @@ useSeoMeta({
               and the reasoning is published.
             </p>
             <div class="mt-6 flex flex-wrap gap-3">
-              <UButton to="/feedback" color="neutral" variant="solid" icon="i-lucide-message-square">
+              <UButton
+                to="/feedback"
+                color="neutral"
+                variant="solid"
+                icon="i-lucide-message-square"
+              >
                 Send feedback
               </UButton>
-              <UButton to="/contribute" color="neutral" variant="subtle">
+              <UButton
+                to="/contribute"
+                color="neutral"
+                variant="subtle"
+              >
                 Contribute
               </UButton>
             </div>

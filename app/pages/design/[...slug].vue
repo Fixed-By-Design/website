@@ -35,7 +35,10 @@ useSeoMeta({
           :items="[{ label: 'Design decisions', to: '/design' }, { label: decision.title }]"
           class="mb-6"
         />
-        <time :datetime="decision.decidedOn" class="text-xs uppercase tracking-wider text-[var(--ui-text-dimmed)]">
+        <time
+          :datetime="decision.decidedOn"
+          class="text-xs uppercase tracking-wider text-[var(--ui-text-dimmed)]"
+        >
           Decided {{ formatter.format(new Date(decision.decidedOn)) }}
         </time>
         <h1 class="mt-3 max-w-3xl text-3xl font-bold tracking-tight text-balance sm:text-4xl">
@@ -52,7 +55,10 @@ useSeoMeta({
         <UPageBody>
           <ContentRenderer :value="decision" />
 
-          <section v-if="features.length" class="mt-12">
+          <section
+            v-if="features.length"
+            class="mt-12"
+          >
             <h2 class="text-xl font-semibold">
               What this shipped as
             </h2>
@@ -73,7 +79,11 @@ useSeoMeta({
 
         <template #right>
           <UPageAside>
-            <UContentToc v-if="decision.body?.toc?.links?.length" :links="decision.body.toc.links" highlight />
+            <UContentToc
+              v-if="decision.body?.toc?.links?.length"
+              :links="decision.body.toc.links"
+              highlight
+            />
           </UPageAside>
         </template>
       </UPage>

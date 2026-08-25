@@ -68,6 +68,12 @@ async function triage(entry: FeedbackEntry, action: TriageAction, extra: Record<
 }
 
 const attachTarget = ref<FeedbackEntry | null>(null)
+const attachOpen = computed({
+  get: () => attachTarget.value !== null,
+  set: (value: boolean) => {
+    if (!value) attachTarget.value = null
+  },
+})
 const selectedProblemId = ref<string | undefined>()
 
 const problemOptions = computed(() =>
@@ -81,6 +87,12 @@ async function confirmAttach() {
 }
 
 const createTarget = ref<FeedbackEntry | null>(null)
+const createOpen = computed({
+  get: () => createTarget.value !== null,
+  set: (value: boolean) => {
+    if (!value) createTarget.value = null
+  },
+})
 const creating = ref(false)
 const newProblem = reactive({
   title: '',
@@ -131,7 +143,10 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
 
 <template>
   <UContainer class="py-10">
-    <UBreadcrumb :items="[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Feedback' }]" class="mb-6" />
+    <UBreadcrumb
+      :items="[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Feedback' }]"
+      class="mb-6"
+    />
 
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
@@ -142,7 +157,12 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
           Nothing here is deleted. Entries are archived, dismissed or attached to a problem.
         </p>
       </div>
-      <UButton to="/dashboard/problems" color="neutral" variant="subtle" icon="i-lucide-target">
+      <UButton
+        to="/dashboard/problems"
+        color="neutral"
+        variant="subtle"
+        icon="i-lucide-target"
+      >
         Problems
       </UButton>
     </div>
@@ -157,28 +177,68 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
         @click="status = key"
       >
         {{ FEEDBACK_STATUS_LABELS[key] }}
-        <UBadge :label="String(data.counts[key] ?? 0)" color="neutral" variant="soft" size="sm" />
+        <UBadge
+          :label="String(data.counts[key] ?? 0)"
+          color="neutral"
+          variant="soft"
+          size="sm"
+        />
       </UButton>
-      <UButton size="sm" :color="status === 'all' ? 'primary' : 'neutral'" :variant="status === 'all' ? 'subtle' : 'ghost'" @click="status = 'all'">
+      <UButton
+        size="sm"
+        :color="status === 'all' ? 'primary' : 'neutral'"
+        :variant="status === 'all' ? 'subtle' : 'ghost'"
+        @click="status = 'all'"
+      >
         All
       </UButton>
     </div>
 
     <div class="mt-4 flex flex-wrap gap-3">
-      <USelect v-model="status" :items="statusOptions" class="w-40" aria-label="Filter by status" />
-      <USelect v-model="type" :items="typeOptions" class="w-44" aria-label="Filter by type" />
-      <USelect v-model="source" :items="sourceOptions" class="w-40" aria-label="Filter by source" />
-      <UInput v-model="version" placeholder="Version" class="w-32" aria-label="Filter by modpack version" />
+      <USelect
+        v-model="status"
+        :items="statusOptions"
+        class="w-40"
+        aria-label="Filter by status"
+      />
+      <USelect
+        v-model="type"
+        :items="typeOptions"
+        class="w-44"
+        aria-label="Filter by type"
+      />
+      <USelect
+        v-model="source"
+        :items="sourceOptions"
+        class="w-40"
+        aria-label="Filter by source"
+      />
+      <UInput
+        v-model="version"
+        placeholder="Version"
+        class="w-32"
+        aria-label="Filter by modpack version"
+      />
       <p class="ms-auto self-center text-sm text-[var(--ui-text-dimmed)]">
         {{ data.total }} {{ data.total === 1 ? 'entry' : 'entries' }}
       </p>
     </div>
 
-    <div v-if="fetchStatus === 'pending' && !data.items.length" class="mt-8 space-y-3">
-      <USkeleton v-for="n in 3" :key="n" class="h-40 w-full" />
+    <div
+      v-if="fetchStatus === 'pending' && !data.items.length"
+      class="mt-8 space-y-3"
+    >
+      <USkeleton
+        v-for="n in 3"
+        :key="n"
+        class="h-40 w-full"
+      />
     </div>
 
-    <div v-else-if="data.items.length" class="mt-8 space-y-4">
+    <div
+      v-else-if="data.items.length"
+      class="mt-8 space-y-4"
+    >
       <DashboardFeedbackCard
         v-for="entry in data.items"
         :key="entry.id"
@@ -206,9 +266,17 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
       description="No feedback matches those filters."
     />
 
-    <UModal v-model:open="attachTarget" title="Attach to a problem" description="Link this feedback to an existing design problem.">
+    <UModal
+      v-model:open="attachOpen"
+      title="Attach to a problem"
+      description="Link this feedback to an existing design problem."
+    >
       <template #body>
-        <UFormField label="Problem" name="problem" required>
+        <UFormField
+          label="Problem"
+          name="problem"
+          required
+        >
           <USelectMenu
             v-model="selectedProblemId"
             :items="problemOptions"
@@ -219,45 +287,104 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
         </UFormField>
       </template>
       <template #footer>
-        <UButton color="neutral" variant="ghost" @click="attachTarget = null">
+        <UButton
+          color="neutral"
+          variant="ghost"
+          @click="attachTarget = null"
+        >
           Cancel
         </UButton>
-        <UButton :disabled="!selectedProblemId" @click="confirmAttach">
+        <UButton
+          :disabled="!selectedProblemId"
+          @click="confirmAttach"
+        >
           Attach
         </UButton>
       </template>
     </UModal>
 
-    <UModal v-model:open="createTarget" title="Create a problem" description="Turn this feedback into a structured design problem.">
+    <UModal
+      v-model:open="createOpen"
+      title="Create a problem"
+      description="Turn this feedback into a structured design problem."
+    >
       <template #body>
         <div class="space-y-5">
-          <UFormField label="Title" name="title" required description="At least 10 characters.">
-            <UInput v-model="newProblem.title" placeholder="Rail networks have no niche once elytra flight is available" class="w-full" />
+          <UFormField
+            label="Title"
+            name="title"
+            required
+            description="At least 10 characters."
+          >
+            <UInput
+              v-model="newProblem.title"
+              placeholder="Rail networks have no niche once elytra flight is available"
+              class="w-full"
+            />
           </UFormField>
 
-          <UFormField label="Summary" name="summary" required description="One paragraph describing the design problem, not the report.">
-            <UTextarea v-model="newProblem.summary" :rows="4" class="w-full" />
+          <UFormField
+            label="Summary"
+            name="summary"
+            required
+            description="One paragraph describing the design problem, not the report."
+          >
+            <UTextarea
+              v-model="newProblem.summary"
+              :rows="4"
+              class="w-full"
+            />
           </UFormField>
 
-          <UFormField label="Context" name="context">
-            <UTextarea v-model="newProblem.context" :rows="3" class="w-full" />
+          <UFormField
+            label="Context"
+            name="context"
+          >
+            <UTextarea
+              v-model="newProblem.context"
+              :rows="3"
+              class="w-full"
+            />
           </UFormField>
 
           <div class="grid gap-4 sm:grid-cols-2">
-            <UFormField label="Status" name="status">
-              <USelect v-model="newProblem.status" :items="[...PROBLEM_STATUSES]" class="w-full" />
+            <UFormField
+              label="Status"
+              name="status"
+            >
+              <USelect
+                v-model="newProblem.status"
+                :items="[...PROBLEM_STATUSES]"
+                class="w-full"
+              />
             </UFormField>
-            <UFormField label="Severity" name="severity">
-              <USelect v-model="newProblem.severity" :items="[...PROBLEM_SEVERITIES]" placeholder="Unset" class="w-full" />
+            <UFormField
+              label="Severity"
+              name="severity"
+            >
+              <USelect
+                v-model="newProblem.severity"
+                :items="[...PROBLEM_SEVERITIES]"
+                placeholder="Unset"
+                class="w-full"
+              />
             </UFormField>
           </div>
         </div>
       </template>
       <template #footer>
-        <UButton color="neutral" variant="ghost" @click="createTarget = null">
+        <UButton
+          color="neutral"
+          variant="ghost"
+          @click="createTarget = null"
+        >
           Cancel
         </UButton>
-        <UButton :loading="creating" :disabled="newProblem.title.length < 10 || newProblem.summary.length < 20" @click="confirmCreate">
+        <UButton
+          :loading="creating"
+          :disabled="newProblem.title.length < 10 || newProblem.summary.length < 20"
+          @click="confirmCreate"
+        >
           Create problem
         </UButton>
       </template>

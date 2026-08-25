@@ -43,10 +43,20 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
         </p>
       </div>
       <div class="flex gap-2">
-        <UButton v-if="canTriage" to="/dashboard/feedback" icon="i-lucide-inbox">
+        <UButton
+          v-if="canTriage"
+          to="/dashboard/feedback"
+          icon="i-lucide-inbox"
+        >
           Triage feedback
         </UButton>
-        <UButton v-if="canSeeProblems" to="/dashboard/problems" color="neutral" variant="subtle" icon="i-lucide-target">
+        <UButton
+          v-if="canSeeProblems"
+          to="/dashboard/problems"
+          color="neutral"
+          variant="subtle"
+          icon="i-lucide-target"
+        >
           Problems
         </UButton>
       </div>
@@ -62,16 +72,29 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
       description="Triage and project data are limited to contributors and maintainers. You can still send feedback and read everything public."
     >
       <template #actions>
-        <UButton to="/feedback" size="sm" color="neutral" variant="subtle">
+        <UButton
+          to="/feedback"
+          size="sm"
+          color="neutral"
+          variant="subtle"
+        >
           Send feedback
         </UButton>
-        <UButton to="/contribute" size="sm" color="neutral" variant="ghost">
+        <UButton
+          to="/contribute"
+          size="sm"
+          color="neutral"
+          variant="ghost"
+        >
           Contribute
         </UButton>
       </template>
     </UAlert>
 
-    <div v-if="canTriage" class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+    <div
+      v-if="canTriage"
+      class="mt-8 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+    >
       <NuxtLink
         v-for="stat in [
           { label: 'Awaiting triage', value: inbox.counts.new ?? 0, icon: 'i-lucide-inbox', to: '/dashboard/feedback?status=new' },
@@ -87,7 +110,10 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           <p class="text-sm text-[var(--ui-text-muted)]">
             {{ stat.label }}
           </p>
-          <UIcon :name="stat.icon" class="size-4 text-gold-400" />
+          <UIcon
+            :name="stat.icon"
+            class="size-4 text-gold-400"
+          />
         </div>
         <p class="mt-2 text-3xl font-bold tabular-nums">
           {{ stat.value }}
@@ -101,12 +127,20 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           <h2 class="text-lg font-semibold">
             Feedback awaiting triage
           </h2>
-          <UButton to="/dashboard/feedback" variant="link" size="sm" trailing-icon="i-lucide-arrow-right">
+          <UButton
+            to="/dashboard/feedback"
+            variant="link"
+            size="sm"
+            trailing-icon="i-lucide-arrow-right"
+          >
             Open inbox
           </UButton>
         </div>
 
-        <div v-if="inbox.items.length" class="space-y-3">
+        <div
+          v-if="inbox.items.length"
+          class="space-y-3"
+        >
           <NuxtLink
             v-for="entry in inbox.items"
             :key="entry.id"
@@ -124,7 +158,12 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           </NuxtLink>
         </div>
 
-        <UEmpty v-else icon="i-lucide-inbox" title="The inbox is empty" description="Nothing is waiting to be triaged." />
+        <UEmpty
+          v-else
+          icon="i-lucide-inbox"
+          title="The inbox is empty"
+          description="Nothing is waiting to be triaged."
+        />
       </section>
 
       <section v-if="canSeeProblems">
@@ -132,12 +171,20 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           <h2 class="text-lg font-semibold">
             Problems being worked on
           </h2>
-          <UButton to="/dashboard/problems" variant="link" size="sm" trailing-icon="i-lucide-arrow-right">
+          <UButton
+            to="/dashboard/problems"
+            variant="link"
+            size="sm"
+            trailing-icon="i-lucide-arrow-right"
+          >
             All problems
           </UButton>
         </div>
 
-        <div v-if="[...investigating, ...designing].length" class="space-y-3">
+        <div
+          v-if="[...investigating, ...designing].length"
+          class="space-y-3"
+        >
           <NuxtLink
             v-for="problem in [...investigating, ...designing].slice(0, 5)"
             :key="problem.id"
@@ -153,7 +200,12 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           </NuxtLink>
         </div>
 
-        <UEmpty v-else icon="i-lucide-target" title="No open problems" description="Nothing is under investigation right now." />
+        <UEmpty
+          v-else
+          icon="i-lucide-target"
+          title="No open problems"
+          description="Nothing is under investigation right now."
+        />
       </section>
     </div>
 
@@ -162,13 +214,35 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
         Development links
       </h2>
       <div class="flex flex-wrap gap-2">
-        <UButton :to="LINKS.github" target="_blank" rel="noopener" color="neutral" variant="subtle" icon="i-simple-icons-github" size="sm">
+        <UButton
+          :to="LINKS.github"
+          target="_blank"
+          rel="noopener"
+          color="neutral"
+          variant="subtle"
+          icon="i-simple-icons-github"
+          size="sm"
+        >
           GitHub organisation
         </UButton>
-        <UButton :to="LINKS.modrinth" target="_blank" rel="noopener" color="neutral" variant="subtle" icon="i-simple-icons-modrinth" size="sm">
+        <UButton
+          :to="LINKS.modrinth"
+          target="_blank"
+          rel="noopener"
+          color="neutral"
+          variant="subtle"
+          icon="i-simple-icons-modrinth"
+          size="sm"
+        >
           Modrinth
         </UButton>
-        <UButton to="/roadmap" color="neutral" variant="subtle" icon="i-lucide-map" size="sm">
+        <UButton
+          to="/roadmap"
+          color="neutral"
+          variant="subtle"
+          icon="i-lucide-map"
+          size="sm"
+        >
           Public roadmap
         </UButton>
       </div>

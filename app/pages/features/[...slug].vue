@@ -20,6 +20,22 @@ const { data: related } = await useAsyncData(`feature-related-${route.path}`, ()
     .all()
 }, { default: () => [] })
 
+const { data: sideLinks } = await useAsyncData(`feature-links-${route.path}`, async () => {
+  const wikiPaths = feature.value?.wiki ?? []
+  const decisionPaths = feature.value?.decisions ?? []
+
+  const [wiki, decisions] = await Promise.all([
+    wikiPaths.length
+      ? queryCollection('wiki').select('path', 'title').where('path', 'IN', wikiPaths).all()
+      : Promise.resolve([]),
+    decisionPaths.length
+      ? queryCollection('design').select('path', 'title').where('path', 'IN', decisionPaths).all()
+      : Promise.resolve([]),
+  ])
+
+  return { wiki, decisions }
+}, { default: () => ({ wiki: [], decisions: [] }) })
+
 const modLinks = computed(() => MOD_LINKS[feature.value!.mod])
 
 const breadcrumb = computed(() => [
@@ -40,12 +56,29 @@ useSeoMeta({
   <div v-if="feature">
     <div class="border-b border-[var(--ui-border)] bg-[var(--ui-bg-muted)]">
       <UContainer class="py-10">
-        <UBreadcrumb :items="breadcrumb" class="mb-6" />
+        <UBreadcrumb
+          :items="breadcrumb"
+          class="mb-6"
+        />
 
         <div class="flex flex-wrap items-center gap-2">
-          <FeatureStatusBadge :status="feature.status as FeatureStatus" size="md" />
-          <UBadge :label="MOD_LABELS[feature.mod as ModId]" color="neutral" variant="subtle" icon="i-lucide-package" />
-          <UBadge v-if="feature.since" :label="`Since ${feature.since}`" color="neutral" variant="subtle" icon="i-lucide-tag" />
+          <FeatureStatusBadge
+            :status="feature.status as FeatureStatus"
+            size="md"
+          />
+          <UBadge
+            :label="MOD_LABELS[feature.mod as ModId]"
+            color="neutral"
+            variant="subtle"
+            icon="i-lucide-package"
+          />
+          <UBadge
+            v-if="feature.since"
+            :label="`Since ${feature.since}`"
+            color="neutral"
+            variant="subtle"
+            icon="i-lucide-tag"
+          />
         </div>
 
         <h1 class="mt-4 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
@@ -71,12 +104,19 @@ useSeoMeta({
             <ContentRenderer :value="feature" />
           </div>
 
-          <section v-if="feature.details?.length" class="mt-12">
+          <section
+            v-if="feature.details?.length"
+            class="mt-12"
+          >
             <h2 class="text-xl font-semibold">
               Details
             </h2>
             <dl class="mt-4 divide-y divide-[var(--ui-border)] rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)]">
-              <div v-for="detail in feature.details" :key="detail.label" class="grid gap-1 p-4 sm:grid-cols-3 sm:gap-4">
+              <div
+                v-for="detail in feature.details"
+                :key="detail.label"
+                class="grid gap-1 p-4 sm:grid-cols-3 sm:gap-4"
+              >
                 <dt class="text-sm font-medium text-[var(--ui-text-dimmed)]">
                   {{ detail.label }}
                 </dt>
@@ -87,7 +127,10 @@ useSeoMeta({
             </dl>
           </section>
 
-          <section v-if="related.length" class="mt-12">
+          <section
+            v-if="related.length"
+            class="mt-12"
+          >
             <h2 class="text-xl font-semibold">
               Related systems
             </h2>
@@ -154,30 +197,57 @@ useSeoMeta({
 
         <template #right>
           <UPageAside>
-            <UContentToc v-if="feature.body?.toc?.links?.length" :links="feature.body.toc.links" highlight />
+            <UContentToc
+              v-if="feature.body?.toc?.links?.length"
+              :links="feature.body.toc.links"
+              highlight
+            />
 
-            <div v-if="feature.wiki?.length || feature.decisions?.length" class="mt-8 space-y-4 text-sm">
-              <div v-if="feature.wiki?.length">
+            <div
+              v-if="sideLinks.wiki.length || sideLinks.decisions.length"
+              class="mt-8 space-y-5 text-sm"
+            >
+              <div v-if="sideLinks.wiki.length">
                 <p class="mb-2 font-semibold text-[var(--ui-text-highlighted)]">
                   In the wiki
                 </p>
-                <ul class="space-y-1">
-                  <li v-for="link in feature.wiki" :key="link">
-                    <ULink :to="link" class="text-[var(--ui-text-muted)] hover:text-gold-400">
-                      {{ link.split('/').pop()?.replace(/-/g, ' ') }}
+                <ul class="space-y-1.5">
+                  <li
+                    v-for="link in sideLinks.wiki"
+                    :key="link.path"
+                  >
+                    <ULink
+                      :to="link.path"
+                      class="flex items-center gap-1.5 text-[var(--ui-text-muted)] hover:text-gold-400"
+                    >
+                      <UIcon
+                        name="i-lucide-book-open"
+                        class="size-3.5 shrink-0"
+                      />
+                      {{ link.title }}
                     </ULink>
                   </li>
                 </ul>
               </div>
 
-              <div v-if="feature.decisions?.length">
+              <div v-if="sideLinks.decisions.length">
                 <p class="mb-2 font-semibold text-[var(--ui-text-highlighted)]">
                   Design decisions
                 </p>
-                <ul class="space-y-1">
-                  <li v-for="link in feature.decisions" :key="link">
-                    <ULink :to="link" class="text-[var(--ui-text-muted)] hover:text-gold-400">
-                      {{ link.split('/').pop()?.replace(/-/g, ' ') }}
+                <ul class="space-y-1.5">
+                  <li
+                    v-for="link in sideLinks.decisions"
+                    :key="link.path"
+                  >
+                    <ULink
+                      :to="link.path"
+                      class="flex items-start gap-1.5 text-[var(--ui-text-muted)] hover:text-gold-400"
+                    >
+                      <UIcon
+                        name="i-lucide-scale"
+                        class="mt-0.5 size-3.5 shrink-0"
+                      />
+                      {{ link.title }}
                     </ULink>
                   </li>
                 </ul>

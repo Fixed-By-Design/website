@@ -58,11 +58,14 @@ useSeoMeta({
 
 <template>
   <div>
-    <UPageHeader
-      title="Feedback"
-      description="Playtesting is how this project makes decisions. Every message is read."
-      :ui="{ root: 'border-b border-[var(--ui-border)]' }"
-    />
+    <div class="border-b border-[var(--ui-border)]">
+      <UContainer>
+        <UPageHeader
+          title="Feedback"
+          description="Playtesting is how this project makes decisions. Every message is read."
+        />
+      </UContainer>
+    </div>
 
     <UContainer class="py-10">
       <div class="grid gap-10 lg:grid-cols-[1.4fr_1fr]">
@@ -76,15 +79,35 @@ useSeoMeta({
             description="It will be read and, if it points at something real, turned into a design problem."
           >
             <template #actions>
-              <UButton color="neutral" variant="subtle" size="sm" @click="sendAnother">
+              <UButton
+                color="neutral"
+                variant="subtle"
+                size="sm"
+                @click="sendAnother"
+              >
                 Send another
               </UButton>
             </template>
           </UAlert>
 
-          <UForm v-else :schema="webFeedbackSchema" :state="state" class="space-y-6" @submit="onSubmit">
-            <UFormField label="What kind of feedback is this?" name="type" required>
-              <URadioGroup v-model="state.type" :items="typeOptions" orientation="horizontal" variant="card" />
+          <UForm
+            v-else
+            :schema="webFeedbackSchema"
+            :state="state"
+            class="space-y-6"
+            @submit="onSubmit"
+          >
+            <UFormField
+              label="What kind of feedback is this?"
+              name="type"
+              required
+            >
+              <URadioGroup
+                v-model="state.type"
+                :items="typeOptions"
+                orientation="horizontal"
+                variant="card"
+              />
             </UFormField>
 
             <UFormField
@@ -106,23 +129,59 @@ useSeoMeta({
             </UFormField>
 
             <div class="grid gap-6 sm:grid-cols-2">
-              <UFormField label="Modpack version" name="version" description="If you know it.">
-                <UInput v-model="state.version" placeholder="1.8.0" class="w-full" />
+              <UFormField
+                label="Modpack version"
+                name="version"
+                description="If you know it."
+              >
+                <UInput
+                  v-model="state.version"
+                  placeholder="1.8.0"
+                  class="w-full"
+                />
               </UFormField>
 
-              <UFormField label="Minecraft username" name="playerName" description="Optional, so we can follow up in game.">
-                <UInput v-model="state.playerName" placeholder="Steve" class="w-full" />
+              <UFormField
+                label="Minecraft username"
+                name="playerName"
+                description="Optional, so we can follow up in game."
+              >
+                <UInput
+                  v-model="state.playerName"
+                  placeholder="Steve"
+                  class="w-full"
+                />
               </UFormField>
             </div>
 
-            <div aria-hidden="true" class="hidden">
+            <div
+              aria-hidden="true"
+              class="hidden"
+            >
               <label for="website">Leave this field empty</label>
-              <input id="website" v-model="state.website" type="text" tabindex="-1" autocomplete="off">
+              <input
+                id="website"
+                v-model="state.website"
+                type="text"
+                tabindex="-1"
+                autocomplete="off"
+              >
             </div>
 
-            <UAlert v-if="errorMessage" color="error" variant="subtle" icon="i-lucide-triangle-alert" :description="errorMessage" />
+            <UAlert
+              v-if="errorMessage"
+              color="error"
+              variant="subtle"
+              icon="i-lucide-triangle-alert"
+              :description="errorMessage"
+            />
 
-            <UButton type="submit" size="lg" :loading="pending" icon="i-lucide-send">
+            <UButton
+              type="submit"
+              size="lg"
+              :loading="pending"
+              icon="i-lucide-send"
+            >
               Send feedback
             </UButton>
           </UForm>

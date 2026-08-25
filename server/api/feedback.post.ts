@@ -22,7 +22,7 @@ export default defineEventHandler(async (event) => {
   const { allowed, retryAfterSeconds } = consumeRateLimit(`feedback:${fingerprint}`, LIMIT, WINDOW_MS)
 
   if (!allowed) {
-    setResponseHeader(event, 'Retry-After', String(retryAfterSeconds))
+    setResponseHeader(event, 'retry-after', retryAfterSeconds)
     throw createError({ statusCode: 429, message: 'You have sent several messages already. Try again shortly.' })
   }
 

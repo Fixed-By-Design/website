@@ -1,0 +1,336 @@
+- generic [ref=f11e2]:
+  - banner [ref=f11e3]:
+    - generic [ref=f11e4]:
+      - link "Fixed by Design, home" [ref=f11e6] [cursor=pointer]:
+        - /url: /
+        - img "Fixed by Design" [ref=f11e7]
+      - navigation [ref=f11e9]:
+        - list [ref=f11e11]:
+          - listitem [ref=f11e12]:
+            - link "Features" [ref=f11e13] [cursor=pointer]:
+              - /url: /features
+          - listitem [ref=f11e15]:
+            - link "Wiki" [ref=f11e16] [cursor=pointer]:
+              - /url: /wiki
+          - listitem [ref=f11e18]:
+            - link "Roadmap" [ref=f11e19] [cursor=pointer]:
+              - /url: /roadmap
+          - listitem [ref=f11e21]:
+            - link "Changelog" [ref=f11e22] [cursor=pointer]:
+              - /url: /changelog
+          - listitem [ref=f11e24]:
+            - link "Contribute" [ref=f11e25] [cursor=pointer]:
+              - /url: /contribute
+      - generic [ref=f11e27]:
+        - button "Search… k" [ref=f11e28]:
+          - generic [ref=f11e30]: Search…
+          - generic [ref=f11e31]: k
+        - link "Fixed by Design on GitHub" [ref=f11e34] [cursor=pointer]:
+          - /url: https://github.com/Fixed-By-Design
+        - link "Download" [ref=f11e36] [cursor=pointer]:
+          - /url: https://modrinth.com/modpack/fixed-smp-modpack
+        - link "Sign in with GitHub" [ref=f11e38] [cursor=pointer]:
+          - /url: /auth/github
+  - main [ref=f11e40]:
+    - generic [ref=f11e41]:
+      - generic [ref=f11e43]:
+        - generic [ref=f11e44]:
+          - img "Fixed by Design" [ref=f11e45]
+          - heading "Minecraft Survival, fixed by design." [level=1] [ref=f11e46]
+          - paragraph [ref=f11e47]: An opinionated redesign of Minecraft Survival, built for both solo and multiplayer.
+          - generic [ref=f11e48]:
+            - link "Download on Modrinth" [ref=f11e49] [cursor=pointer]:
+              - /url: https://modrinth.com/modpack/fixed-smp-modpack
+            - link "Explore the changes" [ref=f11e51] [cursor=pointer]:
+              - /url: /features
+          - paragraph [ref=f11e53]:
+            - link "View on GitHub" [ref=f11e54] [cursor=pointer]:
+              - /url: https://github.com/Fixed-By-Design
+            - text: · Fabric 0.19.2 on Minecraft 26.1.2
+        - paragraph [ref=f11e56]: Gameplay footage
+      - generic [ref=f11e60]:
+        - generic [ref=f11e61]:
+          - paragraph [ref=f11e62]: The idea
+          - heading "Minecraft Survival has incredible foundations." [level=2] [ref=f11e63]
+          - paragraph [ref=f11e64]: Fixed by Design rethinks the systems that get in their way. It is not a different game, a kitchen-sink modpack, or a collection of buffs. It is a redesign that keeps every system's original purpose and fixes what that system actually encourages you to do.
+          - paragraph [ref=f11e65]: "Every change starts from the same four questions: what was this system trying to achieve, what behaviour does it actually reward, where does it become tedious or dominant, and can it be improved without making Minecraft feel like something else."
+        - list [ref=f11e66]:
+          - listitem [ref=f11e67]:
+            - generic [ref=f11e68]: Dominant strategies
+            - paragraph [ref=f11e70]: One correct answer crowds out every alternative.
+          - listitem [ref=f11e71]:
+            - generic [ref=f11e72]: Trivialised progression
+            - paragraph [ref=f11e74]: A single item ends a whole progression curve.
+          - listitem [ref=f11e75]:
+            - generic [ref=f11e76]: Multiplayer friction
+            - paragraph [ref=f11e78]: Rules built for one player, applied to twenty.
+          - listitem [ref=f11e79]:
+            - generic [ref=f11e80]: Forgotten mechanics
+            - paragraph [ref=f11e82]: Whole systems nobody has a reason to touch.
+          - listitem [ref=f11e83]:
+            - generic [ref=f11e84]: Tedium without decisions
+            - paragraph [ref=f11e86]: Time spent that never asks you to choose.
+          - listitem [ref=f11e87]:
+            - generic [ref=f11e88]: Systems undermining systems
+            - paragraph [ref=f11e90]: One feature quietly deleting another.
+      - generic [ref=f11e92]:
+        - generic [ref=f11e93]:
+          - paragraph [ref=f11e94]: Designed systems
+          - heading "Four pillars, rebuilt system by system." [level=2] [ref=f11e95]
+        - generic [ref=f11e96]:
+          - link "Equipment & Enchanting Enchanting stops being a slot machine. Statistics move to the smithing table, magic stays at the enchanting table, and every item has a budget you have to spend deliberately. The Catalogue Discoverable enchantments Enchantment slots Smithing upgrades Reworked repairs Material resistances Enchantment Overhaul Explore" [ref=f11e97] [cursor=pointer]:
+            - /url: /features?category=enchanting
+            - heading "Equipment & Enchanting" [level=3] [ref=f11e101]
+            - paragraph [ref=f11e102]: Enchanting stops being a slot machine. Statistics move to the smithing table, magic stays at the enchanting table, and every item has a budget you have to spend deliberately.
+            - list [ref=f11e103]:
+              - listitem [ref=f11e104]:
+                - generic [ref=f11e105]: The Catalogue
+              - listitem [ref=f11e107]:
+                - generic [ref=f11e108]: Discoverable enchantments
+              - listitem [ref=f11e110]:
+                - generic [ref=f11e111]: Enchantment slots
+              - listitem [ref=f11e113]:
+                - generic [ref=f11e114]: Smithing upgrades
+              - listitem [ref=f11e116]:
+                - generic [ref=f11e117]: Reworked repairs
+              - listitem [ref=f11e119]:
+                - generic [ref=f11e120]: Material resistances
+            - generic [ref=f11e122]:
+              - generic [ref=f11e123]: Enchantment Overhaul
+              - generic [ref=f11e124]: Explore
+          - link "Exploration & Navigation Travel becomes something you plan. Elytra flight runs on campfires you built, maps collect into a shared atlas, and the world is spread out far enough to be worth crossing. Map Book Shared cartography Campfire flight Exploration loot Mount improvements Fishing Exploration Reloaded Explore" [ref=f11e126] [cursor=pointer]:
+            - /url: /features?category=maps-navigation
+            - heading "Exploration & Navigation" [level=3] [ref=f11e130]
+            - paragraph [ref=f11e131]: Travel becomes something you plan. Elytra flight runs on campfires you built, maps collect into a shared atlas, and the world is spread out far enough to be worth crossing.
+            - list [ref=f11e132]:
+              - listitem [ref=f11e133]:
+                - generic [ref=f11e134]: Map Book
+              - listitem [ref=f11e136]:
+                - generic [ref=f11e137]: Shared cartography
+              - listitem [ref=f11e139]:
+                - generic [ref=f11e140]: Campfire flight
+              - listitem [ref=f11e142]:
+                - generic [ref=f11e143]: Exploration loot
+              - listitem [ref=f11e145]:
+                - generic [ref=f11e146]: Mount improvements
+              - listitem [ref=f11e148]:
+                - generic [ref=f11e149]: Fishing
+            - generic [ref=f11e151]:
+              - generic [ref=f11e152]: Exploration Reloaded
+              - generic [ref=f11e153]: Explore
+          - link "Survival & Multiplayer Death costs something without costing everything. Spawn is protected, PvP has rules that hold up, and the map has a shape that rewards moving away from the crowd. Death redesign Bonus hearts PvP rules Spawn protection Geographic progression Server rules Fairlands Explore" [ref=f11e155] [cursor=pointer]:
+            - /url: /features?category=death
+            - heading "Survival & Multiplayer" [level=3] [ref=f11e159]
+            - paragraph [ref=f11e160]: Death costs something without costing everything. Spawn is protected, PvP has rules that hold up, and the map has a shape that rewards moving away from the crowd.
+            - list [ref=f11e161]:
+              - listitem [ref=f11e162]:
+                - generic [ref=f11e163]: Death redesign
+              - listitem [ref=f11e165]:
+                - generic [ref=f11e166]: Bonus hearts
+              - listitem [ref=f11e168]:
+                - generic [ref=f11e169]: PvP rules
+              - listitem [ref=f11e171]:
+                - generic [ref=f11e172]: Spawn protection
+              - listitem [ref=f11e174]:
+                - generic [ref=f11e175]: Geographic progression
+              - listitem [ref=f11e177]:
+                - generic [ref=f11e178]: Server rules
+            - generic [ref=f11e180]:
+              - generic [ref=f11e181]: Fairlands
+              - generic [ref=f11e182]: Explore
+          - link "Transportation Rails become infrastructure worth building. Copper tiers set the speed ceiling, furnace carts drive themselves, and a locomotive pulls a real train behind it. Copper rails Rail speed tiers Furnace locomotives Minecart trains Specialized minecarts Minecarts Overhaul Explore" [ref=f11e184] [cursor=pointer]:
+            - /url: /features?category=minecarts-trains
+            - heading "Transportation" [level=3] [ref=f11e188]
+            - paragraph [ref=f11e189]: Rails become infrastructure worth building. Copper tiers set the speed ceiling, furnace carts drive themselves, and a locomotive pulls a real train behind it.
+            - list [ref=f11e190]:
+              - listitem [ref=f11e191]:
+                - generic [ref=f11e192]: Copper rails
+              - listitem [ref=f11e194]:
+                - generic [ref=f11e195]: Rail speed tiers
+              - listitem [ref=f11e197]:
+                - generic [ref=f11e198]: Furnace locomotives
+              - listitem [ref=f11e200]:
+                - generic [ref=f11e201]: Minecart trains
+              - listitem [ref=f11e203]:
+                - generic [ref=f11e204]: Specialized minecarts
+            - generic [ref=f11e206]:
+              - generic [ref=f11e207]: Minecarts Overhaul
+              - generic [ref=f11e208]: Explore
+      - generic [ref=f11e211]:
+        - generic [ref=f11e212]:
+          - paragraph [ref=f11e213]: How a change is made
+          - heading "Vanilla, the problem, and the fix." [level=2] [ref=f11e214]
+          - paragraph [ref=f11e215]: Every feature is documented the same way. Here is what that looks like on four of them.
+        - generic [ref=f11e216]:
+          - article [ref=f11e217]:
+            - generic [ref=f11e218]:
+              - heading "The Catalogue" [level=3] [ref=f11e219]
+              - link "Read more" [ref=f11e220] [cursor=pointer]:
+                - /url: /features/the-catalogue
+            - generic [ref=f11e222]:
+              - generic [ref=f11e223]:
+                - term [ref=f11e224]: Vanilla
+                - definition [ref=f11e226]: Right-clicking an enchanting table offers three random enchantments hidden behind Standard Galactic Alphabet. You spend lapis and levels on a slot machine, reroll until the result is acceptable, and bookshelves only raise the numbers.
+              - generic [ref=f11e227]:
+                - term [ref=f11e228]: Problem
+                - definition [ref=f11e230]: Randomness makes enchanting a chore rather than a decision. The optimal play is to reroll, so the system rewards patience instead of planning, and bookshelves become wallpaper you place once and never think about again.
+              - generic [ref=f11e231]:
+                - term [ref=f11e232]: Fixed by Design
+                - definition [ref=f11e234]: The table opens the Catalogue, a list of every enchantment stored in the chiseled bookshelves around it. You choose the enchantment and the level, pay its specific reagent and an experience cost, and get exactly that. Bookshelves become a library you build deliberately.
+          - article [ref=f11e235]:
+            - generic [ref=f11e236]:
+              - heading "Smithing Upgrades" [level=3] [ref=f11e237]
+              - link "Read more" [ref=f11e238] [cursor=pointer]:
+                - /url: /features/smithing-upgrades
+            - generic [ref=f11e240]:
+              - generic [ref=f11e241]:
+                - term [ref=f11e242]: Vanilla
+                - definition [ref=f11e244]: Sharpness, Protection, Unbreaking and Efficiency are enchantments. They are also the only enchantments that matter, so every enchanting decision starts by securing them and ends with whatever slots are left.
+              - generic [ref=f11e245]:
+                - term [ref=f11e246]: Problem
+                - definition [ref=f11e248]: Twelve vanilla enchantments are pure statistics wearing a magic costume. They crowd out the enchantments with actual behaviour, and they make the enchanting table a numbers dispenser rather than a place you go for something interesting.
+              - generic [ref=f11e249]:
+                - term [ref=f11e250]: Fixed by Design
+                - definition [ref=f11e252]: Honing, Warding, Tempering and Grinding become smithing templates. You apply them at a smithing table, the ingot decides the level, and no experience is charged. Statistics live at the anvil's neighbour, magic lives at the enchanting table.
+          - article [ref=f11e253]:
+            - generic [ref=f11e254]:
+              - heading "Campfire Elytra Flight" [level=3] [ref=f11e255]
+              - link "Read more" [ref=f11e256] [cursor=pointer]:
+                - /url: /features/campfire-elytra-flight
+            - generic [ref=f11e258]:
+              - generic [ref=f11e259]:
+                - term [ref=f11e260]: Vanilla
+                - definition [ref=f11e262]: Elytra flight ends at firework rockets. Once you have a gunpowder farm, flight is holding right click in a straight line at a fixed speed, indefinitely.
+              - generic [ref=f11e263]:
+                - term [ref=f11e264]: Problem
+                - definition [ref=f11e266]: Rockets delete route planning. Terrain stops mattering, distance stops mattering, and every transportation system you might have built becomes irrelevant the moment the elytra comes out. The best-looking mechanic in the game gets reduced to one button.
+              - generic [ref=f11e267]:
+                - term [ref=f11e268]: Fixed by Design
+                - definition [ref=f11e270]: Firework rockets give zero thrust while gliding. Flight is powered by campfires instead. Crouch in the smoke to launch and to bank charges, spend those charges as mid-air dashes, and ride updraft columns you built on the ground.
+          - article [ref=f11e271]:
+            - generic [ref=f11e272]:
+              - heading "Map Book" [level=3] [ref=f11e273]
+              - link "Read more" [ref=f11e274] [cursor=pointer]:
+                - /url: /features/map-book
+            - generic [ref=f11e276]:
+              - generic [ref=f11e277]:
+                - term [ref=f11e278]: Vanilla
+                - definition [ref=f11e280]: Maps are single items. Covering any real distance means a chest of them, sorted by hand, and reading one means holding it and standing still. Sharing means cloning at a cartography table and hoping everyone remembers to re-clone.
+              - generic [ref=f11e281]:
+                - term [ref=f11e282]: Problem
+                - definition [ref=f11e284]: Cartography is one of the best systems in Minecraft and almost nobody uses it past the first map, because the inventory cost grows faster than the usefulness. Shared exploration in particular has no answer at all.
+              - generic [ref=f11e285]:
+                - term [ref=f11e286]: Fixed by Design
+                - definition [ref=f11e288]: The Map Book is one item holding many maps, opening as a pannable and zoomable full-screen atlas drawn in world coordinates. Two books can share an id, so several players read and edit the same atlas, with markers and holder positions synced live.
+          - article [ref=f11e289]:
+            - generic [ref=f11e290]:
+              - heading "Death & Bonus Hearts" [level=3] [ref=f11e291]
+              - link "Read more" [ref=f11e292] [cursor=pointer]:
+                - /url: /features/death-and-bonus-hearts
+            - generic [ref=f11e294]:
+              - generic [ref=f11e295]:
+                - term [ref=f11e296]: Vanilla
+                - definition [ref=f11e298]: Death drops everything. The penalty is a corpse run under a timer, and if you lose the race you lose hours of gear. Servers respond by turning keepInventory on, at which point death costs nothing at all.
+              - generic [ref=f11e299]:
+                - term [ref=f11e300]: Problem
+                - definition [ref=f11e302]: Both settings are bad. Full drop makes death a logistics disaster that punishes the time you spent enchanting rather than the mistake you made. keepInventory removes the stake entirely. Neither one makes dying interesting.
+              - generic [ref=f11e303]:
+                - term [ref=f11e304]: Fixed by Design
+                - definition [ref=f11e306]: Your equipped armor, tools and weapons come back with you, in their original slots. Half your experience comes back. What you lose is every bonus heart you earned from Tidal Draughts, which are renewable but slow.
+          - article [ref=f11e307]:
+            - generic [ref=f11e308]:
+              - heading "Copper Rails" [level=3] [ref=f11e309]
+              - link "Read more" [ref=f11e310] [cursor=pointer]:
+                - /url: /features/copper-rails
+            - generic [ref=f11e312]:
+              - generic [ref=f11e313]:
+                - term [ref=f11e314]: Vanilla
+                - definition [ref=f11e316]: Minecarts cap at 8 blocks per second. Rails have not meaningfully changed since 2011, and every rail is the same rail. Building a long line is an enormous investment that produces slow transport.
+              - generic [ref=f11e317]:
+                - term [ref=f11e318]: Problem
+                - definition [ref=f11e320]: At 8 blocks per second a minecart loses to walking with any speed effect and loses catastrophically to an elytra. There is no rail network worth building, so redstone transport survives only as a novelty.
+              - generic [ref=f11e321]:
+                - term [ref=f11e322]: Fixed by Design
+                - definition [ref=f11e324]: Copper rails come in four oxidation tiers with real speed ceilings, from 40 blocks per second down to 5. They weather about four times faster than copper blocks, and honeycomb waxes them permanently.
+      - generic [ref=f11e327]:
+        - generic [ref=f11e328]:
+          - heading "Play it" [level=2] [ref=f11e329]
+          - paragraph [ref=f11e330]: Fixed SMP 1.8.0 bundles the four first-party mods with a curated set of third-party mods, shaders and quality-of-life improvements.
+          - generic [ref=f11e331]:
+            - link "Download" [ref=f11e332] [cursor=pointer]:
+              - /url: https://modrinth.com/modpack/fixed-smp-modpack
+            - link "Installation guide" [ref=f11e334] [cursor=pointer]:
+              - /url: /wiki/getting-started
+        - generic [ref=f11e335]:
+          - heading "Shape it" [level=2] [ref=f11e336]
+          - paragraph [ref=f11e337]: Fixed by Design runs on playtesting. Feedback becomes design problems, design problems become decisions, and the reasoning is published.
+          - generic [ref=f11e338]:
+            - link "Send feedback" [ref=f11e339] [cursor=pointer]:
+              - /url: /feedback
+            - link "Contribute" [ref=f11e341] [cursor=pointer]:
+              - /url: /contribute
+  - contentinfo [ref=f11e342]:
+    - generic [ref=f11e345]:
+      - generic [ref=f11e346]:
+        - img "Fixed by Design" [ref=f11e347]
+        - paragraph [ref=f11e348]: An opinionated redesign of Minecraft Survival, built for both solo and multiplayer. Built on Fabric for Minecraft 26.1.2.
+        - generic [ref=f11e349]:
+          - link "GitHub" [ref=f11e350] [cursor=pointer]:
+            - /url: https://github.com/Fixed-By-Design
+          - link "Modrinth" [ref=f11e352] [cursor=pointer]:
+            - /url: https://modrinth.com/modpack/fixed-smp-modpack
+          - link "Discord" [ref=f11e354] [cursor=pointer]:
+            - /url: https://discord.gg/fixed-by-design
+      - navigation [ref=f11e356]:
+        - generic [ref=f11e357]:
+          - generic [ref=f11e358]:
+            - heading "Project" [level=3] [ref=f11e359]
+            - list [ref=f11e360]:
+              - listitem [ref=f11e361]:
+                - link "Features" [ref=f11e362] [cursor=pointer]:
+                  - /url: /features
+              - listitem [ref=f11e364]:
+                - link "Wiki" [ref=f11e365] [cursor=pointer]:
+                  - /url: /wiki
+              - listitem [ref=f11e367]:
+                - link "Roadmap" [ref=f11e368] [cursor=pointer]:
+                  - /url: /roadmap
+              - listitem [ref=f11e370]:
+                - link "Changelog" [ref=f11e371] [cursor=pointer]:
+                  - /url: /changelog
+              - listitem [ref=f11e373]:
+                - link "Design decisions" [ref=f11e374] [cursor=pointer]:
+                  - /url: /design
+              - listitem [ref=f11e376]:
+                - link "The modpack" [ref=f11e377] [cursor=pointer]:
+                  - /url: /modpack
+          - generic [ref=f11e379]:
+            - heading "Participate" [level=3] [ref=f11e380]
+            - list [ref=f11e381]:
+              - listitem [ref=f11e382]:
+                - link "Contribute" [ref=f11e383] [cursor=pointer]:
+                  - /url: /contribute
+              - listitem [ref=f11e385]:
+                - link "Send feedback" [ref=f11e386] [cursor=pointer]:
+                  - /url: /feedback
+              - listitem [ref=f11e388]:
+                - link "Report a bug" [ref=f11e389] [cursor=pointer]:
+                  - /url: /feedback?type=bug
+              - listitem [ref=f11e391]:
+                - link "Discord" [ref=f11e392] [cursor=pointer]:
+                  - /url: https://discord.gg/fixed-by-design
+          - generic [ref=f11e395]:
+            - heading "Elsewhere" [level=3] [ref=f11e396]
+            - list [ref=f11e397]:
+              - listitem [ref=f11e398]:
+                - link "Modrinth" [ref=f11e399] [cursor=pointer]:
+                  - /url: https://modrinth.com/modpack/fixed-smp-modpack
+              - listitem [ref=f11e402]:
+                - link "GitHub" [ref=f11e403] [cursor=pointer]:
+                  - /url: https://github.com/Fixed-By-Design
+              - listitem [ref=f11e406]:
+                - link "Support the project" [ref=f11e407] [cursor=pointer]:
+                  - /url: https://ko-fi.com/akitain
+    - generic [ref=f11e410]:
+      - paragraph [ref=f11e412]: Fixed SMP 1.8.0 · Minecraft 26.1.2
+      - paragraph [ref=f11e414]: © 2026 Fixed by Design. Not affiliated with Mojang or Microsoft.

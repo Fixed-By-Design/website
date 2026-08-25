@@ -1,4 +1,4 @@
-import type { NavigationMenuItem } from '@nuxt/ui'
+import type { FooterColumn, NavigationMenuItem } from '@nuxt/ui'
 import { LINKS } from '#shared/constants/project'
 
 export function usePrimaryNavigation() {
@@ -13,7 +13,7 @@ export function usePrimaryNavigation() {
   ])
 }
 
-export function useFooterNavigation() {
+export function useFooterNavigation(): FooterColumn[] {
   return [
     {
       label: 'Project',
@@ -23,6 +23,7 @@ export function useFooterNavigation() {
         { label: 'Roadmap', to: '/roadmap' },
         { label: 'Changelog', to: '/changelog' },
         { label: 'Design decisions', to: '/design' },
+        { label: 'The modpack', to: '/modpack' },
       ],
     },
     {

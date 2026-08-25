@@ -90,11 +90,14 @@ useSeoMeta({
 
 <template>
   <div>
-    <UPageHeader
-      title="Features"
-      description="What actually changes in the game. Grouped by gameplay system, not by repository."
-      :ui="{ root: 'border-b border-[var(--ui-border)]' }"
-    />
+    <div class="border-b border-[var(--ui-border)]">
+      <UContainer>
+        <UPageHeader
+          title="Features"
+          description="What actually changes in the game. Grouped by gameplay system, not by repository."
+        />
+      </UContainer>
+    </div>
 
     <UContainer class="py-10">
       <div class="flex flex-col gap-3 lg:flex-row lg:items-center">
@@ -106,17 +109,38 @@ useSeoMeta({
           aria-label="Filter features by name"
         />
         <div class="flex flex-wrap gap-3">
-          <USelect v-model="category" :items="usedCategories" class="w-52" aria-label="Filter by category" />
-          <USelect v-model="mod" :items="modOptions" class="w-52" aria-label="Filter by mod" />
-          <USelect v-model="status" :items="statusOptions" class="w-40" aria-label="Filter by status" />
+          <USelect
+            v-model="category"
+            :items="usedCategories"
+            class="w-52"
+            aria-label="Filter by category"
+          />
+          <USelect
+            v-model="mod"
+            :items="modOptions"
+            class="w-52"
+            aria-label="Filter by mod"
+          />
+          <USelect
+            v-model="status"
+            :items="statusOptions"
+            class="w-40"
+            aria-label="Filter by status"
+          />
         </div>
         <p class="text-sm text-[var(--ui-text-dimmed)] lg:ml-auto">
           {{ filtered.length }} of {{ features.length }}
         </p>
       </div>
 
-      <div v-if="grouped.length" class="mt-10 space-y-12">
-        <section v-for="[key, items] in grouped" :key="key">
+      <div
+        v-if="grouped.length"
+        class="mt-10 space-y-12"
+      >
+        <section
+          v-for="[key, items] in grouped"
+          :key="key"
+        >
           <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-gold-400">
             {{ FEATURE_CATEGORY_LABELS[key] }}
           </h2>
@@ -143,7 +167,11 @@ useSeoMeta({
         description="Try widening the category, mod or status filter."
       >
         <template #actions>
-          <UButton color="neutral" variant="subtle" @click="reset">
+          <UButton
+            color="neutral"
+            variant="subtle"
+            @click="reset"
+          >
             Clear filters
           </UButton>
         </template>

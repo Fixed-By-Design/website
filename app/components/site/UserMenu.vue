@@ -20,9 +20,22 @@ const items = computed<DropdownMenuItem[][]>(() => [
 </script>
 
 <template>
-  <UDropdownMenu v-if="loggedIn && user" :items="items" :ui="{ content: 'w-52' }">
-    <UButton color="neutral" variant="ghost" class="p-1" :aria-label="`Account menu for ${user.login}`">
-      <UAvatar :src="user.avatarUrl ?? undefined" :alt="user.login" size="xs" />
+  <UDropdownMenu
+    v-if="loggedIn && user"
+    :items="items"
+    :ui="{ content: 'w-52' }"
+  >
+    <UButton
+      color="neutral"
+      variant="ghost"
+      class="p-1"
+      :aria-label="`Account menu for ${user.login}`"
+    >
+      <UAvatar
+        :src="user.avatarUrl ?? undefined"
+        :alt="user.login"
+        size="xs"
+      />
     </UButton>
   </UDropdownMenu>
 

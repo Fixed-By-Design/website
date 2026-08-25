@@ -29,11 +29,17 @@ defineProps<{
 
     <div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 pt-2 text-xs text-[var(--ui-text-dimmed)]">
       <span class="flex items-center gap-1">
-        <UIcon name="i-lucide-folder" class="size-3" />
+        <UIcon
+          name="i-lucide-folder"
+          class="size-3"
+        />
         {{ FEATURE_CATEGORY_LABELS[category] }}
       </span>
       <span class="flex items-center gap-1">
-        <UIcon name="i-lucide-package" class="size-3" />
+        <UIcon
+          name="i-lucide-package"
+          class="size-3"
+        />
         {{ MOD_LABELS[mod] }}
       </span>
     </div>

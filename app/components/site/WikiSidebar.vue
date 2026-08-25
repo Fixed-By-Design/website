@@ -6,13 +6,22 @@ const route = useRoute()
 </script>
 
 <template>
-  <nav aria-label="Wiki navigation" class="space-y-6">
-    <div v-for="section in sections" :key="section.label">
+  <nav
+    aria-label="Wiki navigation"
+    class="space-y-6"
+  >
+    <div
+      v-for="section in sections"
+      :key="section.label"
+    >
       <p class="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
         {{ section.label }}
       </p>
       <ul class="space-y-0.5 border-s border-[var(--ui-border)]">
-        <li v-for="item in section.items" :key="item.path">
+        <li
+          v-for="item in section.items"
+          :key="item.path"
+        >
           <NuxtLink
             :to="item.path"
             class="-ms-px block border-s-2 py-1.5 ps-3 text-sm transition-colors"

@@ -1,4 +1,5 @@
 import type { H3Event } from 'h3'
+import { queryCollection, queryCollectionSearchSections } from '@nuxt/content/server'
 import type { SearchGroup, SearchResult, SearchSourceId } from '#shared/types/search'
 import { FEATURE_CATEGORY_LABELS, type FeatureCategory } from '#shared/constants/features'
 import { ROADMAP_STATUS_LABELS } from '#shared/constants/workflow'

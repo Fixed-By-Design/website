@@ -34,7 +34,10 @@ useSeoMeta({ title: 'Problems', robots: 'noindex' })
 
 <template>
   <UContainer class="py-10">
-    <UBreadcrumb :items="[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Problems' }]" class="mb-6" />
+    <UBreadcrumb
+      :items="[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Problems' }]"
+      class="mb-6"
+    />
 
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
@@ -46,19 +49,32 @@ useSeoMeta({ title: 'Problems', robots: 'noindex' })
           point at one problem. One problem is never one feedback entry.
         </p>
       </div>
-      <UButton to="/dashboard/feedback" color="neutral" variant="subtle" icon="i-lucide-inbox">
+      <UButton
+        to="/dashboard/feedback"
+        color="neutral"
+        variant="subtle"
+        icon="i-lucide-inbox"
+      >
         Feedback triage
       </UButton>
     </div>
 
     <div class="mt-6 flex flex-wrap items-center gap-3">
-      <USelect v-model="status" :items="statusOptions" class="w-52" aria-label="Filter by status" />
+      <USelect
+        v-model="status"
+        :items="statusOptions"
+        class="w-52"
+        aria-label="Filter by status"
+      />
       <p class="text-sm text-[var(--ui-text-dimmed)]">
         {{ filtered.length }} {{ filtered.length === 1 ? 'problem' : 'problems' }}
       </p>
     </div>
 
-    <div v-if="filtered.length" class="mt-8 space-y-4">
+    <div
+      v-if="filtered.length"
+      class="mt-8 space-y-4"
+    >
       <article
         v-for="problem in filtered"
         :key="problem.id"
@@ -66,7 +82,12 @@ useSeoMeta({ title: 'Problems', robots: 'noindex' })
       >
         <header class="flex flex-wrap items-center gap-2">
           <span class="font-mono text-sm text-[var(--ui-text-dimmed)]">#{{ problem.publicId }}</span>
-          <UBadge :label="PROBLEM_STATUS_LABELS[problem.status]" :color="statusColor[problem.status]" variant="subtle" size="sm" />
+          <UBadge
+            :label="PROBLEM_STATUS_LABELS[problem.status]"
+            :color="statusColor[problem.status]"
+            variant="subtle"
+            size="sm"
+          />
           <UBadge
             v-if="problem.severity"
             :label="problem.severity"
@@ -82,7 +103,10 @@ useSeoMeta({ title: 'Problems', robots: 'noindex' })
             size="sm"
             icon="i-lucide-message-square"
           />
-          <time :datetime="problem.updatedAt" class="ms-auto text-xs text-[var(--ui-text-dimmed)]">
+          <time
+            :datetime="problem.updatedAt"
+            class="ms-auto text-xs text-[var(--ui-text-dimmed)]"
+          >
             Updated {{ formatter.format(new Date(problem.updatedAt)) }}
           </time>
         </header>
@@ -94,7 +118,10 @@ useSeoMeta({ title: 'Problems', robots: 'noindex' })
           {{ problem.summary }}
         </p>
 
-        <div v-if="problem.affectedSystems.length" class="mt-4 flex flex-wrap gap-1.5">
+        <div
+          v-if="problem.affectedSystems.length"
+          class="mt-4 flex flex-wrap gap-1.5"
+        >
           <UBadge
             v-for="system in problem.affectedSystems"
             :key="system"
@@ -115,7 +142,11 @@ useSeoMeta({ title: 'Problems', robots: 'noindex' })
       description="Nothing matches that status. Problems are created from the feedback inbox."
     >
       <template #actions>
-        <UButton to="/dashboard/feedback" color="neutral" variant="subtle">
+        <UButton
+          to="/dashboard/feedback"
+          color="neutral"
+          variant="subtle"
+        >
           Open the inbox
         </UButton>
       </template>
