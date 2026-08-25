@@ -127,13 +127,17 @@ useSeoMeta({
           </section>
 
           <section
-            v-if="related.length"
+            v-if="related.length || sideLinks.wiki.length || sideLinks.decisions.length"
             class="mt-12"
           >
             <h2 class="text-xl font-semibold">
               Related systems
             </h2>
-            <div class="mt-4 grid gap-4 md:grid-cols-2">
+
+            <div
+              v-if="related.length"
+              class="mt-4 grid gap-4 md:grid-cols-2"
+            >
               <FeatureCard
                 v-for="item in related"
                 :key="item.path"
@@ -144,6 +148,55 @@ useSeoMeta({
                 :status="item.status as FeatureStatus"
                 :mod="item.mod as ModId"
               />
+            </div>
+
+            <div
+              v-if="sideLinks.wiki.length || sideLinks.decisions.length"
+              class="mt-4 grid gap-4 sm:grid-cols-2"
+            >
+              <div
+                v-if="sideLinks.wiki.length"
+                class="rounded-xl border border-[var(--ui-border)] p-5"
+              >
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
+                  How to use it
+                </h3>
+                <ul class="mt-3 space-y-2">
+                  <li
+                    v-for="link in sideLinks.wiki"
+                    :key="link.path"
+                  >
+                    <ULink
+                      :to="link.path"
+                      class="text-[var(--ui-text-muted)] underline-offset-2 hover:text-gold-400 hover:underline"
+                    >
+                      {{ link.title }}
+                    </ULink>
+                  </li>
+                </ul>
+              </div>
+
+              <div
+                v-if="sideLinks.decisions.length"
+                class="rounded-xl border border-[var(--ui-border)] p-5"
+              >
+                <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
+                  Why it works this way
+                </h3>
+                <ul class="mt-3 space-y-2">
+                  <li
+                    v-for="link in sideLinks.decisions"
+                    :key="link.path"
+                  >
+                    <ULink
+                      :to="link.path"
+                      class="text-[var(--ui-text-muted)] underline-offset-2 hover:text-gold-400 hover:underline"
+                    >
+                      {{ link.title }}
+                    </ULink>
+                  </li>
+                </ul>
+              </div>
             </div>
           </section>
 
@@ -201,57 +254,6 @@ useSeoMeta({
               :links="feature.body.toc.links"
               highlight
             />
-
-            <div
-              v-if="sideLinks.wiki.length || sideLinks.decisions.length"
-              class="mt-8 space-y-5 text-sm"
-            >
-              <div v-if="sideLinks.wiki.length">
-                <p class="mb-2 font-semibold text-[var(--ui-text-highlighted)]">
-                  In the wiki
-                </p>
-                <ul class="space-y-1.5">
-                  <li
-                    v-for="link in sideLinks.wiki"
-                    :key="link.path"
-                  >
-                    <ULink
-                      :to="link.path"
-                      class="flex items-center gap-1.5 text-[var(--ui-text-muted)] hover:text-gold-400"
-                    >
-                      <UIcon
-                        name="i-lucide-book-open"
-                        class="size-3.5 shrink-0"
-                      />
-                      {{ link.title }}
-                    </ULink>
-                  </li>
-                </ul>
-              </div>
-
-              <div v-if="sideLinks.decisions.length">
-                <p class="mb-2 font-semibold text-[var(--ui-text-highlighted)]">
-                  Design decisions
-                </p>
-                <ul class="space-y-1.5">
-                  <li
-                    v-for="link in sideLinks.decisions"
-                    :key="link.path"
-                  >
-                    <ULink
-                      :to="link.path"
-                      class="flex items-start gap-1.5 text-[var(--ui-text-muted)] hover:text-gold-400"
-                    >
-                      <UIcon
-                        name="i-lucide-scale"
-                        class="mt-0.5 size-3.5 shrink-0"
-                      />
-                      {{ link.title }}
-                    </ULink>
-                  </li>
-                </ul>
-              </div>
-            </div>
           </UPageAside>
         </template>
       </UPage>

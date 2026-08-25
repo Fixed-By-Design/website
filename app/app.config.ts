@@ -8,6 +8,11 @@ export default defineAppConfig({
     button: {
       defaultVariants: { color: 'primary' },
     },
+    contentToc: {
+      slots: {
+        root: 'lg:backdrop-blur-none',
+      },
+    },
     card: {
       slots: {
         root: 'ring-[var(--ui-border)] bg-[var(--ui-bg-muted)]',

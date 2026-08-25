@@ -3,18 +3,8 @@ import type { PublicRoadmapItem } from '#shared/types/roadmap'
 
 const { data: items } = await useFetch<PublicRoadmapItem[]>('/api/roadmap', { default: () => [] })
 
-const domain = ref('all')
-
-const domains = computed(() => [
-  { label: 'All systems', value: 'all' },
-  ...[...new Set(items.value.map(item => item.domain))].sort().map(value => ({ label: value, value })),
-])
-
-const filtered = computed(() =>
-  domain.value === 'all' ? items.value : items.value.filter(item => item.domain === domain.value))
-
-const milestones = computed(() => buildRoadmapTimeline(filtered.value))
-const rejected = computed(() => filtered.value.filter(item => item.status === 'rejected'))
+const milestones = computed(() => buildRoadmapTimeline(items.value))
+const rejected = computed(() => items.value.filter(item => item.status === 'rejected'))
 
 useSeoMeta({
   title: 'Roadmap',
@@ -34,21 +24,9 @@ useSeoMeta({
     </div>
 
     <UContainer class="py-10">
-      <div class="flex flex-wrap items-center gap-3">
-        <USelect
-          v-model="domain"
-          :items="domains"
-          class="w-52"
-          aria-label="Filter by system"
-        />
-        <p class="text-sm text-[var(--ui-text-dimmed)]">
-          {{ filtered.length }} {{ filtered.length === 1 ? 'initiative' : 'initiatives' }}
-        </p>
-      </div>
-
       <ol
         v-if="milestones.length"
-        class="mt-10 space-y-10 border-s border-[var(--ui-border)] ps-6 sm:ps-8"
+        class="space-y-10 border-s border-[var(--ui-border)] ps-6 sm:ps-8"
       >
         <li
           v-for="milestone in milestones"
@@ -91,7 +69,7 @@ useSeoMeta({
         v-else
         class="mt-16"
         title="Nothing on the roadmap"
-        description="No initiative matches that system."
+        description="Initiatives appear here as they are picked up."
       />
 
       <section

@@ -1,48 +1,62 @@
 <script setup lang="ts">
+const { data: page } = await useAsyncData('wiki-overview', () =>
+  queryCollection('wiki').path('/wiki').first())
+
+if (!page.value) {
+  throw createError({ statusCode: 404, statusMessage: 'Wiki overview not found', fatal: true })
+}
+
 const { data: sections } = await useWikiNavigation()
+
+const contents = computed(() => sections.value.filter(section => section.items.some(item => item.path !== '/wiki')))
 
 useSeoMeta({
   title: 'Wiki',
-  description: 'How to use and understand every mechanic Fixed by Design changes, from enchanting to trains.',
+  description: page.value.description,
+  ogTitle: 'Fixed by Design wiki',
+  ogDescription: page.value.description,
 })
 </script>
 
 <template>
-  <div>
-    <div class="border-b border-[var(--ui-border)]">
-      <UContainer>
-        <UPageHeader
-          title="Wiki"
-          description="How to use and understand each mechanic. For what changed and why, read the Features section."
-        />
-      </UContainer>
-    </div>
+  <SiteWikiLayout
+    v-if="page"
+    :page="page"
+    :sections="sections"
+    is-root
+  >
+    <ContentRenderer :value="page" />
 
-    <UContainer class="py-10">
+    <section class="mt-12">
+      <h2 class="text-xl font-semibold">
+        Everything in this wiki
+      </h2>
+
       <div
-        v-for="section in sections"
+        v-for="section in contents"
         :key="section.label"
-        class="mb-10"
+        class="mt-6"
       >
-        <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-gold-400">
+        <h3 class="text-sm font-semibold uppercase tracking-wider text-gold-400">
           {{ section.label }}
-        </h2>
-        <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          <NuxtLink
-            v-for="item in section.items"
+        </h3>
+        <ul class="mt-3 space-y-3">
+          <li
+            v-for="item in section.items.filter(entry => entry.path !== '/wiki')"
             :key="item.path"
-            :to="item.path"
-            class="group rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-5 transition-colors hover:border-gold-500/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500"
           >
-            <h3 class="font-semibold text-[var(--ui-text-highlighted)] group-hover:text-gold-400">
+            <ULink
+              :to="item.path"
+              class="font-medium text-[var(--ui-text-highlighted)] underline-offset-2 hover:text-gold-400 hover:underline"
+            >
               {{ item.title }}
-            </h3>
-            <p class="mt-2 text-sm leading-relaxed text-[var(--ui-text-muted)]">
+            </ULink>
+            <p class="mt-0.5 text-sm text-[var(--ui-text-muted)]">
               {{ item.description }}
             </p>
-          </NuxtLink>
-        </div>
+          </li>
+        </ul>
       </div>
-    </UContainer>
-  </div>
+    </section>
+  </SiteWikiLayout>
 </template>
