@@ -67,4 +67,9 @@ export default defineNuxtConfig({
   linkChecker: { enabled: false },
 
   ogImage: { enabled: false },
+
+  sitemap: {
+    sources: ['/api/__sitemap__/urls'],
+    exclude: ['/dashboard/**', '/signin', '/changelog/**'],
+  },
 })

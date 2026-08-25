@@ -1,5 +1,5 @@
 <script setup lang="ts">
-useSeoMeta({ title: 'Sign in', robots: 'noindex' })
+useSeoMeta({ title: 'Sign in', robots: 'noindex, follow' })
 </script>
 
 <template>
