@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ROLE_RANK } from '#shared/constants/workflow'
-import { LINKS } from '#shared/constants/project'
+import { LINKS, MODPACK_AVAILABLE } from '#shared/constants/project'
 import type { FeedbackPage, ProblemSummary } from '#shared/types/dashboard'
 import type { PublicRoadmapItem } from '#shared/types/roadmap'
 
@@ -226,6 +226,7 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           GitHub organisation
         </UButton>
         <UButton
+          v-if="MODPACK_AVAILABLE"
           :to="LINKS.modrinth"
           target="_blank"
           rel="noopener"

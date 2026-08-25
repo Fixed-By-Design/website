@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LINKS, PROJECT } from '#shared/constants/project'
+import { LINKS, MODPACK_AVAILABLE, PROJECT } from '#shared/constants/project'
 
 const columns = useFooterNavigation()
 const { discordUrl, hasDiscord } = useCommunityLinks()
@@ -28,6 +28,7 @@ const year = new Date().getFullYear()
                 aria-label="GitHub"
               />
               <UButton
+                v-if="MODPACK_AVAILABLE"
                 :to="LINKS.modrinth"
                 target="_blank"
                 rel="noopener"

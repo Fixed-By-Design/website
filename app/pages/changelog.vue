@@ -63,16 +63,11 @@ useSeoMeta({
           </p>
 
           <div class="mt-6 flex flex-wrap gap-2">
-            <UButton
+            <SiteDownloadButton
               v-if="release.modrinth"
-              :to="release.modrinth"
-              target="_blank"
-              rel="noopener"
+              :label="`Download ${release.version}`"
               size="sm"
-              icon="i-simple-icons-modrinth"
-            >
-              Download {{ release.version }}
-            </UButton>
+            />
             <UButton
               v-if="release.github"
               :to="release.github"

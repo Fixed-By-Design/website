@@ -1,5 +1,5 @@
 import type { FooterColumn, NavigationMenuItem } from '@nuxt/ui'
-import { LINKS } from '#shared/constants/project'
+import { LINKS, MODPACK_AVAILABLE } from '#shared/constants/project'
 
 export function usePrimaryNavigation() {
   const route = useRoute()
@@ -40,7 +40,7 @@ export function useFooterNavigation(): FooterColumn[] {
     {
       label: 'Elsewhere',
       children: [
-        { label: 'Modrinth', to: LINKS.modrinth, target: '_blank' },
+        ...(MODPACK_AVAILABLE ? [{ label: 'Modrinth', to: LINKS.modrinth, target: '_blank' }] : []),
         { label: 'GitHub', to: LINKS.github, target: '_blank' },
         { label: 'Support the project', to: LINKS.kofi, target: '_blank' },
       ],

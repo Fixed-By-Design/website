@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LINKS, PROJECT } from '#shared/constants/project'
+import { PROJECT } from '#shared/constants/project'
 
 const { data: page } = await useAsyncData('modpack', () => queryCollection('pages').path('/pages/modpack').first())
 
@@ -22,14 +22,7 @@ useSeoMeta({
           :description="page.description"
         >
           <template #links>
-            <UButton
-              :to="LINKS.modrinth"
-              target="_blank"
-              rel="noopener"
-              icon="i-simple-icons-modrinth"
-            >
-              Download {{ PROJECT.modpackVersion }}
-            </UButton>
+            <SiteDownloadButton :label="`Download ${PROJECT.modpackVersion}`" />
           </template>
         </UPageHeader>
       </UContainer>

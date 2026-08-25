@@ -44,17 +44,10 @@ const links = usePrimaryNavigation()
         aria-label="Fixed by Design on GitHub"
       />
 
-      <UButton
-        :to="LINKS.modrinth"
-        target="_blank"
-        rel="noopener"
-        color="primary"
-        variant="solid"
-        icon="i-simple-icons-modrinth"
-        class="hidden shrink-0 whitespace-nowrap sm:inline-flex font-medium"
-      >
-        Download
-      </UButton>
+      <SiteDownloadButton
+        label="Download"
+        class="hidden shrink-0 sm:inline-flex"
+      />
 
       <SiteUserMenu />
     </template>
@@ -69,15 +62,7 @@ const links = usePrimaryNavigation()
       <USeparator class="my-4" />
 
       <div class="flex flex-col gap-2">
-        <UButton
-          :to="LINKS.modrinth"
-          target="_blank"
-          rel="noopener"
-          icon="i-simple-icons-modrinth"
-          block
-        >
-          Download on Modrinth
-        </UButton>
+        <SiteDownloadButton block />
         <UButton
           :to="LINKS.github"
           target="_blank"

@@ -60,16 +60,7 @@ useSeoMeta({
           </p>
 
           <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
-            <UButton
-              :to="LINKS.modrinth"
-              target="_blank"
-              rel="noopener"
-              size="xl"
-              icon="i-simple-icons-modrinth"
-              class="font-semibold"
-            >
-              Download on Modrinth
-            </UButton>
+            <SiteDownloadButton size="xl" />
             <UButton
               to="/features"
               size="xl"
@@ -256,17 +247,10 @@ useSeoMeta({
             </h2>
             <p class="mt-3 text-[var(--ui-text-muted)]">
               {{ PROJECT.modpackName }} {{ PROJECT.modpackVersion }} bundles the four first-party mods with a curated set
-              of third-party mods, shaders and quality-of-life improvements.
+              of third-party mods, shaders and quality-of-life improvements. It is not published yet.
             </p>
             <div class="mt-6 flex flex-wrap gap-3">
-              <UButton
-                :to="LINKS.modrinth"
-                target="_blank"
-                rel="noopener"
-                icon="i-simple-icons-modrinth"
-              >
-                Download
-              </UButton>
+              <SiteDownloadButton label="Download" />
               <UButton
                 to="/wiki/getting-started"
                 color="neutral"

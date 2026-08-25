@@ -1,3 +1,7 @@
+// Flip to true once the modpack is published. Every download CTA reads this,
+// so releasing is a one-line change rather than a hunt through the templates.
+export const MODPACK_AVAILABLE = false
+
 export const PROJECT = {
   name: 'Fixed by Design',
   shortName: 'FBD',

@@ -9,6 +9,10 @@ description: What ships in Fixed SMP, and a clear line between what Fixed by Des
 
 Three variants are published for every release: **server**, **client** and **full**. The full pack is what the Modrinth page offers by default.
 
+::warning
+The pack is not published yet. Everything below describes what it contains; the download will appear here when it ships.
+::
+
 | | |
 | :-- | :-- |
 | Version | 1.8.0 |
