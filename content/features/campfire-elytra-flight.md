@@ -18,7 +18,7 @@ decisions: [/design/why-rockets-no-longer-power-elytra]
 credits:
   - name: Aileron
     author: ryanhcode and Violunae
-    url: https://github.com/OrtusMC/Aileron
+    url: https://github.com/LodestarMC/Aileron
     license: LGPL-3.0-only
     note: The overhaul that got there first, and the reason this system exists at all. Campfire flight here is a port of its ideas and, in places, its code.
   - name: Eleron
@@ -41,7 +41,7 @@ details:
 
 ## Where this comes from
 
-This system is not original to Fixed by Design. It is a port of [Aileron](https://github.com/OrtusMC/Aileron) by ryanhcode and Violunae, and of its Fabric rewrite [Eleron](https://codeberg.org/sindercube/eleron) by sindercube.
+This system is not original to Fixed by Design. It is a port of [Aileron](https://github.com/LodestarMC/Aileron) by ryanhcode and Violunae, and of its Fabric rewrite [Eleron](https://codeberg.org/sindercube/eleron) by sindercube.
 
 They worked out the hard part: that the fix for rocket flight is not to nerf rockets but to move the cost onto the ground, where you can build against it. Campfires as launch pads, hearth geometry as a power budget, updraft columns as infrastructure. That design is theirs, and it is close to perfect.
 

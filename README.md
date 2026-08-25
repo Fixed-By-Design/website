@@ -103,7 +103,7 @@ Feedback never becomes a GitHub issue automatically, and one problem is never on
 
 ## Credits
 
-Campfire elytra flight, documented on this site, is a port of **[Aileron](https://github.com/OrtusMC/Aileron)** by ryanhcode and Violunae and its Fabric rewrite **[Eleron](https://codeberg.org/sindercube/eleron)** by sindercube, both LGPL-3.0-only. Exploration Reloaded is licensed LGPL-3.0-only so it can carry that code. Several exploration systems also derive from **[Fixed Minecraft](https://github.com/GreenJAB/fixed-minecraft)** by green_jab, MIT-licensed and used with permission.
+Campfire elytra flight, documented on this site, is a port of **[Aileron](https://github.com/LodestarMC/Aileron)** by ryanhcode and Violunae and its Fabric rewrite **[Eleron](https://codeberg.org/sindercube/eleron)** by sindercube, both LGPL-3.0-only. Exploration Reloaded is licensed LGPL-3.0-only so it can carry that code. Several exploration systems also derive from **[Fixed Minecraft](https://github.com/GreenJAB/fixed-minecraft)** by green_jab, MIT-licensed and used with permission.
 
 ## What is deliberately not built
 
