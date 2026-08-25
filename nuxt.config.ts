@@ -14,6 +14,9 @@ export default defineNuxtConfig({
 
   colorMode: { preference: 'dark', fallback: 'dark' },
 
+  ogImage: { enabled: false },
+  linkChecker: { enabled: false },
+
   site: {
     url: process.env.NUXT_PUBLIC_SITE_URL || 'http://localhost:3000',
     name: 'Fixed by Design',
@@ -22,6 +25,7 @@ export default defineNuxtConfig({
   },
 
   content: {
+    experimental: { sqliteConnector: 'native' },
     build: {
       markdown: {
         toc: { depth: 3, searchDepth: 3 },
@@ -51,7 +55,6 @@ export default defineNuxtConfig({
     '/dashboard/**': { ssr: false, robots: false },
   },
 
-  future: { compatibilityVersion: 4 },
   compatibilityDate: '2026-08-25',
 
   eslint: {

@@ -7,6 +7,5 @@ export default defineConfig({
   dbCredentials: {
     url: process.env.NUXT_DATABASE_URL ?? 'postgresql://postgres:postgres@localhost:5432/fixed_by_design',
   },
-  strict: true,
   verbose: true,
 })

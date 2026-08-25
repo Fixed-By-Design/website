@@ -11,6 +11,7 @@ import {
   uniqueIndex,
   uuid,
 } from 'drizzle-orm/pg-core'
+import type { AnyPgColumn } from 'drizzle-orm/pg-core'
 import {
   EXTERNAL_LINK_KINDS,
   FEEDBACK_SOURCES,
@@ -95,7 +96,7 @@ export const feedback = pgTable('feedback', {
   y: doublePrecision('y'),
   z: doublePrecision('z'),
   problemId: uuid('problem_id').references(() => problems.id, { onDelete: 'set null' }),
-  duplicateOfId: uuid('duplicate_of_id').references((): any => feedback.id, { onDelete: 'set null' }),
+  duplicateOfId: uuid('duplicate_of_id').references((): AnyPgColumn => feedback.id, { onDelete: 'set null' }),
   submittedById: uuid('submitted_by_id').references(() => users.id, { onDelete: 'set null' }),
   triagedById: uuid('triaged_by_id').references(() => users.id, { onDelete: 'set null' }),
   triagedAt: timestamp('triaged_at', { withTimezone: true }),

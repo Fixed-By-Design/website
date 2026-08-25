@@ -1,0 +1,78 @@
+<script setup lang="ts">
+import { LINKS } from '#shared/constants/project'
+
+const links = usePrimaryNavigation()
+</script>
+
+<template>
+  <UHeader
+    :ui="{ root: 'bg-[var(--ui-bg)]/85 backdrop-blur border-b border-[var(--ui-border)]' }"
+    mode="drawer"
+  >
+    <template #left>
+      <NuxtLink to="/" class="flex items-center gap-2" aria-label="Fixed by Design, home">
+        <SiteLogo :height="26" />
+      </NuxtLink>
+    </template>
+
+    <UNavigationMenu :items="links" variant="link" />
+
+    <template #right>
+      <UContentSearchButton
+        collapsed
+        class="lg:hidden"
+      />
+      <UContentSearchButton
+        :collapsed="false"
+        class="hidden lg:flex w-40 shrink-0"
+      />
+
+      <UButton
+        :to="LINKS.github"
+        target="_blank"
+        rel="noopener"
+        color="neutral"
+        variant="ghost"
+        icon="i-simple-icons-github"
+        aria-label="Fixed by Design on GitHub"
+      />
+
+      <UButton
+        :to="LINKS.modrinth"
+        target="_blank"
+        rel="noopener"
+        color="primary"
+        variant="solid"
+        icon="i-simple-icons-modrinth"
+        class="hidden shrink-0 whitespace-nowrap sm:inline-flex font-medium"
+      >
+        Download
+      </UButton>
+
+      <SiteUserMenu />
+    </template>
+
+    <template #body>
+      <UNavigationMenu :items="links" orientation="vertical" class="-mx-2.5" />
+
+      <USeparator class="my-4" />
+
+      <div class="flex flex-col gap-2">
+        <UButton :to="LINKS.modrinth" target="_blank" rel="noopener" icon="i-simple-icons-modrinth" block>
+          Download on Modrinth
+        </UButton>
+        <UButton
+          :to="LINKS.github"
+          target="_blank"
+          rel="noopener"
+          color="neutral"
+          variant="subtle"
+          icon="i-simple-icons-github"
+          block
+        >
+          View on GitHub
+        </UButton>
+      </div>
+    </template>
+  </UHeader>
+</template>
