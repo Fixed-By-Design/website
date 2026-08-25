@@ -38,7 +38,10 @@ useSeoMeta({
       />
 
       <UContainer class="relative py-20 sm:py-28">
-        <div class="mx-auto max-w-3xl text-center">
+        <div
+          v-intro.children="{ delay: 0.1, stagger: 0.09 }"
+          class="mx-auto max-w-3xl text-center"
+        >
           <SiteLogo
             :height="72"
             class="mx-auto"
@@ -92,6 +95,7 @@ useSeoMeta({
         </div>
 
         <div
+          v-reveal="{ y: 26 }"
           class="mx-auto mt-16 flex aspect-video max-w-5xl items-center justify-center rounded-xl border border-dashed border-[var(--ui-border-accented)] bg-[var(--ui-bg-muted)]"
         >
           <p class="text-sm text-[var(--ui-text-dimmed)]">
@@ -104,7 +108,7 @@ useSeoMeta({
     <section class="border-b border-[var(--ui-border)]">
       <UContainer class="py-20">
         <div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
-          <div>
+          <div v-reveal>
             <p class="text-sm font-semibold uppercase tracking-wider text-gold-400">
               The idea
             </p>
@@ -123,7 +127,10 @@ useSeoMeta({
             </p>
           </div>
 
-          <ul class="grid gap-3 sm:grid-cols-2 lg:content-start">
+          <ul
+            v-reveal.children="{ stagger: 0.05 }"
+            class="grid gap-3 sm:grid-cols-2 lg:content-start"
+          >
             <li
               v-for="item in [
                 { label: 'Dominant strategies', text: 'One correct answer crowds out every alternative.' },
@@ -150,7 +157,10 @@ useSeoMeta({
 
     <section class="border-b border-[var(--ui-border)]">
       <UContainer class="py-20">
-        <div class="max-w-2xl">
+        <div
+          v-reveal
+          class="max-w-2xl"
+        >
           <p class="text-sm font-semibold uppercase tracking-wider text-gold-400">
             Designed systems
           </p>
@@ -159,7 +169,10 @@ useSeoMeta({
           </h2>
         </div>
 
-        <div class="mt-10 grid gap-5 md:grid-cols-2">
+        <div
+          v-reveal.children="{ stagger: 0.08 }"
+          class="mt-10 grid gap-5 md:grid-cols-2"
+        >
           <SitePillarCard
             v-for="pillar in PILLAR_DEFINITIONS"
             :key="pillar.id"
@@ -171,7 +184,10 @@ useSeoMeta({
 
     <section class="border-b border-[var(--ui-border)]">
       <UContainer class="py-20">
-        <div class="max-w-2xl">
+        <div
+          v-reveal
+          class="max-w-2xl"
+        >
           <p class="text-sm font-semibold uppercase tracking-wider text-gold-400">
             How a change is made
           </p>
@@ -183,7 +199,10 @@ useSeoMeta({
           </p>
         </div>
 
-        <div class="mt-10 space-y-5">
+        <div
+          v-reveal.children="{ stagger: 0.08, y: 22 }"
+          class="mt-10 space-y-5"
+        >
           <SiteRedesignExample
             v-for="example in visibleExamples"
             :key="example.path"
@@ -213,7 +232,10 @@ useSeoMeta({
 
     <section>
       <UContainer class="py-20">
-        <div class="grid gap-5 md:grid-cols-2">
+        <div
+          v-reveal.children="{ stagger: 0.1 }"
+          class="grid gap-5 md:grid-cols-2"
+        >
           <div class="rounded-xl border border-gold-500/25 bg-gold-500/[0.06] p-8">
             <h2 class="text-2xl font-bold tracking-tight">
               Play it

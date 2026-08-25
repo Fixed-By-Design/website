@@ -86,7 +86,10 @@ useSeoMeta({
         <h2 class="text-2xl font-bold tracking-tight">
           Where help is needed
         </h2>
-        <div class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+        <div
+          v-reveal.children="{ stagger: 0.05 }"
+          class="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-4"
+        >
           <div
             v-for="area in areas"
             :key="area.label"
@@ -110,7 +113,10 @@ useSeoMeta({
         <h2 class="text-2xl font-bold tracking-tight">
           How work moves
         </h2>
-        <ol class="mt-6 space-y-4">
+        <ol
+          v-reveal.children="{ stagger: 0.05, y: 14 }"
+          class="mt-6 space-y-4"
+        >
           <li
             v-for="(step, index) in workflow"
             :key="step.title"
@@ -131,7 +137,10 @@ useSeoMeta({
         </ol>
       </section>
 
-      <section class="mt-16 grid gap-4 md:grid-cols-3">
+      <section
+        v-reveal.children="{ stagger: 0.08 }"
+        class="mt-16 grid gap-4 md:grid-cols-3"
+      >
         <div class="rounded-xl border border-[var(--ui-border)] p-6">
           <UIcon
             name="i-simple-icons-github"

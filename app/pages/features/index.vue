@@ -144,7 +144,10 @@ useSeoMeta({
           <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-gold-400">
             {{ FEATURE_CATEGORY_LABELS[key] }}
           </h2>
-          <div class="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+          <div
+            v-reveal.children="{ stagger: 0.05 }"
+            class="grid gap-4 md:grid-cols-2 xl:grid-cols-3"
+          >
             <FeatureCard
               v-for="feature in items"
               :key="feature.path"

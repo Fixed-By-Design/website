@@ -40,7 +40,10 @@ useSeoMeta({
         <h3 class="text-sm font-semibold uppercase tracking-wider text-gold-400">
           {{ section.label }}
         </h3>
-        <ul class="mt-3 space-y-3">
+        <ul
+          v-reveal.children="{ stagger: 0.04, y: 12 }"
+          class="mt-3 space-y-3"
+        >
           <li
             v-for="item in section.items.filter(entry => entry.path !== '/wiki')"
             :key="item.path"

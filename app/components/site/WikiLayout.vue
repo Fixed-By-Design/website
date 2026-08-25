@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import type { ContentNavigationItem } from '@nuxt/content'
+import type { ContentNavigationItem, TocLink } from '@nuxt/content'
 import { LINKS } from '#shared/constants/project'
 import type { WikiNavigationSection } from '~/composables/useWikiNavigation'
 
 const props = defineProps<{
-  page: { title: string, section: string, stem: string, body?: { toc?: { links?: unknown[] } } }
+  page: { title: string, section: string, stem: string, body?: { toc?: { links?: TocLink[] } } }
   sections: WikiNavigationSection[]
   surround?: ContentNavigationItem[] | null
   isRoot?: boolean

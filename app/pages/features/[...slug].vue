@@ -55,7 +55,10 @@ useSeoMeta({
 <template>
   <div v-if="feature">
     <div class="border-b border-[var(--ui-border)] bg-[var(--ui-bg-muted)]">
-      <UContainer class="py-10">
+      <UContainer
+        v-intro.children="{ delay: 0.05, stagger: 0.07 }"
+        class="py-10"
+      >
         <UBreadcrumb
           :items="breadcrumb"
           class="mb-6"
@@ -92,6 +95,7 @@ useSeoMeta({
       <UPage>
         <UPageBody>
           <SiteRedesignExample
+            v-reveal="{ y: 22 }"
             :heading-level="2"
             :title="`${feature.title}: the reasoning`"
             :vanilla="feature.vanilla"

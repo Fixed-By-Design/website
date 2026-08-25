@@ -31,6 +31,7 @@ useSeoMeta({
         <li
           v-for="milestone in milestones"
           :key="milestone.id"
+          v-reveal="{ y: 20 }"
           class="relative"
         >
           <span

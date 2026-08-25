@@ -23,7 +23,10 @@ useSeoMeta({
     </div>
 
     <UContainer class="py-10">
-      <div class="grid gap-4 md:grid-cols-2">
+      <div
+        v-reveal.children="{ stagger: 0.07 }"
+        class="grid gap-4 md:grid-cols-2"
+      >
         <NuxtLink
           v-for="decision in decisions"
           :key="decision.path"

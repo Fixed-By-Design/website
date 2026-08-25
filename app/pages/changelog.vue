@@ -87,7 +87,10 @@ useSeoMeta({
             </UButton>
           </div>
 
-          <div class="mt-8 grid gap-4 lg:grid-cols-3">
+          <div
+            v-reveal.children="{ stagger: 0.08 }"
+            class="mt-8 grid gap-4 lg:grid-cols-3"
+          >
             <section
               v-if="release.highlights?.length"
               class="rounded-xl border border-gold-500/25 bg-gold-500/[0.05] p-5"
