@@ -49,7 +49,7 @@ The pack is built on four first-party mods. You do not need to know their names 
 | Fairlands | Death, bonus hearts, spawn rules, PvP, ore progression |
 | Minecarts Overhaul | Rails, locomotives, trains |
 
-Everything else in the pack is third-party. See [the modpack](/modpack) for the full list and a clear line between the two.
+Everything else in the pack is third-party. [Bundled Mods](/wiki/bundled-mods) covers the ones that change how the game plays, and [the modpack](/modpack) has the full list.
 
 ## If you are new
 

@@ -53,6 +53,8 @@ Everything below is made by other people. Fixed by Design bundles and configures
 
 **Gameplay.** Additional Additions, Horseman, Cut Through, Debugify, NetherPortalFix, Old Combat Mod, Emotecraft.
 
+The wiki page [Bundled Mods](/wiki/bundled-mods) goes through the ones that change how the game plays, what each one actually does, and who made it.
+
 **Libraries.** Fabric API, Fabric Language Kotlin, Cloth Config API, Balm, CreativeCore, Forge Config API Port, Puzzles Lib, Prickle, M.R.U, Text Placeholder API, YetAnotherConfigLib, Language Reload.
 
 ## Standing on other people's work
@@ -75,7 +77,7 @@ Beyond bundling, the pack ships configuration that changes how things feel.
 
 **Horses** get step-up, smoother ledges, hitching, a summoning horn, full mining speed while mounted and a mounted HUD, through Horseman.
 
-**Information** is exposed through Jade in toggle mode, covering harvest tools, crop progress, mob breeding, horse stats, storage previews and enchantment power, with display entities and barriers hidden so builds stay clean.
+**Information** is exposed through Jade in toggle mode, covering harvest tools, crop progress, mob breeding, horse stats, storage previews and enchantment power, with text displays, interaction entities and barriers hidden so builds stay clean.
 
 **Audio** uses full occlusion and reverb, with proximity voice chat at 48 blocks and a raised simultaneous-sound cap so dense bases do not drop audio.
 
