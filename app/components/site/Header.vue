@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { LINKS } from '#shared/constants/project'
+import { LINKS, MODPACK_AVAILABLE } from '#shared/constants/project'
 
 const links = usePrimaryNavigation()
 </script>
@@ -47,24 +47,16 @@ const links = usePrimaryNavigation()
         Feedback
       </UButton>
 
-      <UButton
-        :to="LINKS.github"
-        target="_blank"
-        rel="noopener"
-        color="neutral"
-        variant="ghost"
-        icon="i-simple-icons-github"
-        class="hidden lg:inline-flex"
-        aria-label="Fixed by Design on GitHub"
-      />
-
       <SiteDownloadButton
+        v-if="MODPACK_AVAILABLE"
         label="Download"
-        pending-label="Soon"
         class="hidden shrink-0 sm:inline-flex"
       />
 
-      <SiteUserMenu class="hidden lg:inline-flex" />
+      <SiteUserMenu
+        signed-in-only
+        class="hidden lg:inline-flex"
+      />
     </template>
 
     <template #body>

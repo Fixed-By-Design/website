@@ -2,7 +2,11 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 import { ROLE_RANK } from '#shared/constants/workflow'
 
-const { mobile = false } = defineProps<{ mobile?: boolean }>()
+const { mobile = false, signedInOnly = false } = defineProps<{
+  mobile?: boolean
+  /** Renders nothing when signed out. The header uses this so players never meet a maintainer control. */
+  signedInOnly?: boolean
+}>()
 
 const { loggedIn, user, clear } = useUserSession()
 const { githubConfigured } = useAuthAvailability()
@@ -91,7 +95,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
   </UDropdownMenu>
 
   <UButton
-    v-else
+    v-else-if="!signedInOnly"
     :to="signInTo"
     :external="githubConfigured"
     color="neutral"

@@ -3,6 +3,8 @@ import { LINKS, MODPACK_AVAILABLE, PROJECT } from '#shared/constants/project'
 
 const columns = useFooterNavigation()
 const { discordUrl, hasDiscord } = useCommunityLinks()
+const { githubConfigured } = useAuthAvailability()
+const { loggedIn } = useUserSession()
 const year = new Date().getFullYear()
 </script>
 
@@ -60,6 +62,14 @@ const year = new Date().getFullYear()
     <template #left>
       <p class="text-sm text-[var(--ui-text-dimmed)]">
         &copy; {{ year }} Fixed by Design. Not affiliated with Mojang or Microsoft.
+        <ULink
+          v-if="!loggedIn"
+          :to="githubConfigured ? '/auth/github' : '/signin'"
+          :external="githubConfigured"
+          class="ms-1 underline-offset-2 hover:text-gold-400 hover:underline"
+        >
+          Maintainer sign-in
+        </ULink>
       </p>
     </template>
 
