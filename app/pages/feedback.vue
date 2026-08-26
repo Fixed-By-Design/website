@@ -8,7 +8,7 @@ const route = useRoute()
 const state = reactive<WebFeedbackInput>({
   message: '',
   type: (FEEDBACK_TYPES.includes(route.query.type as FeedbackType) ? route.query.type : 'general') as FeedbackType,
-  version: PROJECT.modpackVersion,
+  version: undefined,
   playerName: undefined,
   website: '',
 })

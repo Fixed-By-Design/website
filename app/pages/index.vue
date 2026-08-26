@@ -247,8 +247,8 @@ useSeoMeta({
               Play it
             </h2>
             <p class="mt-3 text-[var(--ui-text-muted)]">
-              {{ PROJECT.modpackName }} {{ PROJECT.modpackVersion }} bundles the four first-party mods with a curated set
-              of third-party mods, shaders and quality-of-life improvements. It is not published yet.
+              The {{ PROJECT.modpackName }} modpack bundles the four first-party mods with a curated set of
+              third-party mods, shaders and quality-of-life improvements. It is not published yet.
             </p>
             <div class="mt-6 flex flex-wrap gap-3">
               <SiteDownloadButton label="Download" />

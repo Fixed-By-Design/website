@@ -9,12 +9,13 @@ export const PROJECT = {
   description: 'An opinionated redesign of Minecraft Survival, built for both solo and multiplayer.',
   minecraftVersion: '26.1.2',
   fabricLoaderVersion: '0.19.2',
-  modpackName: 'Fixed SMP',
-  modpackVersion: '1.8.0',
+  modpackName: 'Fixed by Design',
 } as const
 
 export const LINKS = {
-  modrinth: 'https://modrinth.com/modpack/fixed-smp-modpack',
+  // Points at the organisation until the modpack is published; swap in the
+  // pack URL at the same time as flipping MODPACK_AVAILABLE.
+  modrinth: 'https://modrinth.com/organization/fixed-by-design',
   modrinthOrg: 'https://modrinth.com/organization/fixed-by-design',
   github: 'https://github.com/Fixed-By-Design',
   githubWebsite: 'https://github.com/Fixed-By-Design/website',

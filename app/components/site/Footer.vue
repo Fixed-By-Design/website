@@ -65,7 +65,7 @@ const year = new Date().getFullYear()
 
     <template #right>
       <p class="text-sm text-[var(--ui-text-dimmed)]">
-        {{ PROJECT.modpackName }} {{ PROJECT.modpackVersion }} &middot; Minecraft {{ PROJECT.minecraftVersion }}
+        Minecraft {{ PROJECT.minecraftVersion }} &middot; Fabric {{ PROJECT.fabricLoaderVersion }}
       </p>
     </template>
   </UFooter>

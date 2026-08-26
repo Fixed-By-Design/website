@@ -1,6 +1,4 @@
 <script setup lang="ts">
-import { PROJECT } from '#shared/constants/project'
-
 const { data: page } = await useAsyncData('modpack', () => queryCollection('pages').path('/pages/modpack').first())
 
 if (!page.value) {
@@ -22,7 +20,7 @@ useSeoMeta({
           :description="page.description"
         >
           <template #links>
-            <SiteDownloadButton :label="`Download ${PROJECT.modpackVersion}`" />
+            <SiteDownloadButton />
           </template>
         </UPageHeader>
       </UContainer>

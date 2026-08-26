@@ -1,13 +1,13 @@
 ---
 title: The modpack
-description: What ships in Fixed SMP, and a clear line between what Fixed by Design designed and what it only bundles.
+description: What ships in the Fixed by Design modpack, and a clear line between what the project designed and what it only bundles.
 ---
 
 # The modpack
 
-**Fixed SMP** is the distribution. It combines the four first-party Fixed by Design mods with a curated set of third-party mods, resource packs, shaders and configuration.
+The **Fixed by Design modpack** is the distribution. It combines the four first-party mods with a curated set of third-party mods, resource packs, shaders and configuration.
 
-Three variants are published for every release: **server**, **client** and **full**. The full pack is what the Modrinth page offers by default.
+Three variants are planned for every release: **server**, **client** and **full**. The full pack will be what the Modrinth page offers by default.
 
 ::warning
 The pack is not published yet. Everything below describes what it contains; the download will appear here when it ships.
@@ -15,7 +15,6 @@ The pack is not published yet. Everything below describes what it contains; the 
 
 | | |
 | :-- | :-- |
-| Version | 1.8.0 |
 | Minecraft | 26.1.2 |
 | Fabric Loader | 0.19.2 |
 | Mods | 89 |
