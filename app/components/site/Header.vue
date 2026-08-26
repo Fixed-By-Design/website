@@ -6,7 +6,10 @@ const links = usePrimaryNavigation()
 
 <template>
   <UHeader
-    :ui="{ root: 'bg-[var(--ui-bg)]/85 backdrop-blur border-b border-[var(--ui-border)]' }"
+    :ui="{
+      root: 'bg-[var(--ui-bg)]/85 backdrop-blur border-b border-[var(--ui-border)]',
+      toggle: 'size-11 lg:size-8',
+    }"
     mode="drawer"
   >
     <template #left>
@@ -27,12 +30,31 @@ const links = usePrimaryNavigation()
     <template #right>
       <UContentSearchButton
         collapsed
-        class="lg:hidden"
+        class="size-11 justify-center lg:hidden"
       />
       <UContentSearchButton
         :collapsed="false"
         class="hidden lg:flex w-40 shrink-0"
       />
+
+      <UButton
+        to="/feedback"
+        color="neutral"
+        variant="ghost"
+        icon="i-lucide-message-square"
+        class="size-11 justify-center lg:hidden"
+        aria-label="Send feedback"
+      />
+
+      <UButton
+        to="/feedback"
+        color="primary"
+        variant="subtle"
+        icon="i-lucide-message-square"
+        class="hidden shrink-0 font-medium lg:inline-flex"
+      >
+        Feedback
+      </UButton>
 
       <UButton
         :to="LINKS.github"
@@ -41,6 +63,7 @@ const links = usePrimaryNavigation()
         color="neutral"
         variant="ghost"
         icon="i-simple-icons-github"
+        class="hidden lg:inline-flex"
         aria-label="Fixed by Design on GitHub"
       />
 
@@ -50,7 +73,7 @@ const links = usePrimaryNavigation()
         class="hidden shrink-0 sm:inline-flex"
       />
 
-      <SiteUserMenu />
+      <SiteUserMenu class="hidden lg:inline-flex" />
     </template>
 
     <template #body>
@@ -63,6 +86,15 @@ const links = usePrimaryNavigation()
       <USeparator class="my-4" />
 
       <div class="flex flex-col gap-2">
+        <UButton
+          to="/feedback"
+          color="primary"
+          variant="solid"
+          icon="i-lucide-message-square"
+          block
+        >
+          Send feedback
+        </UButton>
         <SiteDownloadButton block />
         <UButton
           :to="LINKS.github"
@@ -76,6 +108,10 @@ const links = usePrimaryNavigation()
           View on GitHub
         </UButton>
       </div>
+
+      <USeparator class="my-4" />
+
+      <SiteUserMenu mobile />
     </template>
   </UHeader>
 </template>

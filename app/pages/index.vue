@@ -191,54 +191,6 @@ useSeoMeta({
     <section class="border-b border-[var(--ui-border)]">
       <UContainer class="py-20">
         <div
-          v-reveal
-          class="max-w-2xl"
-        >
-          <p class="text-sm font-semibold uppercase tracking-wider text-gold-400">
-            How a change is made
-          </p>
-          <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-            Vanilla, the problem, and the fix.
-          </h2>
-          <p class="mt-4 text-[var(--ui-text-muted)]">
-            Every feature is documented the same way. Here is what that looks like in practice.
-          </p>
-        </div>
-
-        <div
-          v-reveal.children="{ stagger: 0.08, y: 22 }"
-          class="mt-10 space-y-5"
-        >
-          <SiteRedesignExample
-            v-for="example in visibleExamples"
-            :key="example.path"
-            :title="example.title"
-            :vanilla="example.vanilla"
-            :problem="example.problem"
-            :solution="example.solution"
-            :to="example.path"
-          />
-        </div>
-
-        <div
-          v-if="hiddenCount"
-          class="mt-6 flex justify-center"
-        >
-          <UButton
-            color="neutral"
-            variant="subtle"
-            :trailing-icon="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
-            @click="expanded = !expanded"
-          >
-            {{ expanded ? 'Show less' : `Show ${hiddenCount} more` }}
-          </UButton>
-        </div>
-      </UContainer>
-    </section>
-
-    <section>
-      <UContainer class="py-20">
-        <div
           v-reveal.children="{ stagger: 0.1 }"
           class="grid gap-5 md:grid-cols-2"
         >
@@ -288,6 +240,71 @@ useSeoMeta({
               </UButton>
             </div>
           </div>
+        </div>
+      </UContainer>
+    </section>
+    <section>
+      <UContainer class="py-20">
+        <div
+          v-reveal
+          class="max-w-2xl"
+        >
+          <p class="text-sm font-semibold uppercase tracking-wider text-gold-400">
+            How a change is made
+          </p>
+          <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
+            Vanilla, the problem, and the fix.
+          </h2>
+          <p class="mt-4 text-[var(--ui-text-muted)]">
+            Every feature is documented the same way. Here is what that looks like in practice.
+          </p>
+        </div>
+
+        <div
+          v-reveal.children="{ stagger: 0.08, y: 22 }"
+          class="mt-10 space-y-5"
+        >
+          <SiteRedesignExample
+            v-for="example in visibleExamples"
+            :key="example.path"
+            :title="example.title"
+            :vanilla="example.vanilla"
+            :problem="example.problem"
+            :solution="example.solution"
+            :to="example.path"
+          />
+        </div>
+
+        <div
+          v-if="hiddenCount"
+          class="mt-6 flex justify-center"
+        >
+          <UButton
+            color="neutral"
+            variant="subtle"
+            :trailing-icon="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
+            @click="expanded = !expanded"
+          >
+            {{ expanded ? 'Show less' : `Show ${hiddenCount} more` }}
+          </UButton>
+        </div>
+
+        <div
+          v-reveal
+          class="mt-14 flex flex-col items-center gap-4 border-t border-[var(--ui-border)] pt-10 text-center"
+        >
+          <p class="max-w-xl text-[var(--ui-text-muted)]">
+            Every change on this list has a page explaining what vanilla did, why it was a problem, and what
+            replaced it.
+          </p>
+          <UButton
+            to="/features"
+            size="lg"
+            trailing-icon="i-lucide-arrow-right"
+            class="font-semibold"
+          >
+            Read every change
+          </UButton>
         </div>
       </UContainer>
     </section>

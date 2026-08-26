@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { FEEDBACK_TYPES, FEEDBACK_TYPE_LABELS, type FeedbackType } from '#shared/constants/workflow'
 import { MESSAGE_MAX, MESSAGE_MIN, webFeedbackSchema, type WebFeedbackInput } from '#shared/schemas/feedback'
-import { PROJECT } from '#shared/constants/project'
 
 const route = useRoute()
 

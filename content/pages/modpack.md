@@ -3,8 +3,6 @@ title: The modpack
 description: What ships in the Fixed by Design modpack, and a clear line between what the project designed and what it only bundles.
 ---
 
-# The modpack
-
 The **Fixed by Design modpack** is the distribution. It combines the four first-party mods with a curated set of third-party mods, resource packs, shaders and configuration.
 
 Three variants are planned for every release: **server**, **client** and **full**. The full pack will be what the Modrinth page offers by default.

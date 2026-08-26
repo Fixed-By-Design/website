@@ -35,6 +35,11 @@ const editUrl = computed(() => `${LINKS.githubWebsite}/edit/dev/content/${props.
 
         <slot />
 
+        <SiteFeedbackPrompt
+          subject="this"
+          class="mt-12"
+        />
+
         <USeparator class="my-10" />
 
         <UContentSurround

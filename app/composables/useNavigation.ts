@@ -3,13 +3,22 @@ import { LINKS, MODPACK_AVAILABLE } from '#shared/constants/project'
 
 export function usePrimaryNavigation() {
   const route = useRoute()
+  const startsWith = (prefix: string) => route.path.startsWith(prefix)
 
   return computed<NavigationMenuItem[]>(() => [
-    { label: 'Features', to: '/features', active: route.path.startsWith('/features') },
-    { label: 'Wiki', to: '/wiki', active: route.path.startsWith('/wiki') },
-    { label: 'Roadmap', to: '/roadmap', active: route.path.startsWith('/roadmap') },
-    { label: 'Changelog', to: '/changelog', active: route.path.startsWith('/changelog') },
-    { label: 'Contribute', to: '/contribute', active: route.path.startsWith('/contribute') },
+    { label: 'Features', to: '/features', active: startsWith('/features') },
+    { label: 'Wiki', to: '/wiki', active: startsWith('/wiki') },
+    { label: 'The modpack', to: '/modpack', active: startsWith('/modpack') },
+    {
+      label: 'Project',
+      active: startsWith('/roadmap') || startsWith('/changelog') || startsWith('/design'),
+      children: [
+        { label: 'Roadmap', description: 'What is coming next.', to: '/roadmap' },
+        { label: 'Changelog', description: 'What already shipped.', to: '/changelog' },
+        { label: 'Design decisions', description: 'Why we chose this over the alternatives.', to: '/design' },
+      ],
+    },
+    { label: 'Contribute', to: '/contribute', active: startsWith('/contribute') },
   ])
 }
 
@@ -22,18 +31,18 @@ export function useFooterNavigation(): FooterColumn[] {
       children: [
         { label: 'Features', to: '/features' },
         { label: 'Wiki', to: '/wiki' },
+        { label: 'The modpack', to: '/modpack' },
         { label: 'Roadmap', to: '/roadmap' },
         { label: 'Changelog', to: '/changelog' },
         { label: 'Design decisions', to: '/design' },
-        { label: 'The modpack', to: '/modpack' },
       ],
     },
     {
       label: 'Participate',
       children: [
-        { label: 'Contribute', to: '/contribute' },
         { label: 'Send feedback', to: '/feedback' },
         { label: 'Report a bug', to: '/feedback?type=bug' },
+        { label: 'Contribute', to: '/contribute' },
         ...(hasDiscord ? [{ label: 'Discord', to: discordUrl, target: '_blank' }] : []),
       ],
     },

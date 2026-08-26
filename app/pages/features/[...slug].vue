@@ -290,6 +290,11 @@ useSeoMeta({
               </UButton>
             </div>
           </section>
+
+          <SiteFeedbackPrompt
+            subject="this change"
+            class="mt-12"
+          />
         </UPageBody>
 
         <template #right>
