@@ -13,9 +13,9 @@ export function usePrimaryNavigation() {
       label: 'Project',
       active: startsWith('/roadmap') || startsWith('/changelog') || startsWith('/design'),
       children: [
-        { label: 'Roadmap', description: 'What is coming next.', to: '/roadmap' },
-        { label: 'Changelog', description: 'What already shipped.', to: '/changelog' },
-        { label: 'Design decisions', description: 'Why we chose this over the alternatives.', to: '/design' },
+        { label: 'Roadmap', description: 'What is coming next.', to: '/roadmap', active: startsWith('/roadmap') },
+        { label: 'Changelog', description: 'What already shipped.', to: '/changelog', active: startsWith('/changelog') },
+        { label: 'Design decisions', description: 'Why we chose this over the alternatives.', to: '/design', active: startsWith('/design') },
       ],
     },
     { label: 'Contribute', to: '/contribute', active: startsWith('/contribute') },

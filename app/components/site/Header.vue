@@ -39,19 +39,10 @@ const links = usePrimaryNavigation()
 
       <UButton
         to="/feedback"
-        color="neutral"
-        variant="ghost"
-        icon="i-lucide-message-square"
-        class="size-11 justify-center lg:hidden"
-        aria-label="Send feedback"
-      />
-
-      <UButton
-        to="/feedback"
         color="primary"
         variant="subtle"
         icon="i-lucide-message-square"
-        class="hidden shrink-0 font-medium lg:inline-flex"
+        class="h-11 shrink-0 font-medium lg:h-8"
       >
         Feedback
       </UButton>
