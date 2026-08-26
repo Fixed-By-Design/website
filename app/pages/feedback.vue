@@ -136,7 +136,7 @@ useSeoMeta({
               >
                 <UInput
                   v-model="state.version"
-                  placeholder="1.8.0"
+                  placeholder="e.g. 1.0.0"
                   class="w-full"
                 />
               </UFormField>
