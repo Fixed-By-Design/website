@@ -9,7 +9,7 @@ since: "0.3.0-beta"
 order: 10
 vanilla: Lodestone compasses point towards a chosen block. They do not provide a way to travel to it.
 problem: A server can benefit from occasional long journeys between established places while keeping everyday travel and built infrastructure useful.
-solution: Charge a linked compass with one Nether Star at an anvil, then activate a matching platform. Each player joins explicitly and keeps their relative position on arrival. Materials control reach, preparation time and transport of villagers or mounts.
+solution: Charge a linked compass with one Nether Star at an anvil, then activate a matching platform. Each player joins explicitly and keeps their relative position on arrival. Materials control reach, preparation time and transport of creatures and ridden mounts.
 tags: [teleportation, lodestone, compass, multiplayer, villagers, mounts]
 related: [map-book, campfire-elytra-flight]
 wiki: [/wiki/teleportation]
@@ -33,7 +33,10 @@ Implemented for playtesting in Exploration Reloaded 0.3.0-beta. This feature is 
 
 ## Platforms with different roles
 
-All materials support groups. Iron provides regional travel; gold shortens preparation; emerald includes villagers; diamond removes the distance limit within a dimension; netherite allows travel between dimensions. Additional Additions' rose gold includes ridden living mounts.
+::teleport-diagram{kind="platform"}
+::
+
+All materials support groups. Iron provides regional travel for players; gold shortens preparation and adds animals and monsters; emerald also includes villagers; diamond removes the distance limit within a dimension; netherite allows travel between dimensions. Animals and monsters can also use diamond, netherite and rose gold. Additional Additions' rose gold additionally includes ridden living mounts.
 
 Each platform uses a single material, and both ends must match. Decorative coverings are allowed. Matching expensive materials do not provide access control.
 
