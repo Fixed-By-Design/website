@@ -48,7 +48,7 @@ Every platform carries consenting players. Iron supplies regional travel, gold s
 
 Keep the ordinary compass appearance throughout the charge cycle. Identify the stored charge through its name and short tooltip. Use existing Minecraft particles and sounds for boarding, preparation, departure and cancellation.
 
-Preserve the group's exact positions relative to the Lodestone, sampled at departure, together with looking direction. Check every arrival before moving anyone. An obstruction cancels the journey instead of rearranging travellers around the destination.
+Preserve the group's exact horizontal positions relative to the Lodestone, sampled at departure, together with looking direction. Adjust arrival height to the destination surface, keeping any height above the departure floor. Check every arrival before moving anyone. An obstruction cancels the journey instead of rearranging travellers around the destination.
 
 ## Consequences
 
@@ -56,7 +56,7 @@ Teleportation is useful for planned expeditions, communal departures and built l
 
 Nether Stars gain a recurring use. Their scarcity still depends on the server's actual acquisition rate and farming rules; consuming them does not by itself guarantee any particular economic outcome.
 
-Platform builders must think about both ends of the route. Decorative blocks may differ, but floor heights and clearance must permit matching arrival positions, including villagers and mounted riders.
+Platform builders must leave enough room at both ends of the route, including for villagers and mounted riders. Decorative floors can differ in material and height. Arrival follows the destination surface within the boarding height, without shifting anyone to a different square.
 
 The first playtest should evaluate whether the cost encourages shared journeys, whether the material roles are all useful, and whether the outline and sounds communicate boarding clearly on covered platforms. Range and preparation times remain balance values to assess in play.
 
