@@ -29,7 +29,7 @@ details:
 
 ## Availability
 
-Implemented for playtesting in Exploration Reloaded 0.3.0-beta. This feature is not yet part of the public modpack release.
+Available in [Exploration Reloaded 0.3.0-beta](https://modrinth.com/mod/exploration-reloaded/version/ZVOYzpGA) for Minecraft 26.1.2. Install the mod on both client and server.
 
 ## Platforms with different roles
 
