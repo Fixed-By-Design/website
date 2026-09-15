@@ -26,7 +26,7 @@ These four mods are the project. Everything on this website documents them.
 | Mod | Version | What it does |
 | :-- | :-- | :-- |
 | [Enchantment Overhaul](/features?mod=enchantment-overhaul) | 0.9.0 | The Catalogue, smithing upgrades, enchantment slots, material resistances, anvil and repair rework |
-| [Exploration Reloaded](/features?mod=exploration-reloaded) | 0.2.0-beta | Campfire elytra flight, the Map Book, fishing, mounts, worldgen spacing, exploration loot |
+| [Exploration Reloaded](/features?mod=exploration-reloaded) | 0.3.0-beta | Wither Compass teleportation, covered campfire flight stations, the Map Book, fishing, mounts and exploration loot |
 | [Fairlands](/features?mod=fairlands) | 0.2.1-beta | Partial keep inventory, bonus hearts, spawn protection, PvP rules, ore progression |
 | [Minecarts Overhaul](/features?mod=minecarts-overhaul) | 0.5.0-beta | Copper rails, furnace locomotives, trains, the Dispenser Minecart |
 
