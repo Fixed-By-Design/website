@@ -44,7 +44,7 @@ Charging each passenger or restricting groups to a small fixed size would discou
 
 Charge a Lodestone compass with one Nether Star and one experience level at an anvil. A successful journey returns the same named, linked ordinary compass. Cancellation consumes no charge.
 
-Every platform carries consenting players. Iron supplies regional travel, gold speeds up preparation, emerald carries villagers, diamond allows unlimited distance within a dimension and netherite connects dimensions. Rose gold, when Additional Additions is present, supports ridden living mounts.
+Every platform carries consenting players. Iron supplies regional travel, gold speeds up preparation and adds animals and monsters, emerald additionally carries villagers, diamond allows unlimited distance within a dimension and netherite connects dimensions. Diamond, netherite and rose gold also carry animals and monsters. Rose gold, when Additional Additions is present, additionally supports ridden living mounts. Villagers and wandering traders remain exclusive to emerald.
 
 Keep the ordinary compass appearance throughout the charge cycle. Identify the stored charge through its name and short tooltip. Use existing Minecraft particles and sounds for boarding, preparation, departure and cancellation.
 
