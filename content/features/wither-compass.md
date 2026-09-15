@@ -22,7 +22,7 @@ details:
   - label: Cost per journey
     value: One charge for the entire group, returning the linked ordinary compass
   - label: Arrival
-    value: Exact relative position and looking direction, with three seconds of Blindness
+    value: Exact horizontal position, height adjusted to the floor, preserved looking direction and three seconds of Blindness
   - label: Failure
     value: A blocked arrival cancels the whole journey and preserves the charge
 ---
