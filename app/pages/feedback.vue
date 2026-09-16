@@ -2,6 +2,8 @@
 import { FEEDBACK_TYPES, FEEDBACK_TYPE_LABELS, type FeedbackType } from '#shared/constants/workflow'
 import { MESSAGE_MAX, MESSAGE_MIN, webFeedbackSchema, type WebFeedbackInput } from '#shared/schemas/feedback'
 
+const { t } = useSiteLocale()
+
 const route = useRoute()
 
 const state = reactive<WebFeedbackInput>({
@@ -12,7 +14,22 @@ const state = reactive<WebFeedbackInput>({
   website: '',
 })
 
-const typeOptions = FEEDBACK_TYPES.map(value => ({ label: FEEDBACK_TYPE_LABELS[value], value }))
+const typeOptions = FEEDBACK_TYPES.map(value => ({ label: t(FEEDBACK_TYPE_LABELS[value]), value }))
+
+function validate(input: WebFeedbackInput) {
+  const result = webFeedbackSchema.safeParse(input)
+  if (result.success) return []
+  return result.error.issues.map(issue => ({
+    name: String(issue.path[0]),
+    message: issue.path[0] === 'message'
+      ? t('Please enter between {min} and {max} characters.', { min: MESSAGE_MIN, max: MESSAGE_MAX })
+      : issue.path[0] === 'playerName'
+        ? t('Use 3 to 16 letters, numbers or underscores.')
+        : issue.path[0] === 'version'
+          ? t('Use at most 32 characters.')
+          : t('That could not be sent. Check the message and try again.'),
+  }))
+}
 
 const submitted = ref(false)
 const pending = ref(false)
@@ -35,8 +52,8 @@ async function onSubmit() {
   catch (error) {
     const status = (error as { statusCode?: number }).statusCode
     errorMessage.value = status === 429
-      ? 'You have sent several messages already. Try again shortly.'
-      : 'That could not be sent. Check the message and try again.'
+      ? t('You have sent several messages already. Try again shortly.')
+      : t('That could not be sent. Check the message and try again.')
   }
   finally {
     pending.value = false
@@ -50,8 +67,8 @@ function sendAnother() {
 }
 
 useSeoMeta({
-  title: 'Feedback',
-  description: 'Tell the Fixed by Design team what is working, what is not, and what you would change.',
+  title: t('Feedback'),
+  description: t('Tell the Fixed by Design team what is working, what is not, and what you would change.'),
 })
 </script>
 
@@ -60,8 +77,8 @@ useSeoMeta({
     <div class="border-b border-[var(--ui-border)]">
       <UContainer>
         <UPageHeader
-          title="Feedback"
-          description="Playtesting is how this project makes decisions. Every message is read."
+          :title="t('Feedback')"
+          :description="t('Playtesting is how this project makes decisions. Every message is read.')"
         />
       </UContainer>
     </div>
@@ -74,8 +91,8 @@ useSeoMeta({
             color="success"
             variant="subtle"
             icon="i-lucide-check-circle-2"
-            title="Thanks. Your feedback was added to the playtest inbox."
-            description="It will be read and, if it points at something real, turned into a design problem."
+            :title="t('Thanks. Your feedback was added to the playtest inbox.')"
+            :description="t('It will be read and, if it points at something real, turned into a design problem.')"
           >
             <template #actions>
               <UButton
@@ -84,20 +101,20 @@ useSeoMeta({
                 size="sm"
                 @click="sendAnother"
               >
-                Send another
+                {{ t('Send another') }}
               </UButton>
             </template>
           </UAlert>
 
           <UForm
             v-else
-            :schema="webFeedbackSchema"
+            :validate="validate"
             :state="state"
             class="space-y-6"
             @submit="onSubmit"
           >
             <UFormField
-              label="What kind of feedback is this?"
+              :label="t('What kind of feedback is this?')"
               name="type"
               required
             >
@@ -110,16 +127,16 @@ useSeoMeta({
             </UFormField>
 
             <UFormField
-              label="Your feedback"
+              :label="t('Your feedback')"
               name="message"
               required
-              :description="`Between ${MESSAGE_MIN} and ${MESSAGE_MAX} characters. Be specific: what happened, what you expected, and where.`"
+              :description="t('Between {min} and {max} characters. Be specific: what happened, what you expected, and where.', { min: MESSAGE_MIN, max: MESSAGE_MAX })"
             >
               <UTextarea
                 v-model="state.message"
                 :rows="8"
                 :maxlength="MESSAGE_MAX"
-                placeholder="Copper rails are great but I still fly everywhere. Building a line never felt worth it because..."
+                :placeholder="t('Copper rails are great but I still fly everywhere. Building a line never felt worth it because...')"
                 class="w-full"
               />
               <template #hint>
@@ -129,21 +146,21 @@ useSeoMeta({
 
             <div class="grid gap-6 sm:grid-cols-2">
               <UFormField
-                label="Modpack version"
+                :label="t('Modpack version')"
                 name="version"
-                description="If you know it."
+                :description="t('If you know it.')"
               >
                 <UInput
                   v-model="state.version"
-                  placeholder="e.g. 1.0.0"
+                  :placeholder="t('e.g. 1.0.0')"
                   class="w-full"
                 />
               </UFormField>
 
               <UFormField
-                label="Minecraft username"
+                :label="t('Minecraft username')"
                 name="playerName"
-                description="Optional, so we can follow up in game."
+                :description="t('Optional, so we can follow up in game.')"
               >
                 <UInput
                   v-model="state.playerName"
@@ -157,7 +174,7 @@ useSeoMeta({
               aria-hidden="true"
               class="hidden"
             >
-              <label for="website">Leave this field empty</label>
+              <label for="website">{{ t('Leave this field empty') }}</label>
               <input
                 id="website"
                 v-model="state.website"
@@ -181,7 +198,7 @@ useSeoMeta({
               :loading="pending"
               icon="i-lucide-send"
             >
-              Send feedback
+              {{ t('Send feedback') }}
             </UButton>
           </UForm>
         </div>
@@ -189,36 +206,34 @@ useSeoMeta({
         <aside class="space-y-6 text-sm">
           <div class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-5">
             <h2 class="font-semibold text-[var(--ui-text-highlighted)]">
-              Feedback is not an issue
+              {{ t('Feedback is not an issue') }}
             </h2>
             <p class="mt-2 leading-relaxed text-[var(--ui-text-muted)]">
-              Nothing here opens a GitHub issue automatically. Feedback is raw observation. When several messages point
-              at the same thing, that becomes a design problem, and the problem is what gets worked on.
+              {{ t('Nothing here opens a GitHub issue automatically. Feedback is raw observation. When several messages point at the same thing, that becomes a design problem, and the problem is what gets worked on.') }}
             </p>
           </div>
 
           <div class="rounded-xl border border-[var(--ui-border)] p-5">
             <h2 class="font-semibold text-[var(--ui-text-highlighted)]">
-              From in game
+              {{ t('From in game') }}
             </h2>
             <p class="mt-2 leading-relaxed text-[var(--ui-text-muted)]">
-              On a server running Fairlands, run:
+              {{ t('On a server running Fairlands, run:') }}
             </p>
             <code class="mt-3 block rounded-md bg-[var(--ui-bg-elevated)] px-3 py-2 font-mono text-xs text-gold-300">
               /feedback &lt;message&gt;
             </code>
             <p class="mt-3 leading-relaxed text-[var(--ui-text-muted)]">
-              That records where you were and what version you were on, which is often the part that makes a report
-              actionable.
+              {{ t('That records where you were and what version you were on, which is often the part that makes a report actionable.') }}
             </p>
           </div>
 
           <div class="rounded-xl border border-[var(--ui-border)] p-5">
             <h2 class="font-semibold text-[var(--ui-text-highlighted)]">
-              Something broken in code?
+              {{ t('Something broken in code?') }}
             </h2>
             <p class="mt-2 leading-relaxed text-[var(--ui-text-muted)]">
-              Crashes and reproducible bugs are better as GitHub issues on the mod that owns them.
+              {{ t('Crashes and reproducible bugs are better as GitHub issues on the mod that owns them.') }}
             </p>
             <UButton
               to="https://github.com/Fixed-By-Design"
@@ -230,7 +245,7 @@ useSeoMeta({
               icon="i-simple-icons-github"
               class="mt-3"
             >
-              Open an issue
+              {{ t('Open an issue') }}
             </UButton>
           </div>
         </aside>

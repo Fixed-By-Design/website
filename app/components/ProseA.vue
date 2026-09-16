@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { localPath } = useSiteLocale()
 const { href = '', target } = defineProps<{
   href?: string
   target?: string | null
@@ -23,7 +24,7 @@ const isModrinth = computed(() => {
 
 <template>
   <ULink
-    :href="href"
+    :href="localPath(href)"
     :target="target ?? (isExternal ? '_blank' : undefined)"
     :rel="isExternal ? 'noopener' : undefined"
     :class="[

@@ -1,7 +1,10 @@
+import { z } from 'zod'
+import { translate, localizedPath } from '#shared/i18n/translate'
 import { asc, eq, inArray } from 'drizzle-orm'
 import type { PublicRoadmapItem } from '#shared/types/roadmap'
 
-export default defineEventHandler(async (): Promise<PublicRoadmapItem[]> => {
+export default defineEventHandler(async (event): Promise<PublicRoadmapItem[]> => {
+  const { locale } = await getValidatedQuery(event, z.object({ locale: z.enum(['en', 'fr']).default('en') }).parse)
   const db = useDatabase()
 
   const rows = await db
@@ -32,12 +35,15 @@ export default defineEventHandler(async (): Promise<PublicRoadmapItem[]> => {
 
   return rows.map(({ itemId, problemSlug, problemPublicId, problemTitle, updatedAt, ...item }) => ({
     ...item,
+    title: translate(locale, item.title),
+    summary: translate(locale, item.summary),
+    domain: translate(locale, item.domain),
     updatedAt: updatedAt.toISOString(),
     problem: problemSlug && problemPublicId !== null
-      ? { slug: problemSlug, publicId: problemPublicId, title: problemTitle! }
+      ? { slug: problemSlug, publicId: problemPublicId, title: translate(locale, problemTitle!) }
       : null,
     links: links
       .filter(link => link.entityId === itemId)
-      .map(link => ({ url: link.url, label: link.label, number: link.number })),
+      .map(link => ({ url: localizedPath(link.url.replace(/^https:\/\/fixedbydesign\.com(?=\/)/, ''), locale), label: link.label ? translate(locale, link.label) : null, number: link.number })),
   }))
 })

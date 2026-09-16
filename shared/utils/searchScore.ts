@@ -2,18 +2,22 @@ import type { SearchResult } from '../types/search'
 
 export const SEARCH_MIN_LENGTH = 2
 
+export function normalizeSearch(text: string) {
+  return text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase().replaceAll('œ', 'oe')
+}
+
 export function searchTerms(query: string) {
-  return query.toLowerCase().split(/\s+/).filter(Boolean)
+  return normalizeSearch(query).split(/\s+/).filter(Boolean)
 }
 
 export function scoreSearchResult(result: SearchResult, terms: string[]) {
   if (!terms.length) return 0
 
-  const title = result.title.toLowerCase()
+  const title = normalizeSearch(result.title)
   const haystack = [
     title,
-    result.description?.toLowerCase() ?? '',
-    ...(result.breadcrumb ?? []).map(entry => entry.toLowerCase()),
+    normalizeSearch(result.description ?? ''),
+    ...(result.breadcrumb ?? []).map(entry => normalizeSearch(entry)),
   ].join(' ')
 
   let total = 0

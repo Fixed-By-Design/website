@@ -2,56 +2,58 @@ import type { FooterColumn, NavigationMenuItem } from '@nuxt/ui'
 import { LINKS, MODPACK_AVAILABLE } from '#shared/constants/project'
 
 export function usePrimaryNavigation() {
+  const { t, localPath } = useSiteLocale()
   const route = useRoute()
-  const startsWith = (prefix: string) => route.path.startsWith(prefix)
+  const startsWith = (prefix: string) => route.path.startsWith(localPath(prefix))
 
   return computed<NavigationMenuItem[]>(() => [
-    { label: 'Features', to: '/features', active: startsWith('/features') },
-    { label: 'Wiki', to: '/wiki', active: startsWith('/wiki') },
-    { label: 'The modpack', to: '/modpack', active: startsWith('/modpack') },
+    { label: t('Features'), to: localPath('/features'), active: startsWith('/features') },
+    { label: t('Wiki'), to: localPath('/wiki'), active: startsWith('/wiki') },
+    { label: t('The modpack'), to: localPath('/modpack'), active: startsWith('/modpack') },
     {
-      label: 'Project',
+      label: t('Project'),
       active: startsWith('/roadmap') || startsWith('/changelog') || startsWith('/design'),
       children: [
-        { label: 'Roadmap', description: 'What is coming next.', to: '/roadmap', active: startsWith('/roadmap') },
-        { label: 'Changelog', description: 'What already shipped.', to: '/changelog', active: startsWith('/changelog') },
-        { label: 'Design decisions', description: 'Why we chose this over the alternatives.', to: '/design', active: startsWith('/design') },
+        { label: t('Roadmap'), description: t('What is coming next.'), to: localPath('/roadmap'), active: startsWith('/roadmap') },
+        { label: t('Changelog'), description: t('What already shipped.'), to: localPath('/changelog'), active: startsWith('/changelog') },
+        { label: t('Design decisions'), description: t('Why we chose this over the alternatives.'), to: localPath('/design'), active: startsWith('/design') },
       ],
     },
-    { label: 'Contribute', to: '/contribute', active: startsWith('/contribute') },
+    { label: t('Contribute'), to: localPath('/contribute'), active: startsWith('/contribute') },
   ])
 }
 
 export function useFooterNavigation(): FooterColumn[] {
+  const { t, localPath } = useSiteLocale()
   const { discordUrl, hasDiscord } = useCommunityLinks()
 
   return [
     {
-      label: 'Project',
+      label: t('Project'),
       children: [
-        { label: 'Features', to: '/features' },
-        { label: 'Wiki', to: '/wiki' },
-        { label: 'The modpack', to: '/modpack' },
-        { label: 'Roadmap', to: '/roadmap' },
-        { label: 'Changelog', to: '/changelog' },
-        { label: 'Design decisions', to: '/design' },
+        { label: t('Features'), to: localPath('/features') },
+        { label: t('Wiki'), to: localPath('/wiki') },
+        { label: t('The modpack'), to: localPath('/modpack') },
+        { label: t('Roadmap'), to: localPath('/roadmap') },
+        { label: t('Changelog'), to: localPath('/changelog') },
+        { label: t('Design decisions'), to: localPath('/design') },
       ],
     },
     {
-      label: 'Participate',
+      label: t('Participate'),
       children: [
-        { label: 'Send feedback', to: '/feedback' },
-        { label: 'Report a bug', to: '/feedback?type=bug' },
-        { label: 'Contribute', to: '/contribute' },
-        ...(hasDiscord ? [{ label: 'Discord', to: discordUrl, target: '_blank' }] : []),
+        { label: t('Send feedback'), to: localPath('/feedback') },
+        { label: t('Report a bug'), to: localPath('/feedback?type=bug') },
+        { label: t('Contribute'), to: localPath('/contribute') },
+        ...(hasDiscord ? [{ label: t('Discord'), to: discordUrl, target: '_blank' }] : []),
       ],
     },
     {
-      label: 'Elsewhere',
+      label: t('Elsewhere'),
       children: [
-        ...(MODPACK_AVAILABLE ? [{ label: 'Modrinth', to: LINKS.modrinth, target: '_blank' }] : []),
-        { label: 'GitHub', to: LINKS.github, target: '_blank' },
-        { label: 'Support the project', to: LINKS.kofi, target: '_blank' },
+        ...(MODPACK_AVAILABLE ? [{ label: t('Modrinth'), to: LINKS.modrinth, target: '_blank' }] : []),
+        { label: t('GitHub'), to: LINKS.github, target: '_blank' },
+        { label: t('Support the project'), to: LINKS.kofi, target: '_blank' },
       ],
     },
   ]

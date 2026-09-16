@@ -1,4 +1,5 @@
 <script setup lang="ts">
+const { t, localPath } = useSiteLocale()
 defineProps<{
   title: string
   headingLevel?: 2 | 3
@@ -20,20 +21,20 @@ defineProps<{
       </component>
       <UButton
         v-if="to"
-        :to="to"
+        :to="localPath(to)"
         variant="link"
         color="primary"
         trailing-icon="i-lucide-arrow-right"
         size="sm"
       >
-        Read more
+        {{ t('Read more') }}
       </UButton>
     </header>
 
     <dl class="grid divide-y divide-[var(--ui-border)] md:grid-cols-3 md:divide-x md:divide-y-0">
       <div class="p-6">
         <dt class="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-          Vanilla
+          {{ t('Vanilla') }}
         </dt>
         <dd class="text-sm leading-relaxed text-[var(--ui-text-muted)]">
           {{ vanilla }}
@@ -42,7 +43,7 @@ defineProps<{
 
       <div class="p-6">
         <dt class="mb-2 text-xs font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-          Problem
+          {{ t('Problem') }}
         </dt>
         <dd class="text-sm leading-relaxed text-[var(--ui-text-muted)]">
           {{ problem }}

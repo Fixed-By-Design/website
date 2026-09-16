@@ -4,6 +4,8 @@ import { LINKS, MODPACK_AVAILABLE } from '#shared/constants/project'
 import type { FeedbackPage, ProblemSummary } from '#shared/types/dashboard'
 import type { PublicRoadmapItem } from '#shared/types/roadmap'
 
+const { t, localPath } = useSiteLocale()
+
 definePageMeta({ middleware: 'auth' })
 
 const { user } = useUserSession()
@@ -28,7 +30,7 @@ const designing = computed(() => problems.value.filter(p => p.status === 'design
 const inDevelopment = computed(() => roadmap.value.filter(item => item.status === 'in-progress'))
 const needsPlaytest = computed(() => roadmap.value.filter(item => item.status === 'playtesting'))
 
-useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
+useSeoMeta({ title: t('Dashboard'), robots: 'noindex' })
 </script>
 
 <template>
@@ -36,28 +38,28 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
         <h1 class="text-3xl font-bold tracking-tight">
-          What needs attention
+          {{ t('What needs attention') }}
         </h1>
         <p class="mt-2 text-[var(--ui-text-muted)]">
-          Signed in as {{ user?.login }} &middot; {{ user?.role }}
+          {{ t('Signed in as') }} {{ user?.login }} &middot; {{ user?.role ? t(user.role) : '' }}
         </p>
       </div>
       <div class="flex gap-2">
         <UButton
           v-if="canTriage"
-          to="/dashboard/feedback"
+          :to="localPath('/dashboard/feedback')"
           icon="i-lucide-inbox"
         >
-          Triage feedback
+          {{ t('Triage feedback') }}
         </UButton>
         <UButton
           v-if="canSeeProblems"
-          to="/dashboard/problems"
+          :to="localPath('/dashboard/problems')"
           color="neutral"
           variant="subtle"
           icon="i-lucide-target"
         >
-          Problems
+          {{ t('Problems') }}
         </UButton>
       </div>
     </div>
@@ -68,25 +70,25 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
       color="info"
       variant="subtle"
       icon="i-lucide-info"
-      title="You have a player account"
-      description="Triage and project data are limited to contributors and maintainers. You can still send feedback and read everything public."
+      :title="t('You have a player account')"
+      :description="t('Triage and project data are limited to contributors and maintainers. You can still send feedback and read everything public.')"
     >
       <template #actions>
         <UButton
-          to="/feedback"
+          :to="localPath('/feedback')"
           size="sm"
           color="neutral"
           variant="subtle"
         >
-          Send feedback
+          {{ t('Send feedback') }}
         </UButton>
         <UButton
-          to="/contribute"
+          :to="localPath('/contribute')"
           size="sm"
           color="neutral"
           variant="ghost"
         >
-          Contribute
+          {{ t('Contribute') }}
         </UButton>
       </template>
     </UAlert>
@@ -97,13 +99,13 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
     >
       <NuxtLink
         v-for="stat in [
-          { label: 'Awaiting triage', value: inbox.counts.new ?? 0, icon: 'i-lucide-inbox', to: '/dashboard/feedback?status=new' },
-          { label: 'Being investigated', value: investigating.length, icon: 'i-lucide-search', to: '/dashboard/problems' },
-          { label: 'In development', value: inDevelopment.length, icon: 'i-lucide-hammer', to: '/roadmap' },
-          { label: 'Needs playtest', value: needsPlaytest.length, icon: 'i-lucide-gamepad-2', to: '/roadmap' },
+          { label: 'Awaiting triage', value: inbox.counts.new ?? 0, icon: 'i-lucide-inbox', to: localPath('/dashboard/feedback?status=new') },
+          { label: 'Being investigated', value: investigating.length, icon: 'i-lucide-search', to: localPath('/dashboard/problems') },
+          { label: 'In development', value: inDevelopment.length, icon: 'i-lucide-hammer', to: localPath('/roadmap') },
+          { label: 'Needs playtest', value: needsPlaytest.length, icon: 'i-lucide-gamepad-2', to: localPath('/roadmap') },
         ]"
         :key="stat.label"
-        :to="stat.to"
+        :to="localPath(stat.to)"
         class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-5 transition-colors hover:border-gold-500/50"
       >
         <div class="flex items-center justify-between">
@@ -125,15 +127,15 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
       <section v-if="canTriage">
         <div class="mb-4 flex items-center justify-between">
           <h2 class="text-lg font-semibold">
-            Feedback awaiting triage
+            {{ t('Feedback awaiting triage') }}
           </h2>
           <UButton
-            to="/dashboard/feedback"
+            :to="localPath('/dashboard/feedback')"
             variant="link"
             size="sm"
             trailing-icon="i-lucide-arrow-right"
           >
-            Open inbox
+            {{ t('Open inbox') }}
           </UButton>
         </div>
 
@@ -144,14 +146,14 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           <NuxtLink
             v-for="entry in inbox.items"
             :key="entry.id"
-            to="/dashboard/feedback"
+            :to="localPath('/dashboard/feedback')"
             class="block rounded-lg border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-4 transition-colors hover:border-gold-500/50"
           >
             <p class="line-clamp-2 text-sm text-[var(--ui-text-toned)]">
               {{ entry.message }}
             </p>
             <p class="mt-2 text-xs text-[var(--ui-text-dimmed)]">
-              {{ entry.source === 'minecraft' ? 'In game' : 'Website' }}
+              {{ entry.source === 'minecraft' ? t('In game') : t('Website') }}
               <template v-if="entry.playerName"> &middot; {{ entry.playerName }}</template>
               <template v-if="entry.version"> &middot; {{ entry.version }}</template>
             </p>
@@ -161,23 +163,23 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
         <UEmpty
           v-else
           icon="i-lucide-inbox"
-          title="The inbox is empty"
-          description="Nothing is waiting to be triaged."
+          :title="t('The inbox is empty')"
+          :description="t('Nothing is waiting to be triaged.')"
         />
       </section>
 
       <section v-if="canSeeProblems">
         <div class="mb-4 flex items-center justify-between">
           <h2 class="text-lg font-semibold">
-            Problems being worked on
+            {{ t('Problems being worked on') }}
           </h2>
           <UButton
-            to="/dashboard/problems"
+            :to="localPath('/dashboard/problems')"
             variant="link"
             size="sm"
             trailing-icon="i-lucide-arrow-right"
           >
-            All problems
+            {{ t('All problems') }}
           </UButton>
         </div>
 
@@ -188,14 +190,14 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           <NuxtLink
             v-for="problem in [...investigating, ...designing].slice(0, 5)"
             :key="problem.id"
-            to="/dashboard/problems"
+            :to="localPath('/dashboard/problems')"
             class="block rounded-lg border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-4 transition-colors hover:border-gold-500/50"
           >
             <p class="text-sm font-medium text-[var(--ui-text-highlighted)]">
               #{{ problem.publicId }} {{ problem.title }}
             </p>
             <p class="mt-1 text-xs text-[var(--ui-text-dimmed)]">
-              {{ problem.status }} &middot; {{ problem.feedbackCount }} linked feedback
+              {{ problem.status }} &middot; {{ problem.feedbackCount }} {{ t('linked feedback') }}
             </p>
           </NuxtLink>
         </div>
@@ -203,19 +205,19 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
         <UEmpty
           v-else
           icon="i-lucide-target"
-          title="No open problems"
-          description="Nothing is under investigation right now."
+          :title="t('No open problems')"
+          :description="t('Nothing is under investigation right now.')"
         />
       </section>
     </div>
 
     <section class="mt-10">
       <h2 class="mb-4 text-lg font-semibold">
-        Development links
+        {{ t('Development links') }}
       </h2>
       <div class="flex flex-wrap gap-2">
         <UButton
-          :to="LINKS.github"
+          :to="localPath(LINKS.github)"
           target="_blank"
           rel="noopener"
           color="neutral"
@@ -223,11 +225,11 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           icon="i-simple-icons-github"
           size="sm"
         >
-          GitHub organisation
+          {{ t('GitHub organisation') }}
         </UButton>
         <UButton
           v-if="MODPACK_AVAILABLE"
-          :to="LINKS.modrinth"
+          :to="localPath(LINKS.modrinth)"
           target="_blank"
           rel="noopener"
           color="neutral"
@@ -238,13 +240,13 @@ useSeoMeta({ title: 'Dashboard', robots: 'noindex' })
           Modrinth
         </UButton>
         <UButton
-          to="/roadmap"
+          :to="localPath('/roadmap')"
           color="neutral"
           variant="subtle"
           icon="i-lucide-map"
           size="sm"
         >
-          Public roadmap
+          {{ t('Public roadmap') }}
         </UButton>
       </div>
     </section>

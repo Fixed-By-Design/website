@@ -1,15 +1,18 @@
 <script setup lang="ts">
+import { en, fr } from '@nuxt/ui/locale'
 import type { NuxtError } from '#app'
+
+const { t, localPath, locale } = useSiteLocale()
 
 const props = defineProps<{ error: NuxtError }>()
 
 const isNotFound = computed(() => props.error.statusCode === 404)
 
-useHead({ htmlAttrs: { lang: 'en', class: 'dark' } })
+useHead({ htmlAttrs: { lang: locale, class: 'dark' } })
 </script>
 
 <template>
-  <UApp>
+  <UApp :locale="locale === 'fr' ? fr : en">
     <SiteHeader />
 
     <UMain>
@@ -19,35 +22,35 @@ useHead({ htmlAttrs: { lang: 'en', class: 'dark' } })
         </p>
 
         <h1 class="mt-6 text-3xl font-bold tracking-tight">
-          {{ isNotFound ? 'That page does not exist' : 'Something went wrong' }}
+          {{ isNotFound ? t('That page does not exist') : t('Something went wrong') }}
         </h1>
 
         <p class="mt-4 max-w-md text-[var(--ui-text-muted)]">
           {{ isNotFound
-            ? 'The page may have moved, or the link may be wrong. Try the features index or search.'
-            : 'An unexpected error occurred. If it keeps happening, tell us about it.' }}
+            ? t('The page may have moved, or the link may be wrong. Try the features index or search.')
+            : t('An unexpected error occurred. If it keeps happening, tell us about it.') }}
         </p>
 
         <div class="mt-8 flex flex-wrap justify-center gap-3">
           <UButton
-            to="/"
+            :to="localPath('/')"
             icon="i-lucide-home"
           >
-            Back home
+            {{ t('Back home') }}
           </UButton>
           <UButton
-            to="/features"
+            :to="localPath('/features')"
             color="neutral"
             variant="subtle"
           >
-            Browse features
+            {{ t('Browse features') }}
           </UButton>
           <UButton
-            to="/wiki"
+            :to="localPath('/wiki')"
             color="neutral"
             variant="subtle"
           >
-            Open the wiki
+            {{ t('Open the wiki') }}
           </UButton>
         </div>
       </UContainer>

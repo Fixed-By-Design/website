@@ -10,8 +10,9 @@ export interface WikiNavigationSection {
 }
 
 export function useWikiNavigation() {
-  return useAsyncData('wiki-nav', async () => {
-    const pages = await queryCollection('wiki')
+  const { locale, collection } = useSiteLocale()
+  return useAsyncData(`wiki-nav-${locale.value}`, async () => {
+    const pages = await queryCollection(collection('wiki'))
       .select('path', 'title', 'description', 'section', 'order')
       .order('order', 'ASC')
       .all()

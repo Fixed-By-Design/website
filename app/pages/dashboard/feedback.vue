@@ -7,9 +7,12 @@ import {
   FEEDBACK_TYPE_LABELS,
   PROBLEM_SEVERITIES,
   PROBLEM_STATUSES,
+  PROBLEM_STATUS_LABELS,
 } from '#shared/constants/workflow'
 import type { FeedbackEntry, FeedbackPage, ProblemSummary } from '#shared/types/dashboard'
 import type { TriageAction } from '#shared/schemas/triage'
+
+const { t, localPath } = useSiteLocale()
 
 definePageMeta({ middleware: 'auth' })
 
@@ -45,18 +48,18 @@ watch([status, type, source, version, tag], () => (page.value = 1))
 const { data: tags } = await useFetch<{ slug: string, label: string }[]>('/api/dashboard/tags', { default: () => [] })
 
 const tagOptions = computed(() => [
-  { label: 'All tags', value: 'all' },
-  ...tags.value.map(entry => ({ label: entry.label, value: entry.slug })),
+  { label: t('All tags'), value: 'all' },
+  ...tags.value.map(entry => ({ label: t(entry.label), value: entry.slug })),
 ])
 
 const statusOptions = [
-  { label: 'All statuses', value: 'all' },
-  ...FEEDBACK_STATUSES.map(value => ({ label: FEEDBACK_STATUS_LABELS[value], value })),
+  { label: t('All statuses'), value: 'all' },
+  ...FEEDBACK_STATUSES.map(value => ({ label: t(FEEDBACK_STATUS_LABELS[value]), value })),
 ]
-const typeOptions = [{ label: 'All types', value: 'all' }, ...FEEDBACK_TYPES.map(value => ({ label: FEEDBACK_TYPE_LABELS[value], value }))]
+const typeOptions = [{ label: t('All types'), value: 'all' }, ...FEEDBACK_TYPES.map(value => ({ label: t(FEEDBACK_TYPE_LABELS[value]), value }))]
 const sourceOptions = [
-  { label: 'All sources', value: 'all' },
-  ...FEEDBACK_SOURCES.map(value => ({ label: value === 'minecraft' ? 'In game' : 'Website', value })),
+  { label: t('All sources'), value: 'all' },
+  ...FEEDBACK_SOURCES.map(value => ({ label: value === 'minecraft' ? t('In game') : t('Website'), value })),
 ]
 
 const busyId = ref<string | null>(null)
@@ -66,10 +69,10 @@ async function triage(entry: FeedbackEntry, action: TriageAction, extra: Record<
   try {
     await $fetch(`/api/dashboard/feedback/${entry.id}`, { method: 'PATCH', body: { action, ...extra } })
     await refresh()
-    toast.add({ title: 'Feedback updated', color: 'success', icon: 'i-lucide-check' })
+    toast.add({ title: t('Feedback updated'), color: 'success', icon: 'i-lucide-check' })
   }
   catch {
-    toast.add({ title: 'That action failed', color: 'error', icon: 'i-lucide-triangle-alert' })
+    toast.add({ title: t('That action failed'), color: 'error', icon: 'i-lucide-triangle-alert' })
   }
   finally {
     busyId.value = null
@@ -158,42 +161,42 @@ async function confirmCreate() {
     })
     createTarget.value = null
     await Promise.all([refresh(), refreshProblems()])
-    toast.add({ title: 'Problem created and feedback attached', color: 'success', icon: 'i-lucide-check' })
+    toast.add({ title: t('Problem created and feedback attached'), color: 'success', icon: 'i-lucide-check' })
   }
   catch {
-    toast.add({ title: 'The problem could not be created', color: 'error', icon: 'i-lucide-triangle-alert' })
+    toast.add({ title: t('The problem could not be created'), color: 'error', icon: 'i-lucide-triangle-alert' })
   }
   finally {
     creating.value = false
   }
 }
 
-useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
+useSeoMeta({ title: t('Feedback triage'), robots: 'noindex' })
 </script>
 
 <template>
   <UContainer class="py-10">
     <UBreadcrumb
-      :items="[{ label: 'Dashboard', to: '/dashboard' }, { label: 'Feedback' }]"
+      :items="[{ label: t('Dashboard'), to: localPath('/dashboard') }, { label: t('Feedback') }]"
       class="mb-6"
     />
 
     <div class="flex flex-wrap items-end justify-between gap-4">
       <div>
         <h1 class="text-3xl font-bold tracking-tight">
-          Feedback triage
+          {{ t('Feedback triage') }}
         </h1>
         <p class="mt-2 text-[var(--ui-text-muted)]">
-          Nothing here is deleted. Entries are archived, dismissed or attached to a problem.
+          {{ t('Nothing here is deleted. Entries are archived, dismissed or attached to a problem.') }}
         </p>
       </div>
       <UButton
-        to="/dashboard/problems"
+        :to="localPath('/dashboard/problems')"
         color="neutral"
         variant="subtle"
         icon="i-lucide-target"
       >
-        Problems
+        {{ t('Problems') }}
       </UButton>
     </div>
 
@@ -206,7 +209,7 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
         :variant="status === key ? 'subtle' : 'ghost'"
         @click="status = key"
       >
-        {{ FEEDBACK_STATUS_LABELS[key] }}
+        {{ t(FEEDBACK_STATUS_LABELS[key]) }}
         <UBadge
           :label="String(data.counts[key] ?? 0)"
           color="neutral"
@@ -220,7 +223,7 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
         :variant="status === 'all' ? 'subtle' : 'ghost'"
         @click="status = 'all'"
       >
-        All
+        {{ t('All') }}
       </UButton>
     </div>
 
@@ -229,34 +232,34 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
         v-model="status"
         :items="statusOptions"
         class="w-40"
-        aria-label="Filter by status"
+        :aria-label="t('Filter by status')"
       />
       <USelect
         v-model="type"
         :items="typeOptions"
         class="w-44"
-        aria-label="Filter by type"
+        :aria-label="t('Filter by type')"
       />
       <USelect
         v-model="source"
         :items="sourceOptions"
         class="w-40"
-        aria-label="Filter by source"
+        :aria-label="t('Filter by source')"
       />
       <USelect
         v-model="tag"
         :items="tagOptions"
         class="w-40"
-        aria-label="Filter by tag"
+        :aria-label="t('Filter by tag')"
       />
       <UInput
         v-model="version"
         placeholder="Version"
         class="w-32"
-        aria-label="Filter by modpack version"
+        :aria-label="t('Filter by modpack version')"
       />
       <p class="ms-auto self-center text-sm text-[var(--ui-text-dimmed)]">
-        {{ data.total }} {{ data.total === 1 ? 'entry' : 'entries' }}
+        {{ data.total }} {{ t(data.total === 1 ? 'entry' : 'entries') }}
       </p>
     </div>
 
@@ -299,18 +302,18 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
       v-else
       class="mt-16"
       icon="i-lucide-inbox"
-      title="Nothing here"
-      description="No feedback matches those filters."
+      :title="t('Nothing here')"
+      :description="t('No feedback matches those filters.')"
     />
 
     <UModal
       v-model:open="attachOpen"
-      title="Attach to a problem"
-      description="Link this feedback to an existing design problem."
+      :title="t('Attach to a problem')"
+      :description="t('Link this feedback to an existing design problem.')"
     >
       <template #body>
         <UFormField
-          label="Problem"
+          :label="t('Problem')"
           name="problem"
           required
         >
@@ -318,7 +321,7 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
             v-model="selectedProblemId"
             :items="problemOptions"
             value-key="value"
-            placeholder="Choose a problem"
+            :placeholder="t('Choose a problem')"
             class="w-full"
           />
         </UFormField>
@@ -329,25 +332,25 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
           variant="ghost"
           @click="attachTarget = null"
         >
-          Cancel
+          {{ t('Cancel') }}
         </UButton>
         <UButton
           :disabled="!selectedProblemId"
           @click="confirmAttach"
         >
-          Attach
+          {{ t('Attach') }}
         </UButton>
       </template>
     </UModal>
 
     <UModal
       v-model:open="duplicateOpen"
-      title="Mark as duplicate"
-      description="Point this entry at the feedback it repeats. Neither entry is deleted."
+      :title="t('Mark as duplicate')"
+      :description="t('Point this entry at the feedback it repeats. Neither entry is deleted.')"
     >
       <template #body>
         <UFormField
-          label="Duplicate of"
+          :label="t('Duplicate of')"
           name="duplicate"
           required
         >
@@ -355,7 +358,7 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
             v-model="selectedDuplicateId"
             :items="duplicateOptions"
             value-key="value"
-            placeholder="Choose the original entry"
+            :placeholder="t('Choose the original entry')"
             class="w-full"
           />
         </UFormField>
@@ -366,42 +369,42 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
           variant="ghost"
           @click="duplicateTarget = null"
         >
-          Cancel
+          {{ t('Cancel') }}
         </UButton>
         <UButton
           :disabled="!selectedDuplicateId"
           @click="confirmDuplicate"
         >
-          Mark duplicate
+          {{ t('Mark duplicate') }}
         </UButton>
       </template>
     </UModal>
 
     <UModal
       v-model:open="createOpen"
-      title="Create a problem"
-      description="Turn this feedback into a structured design problem."
+      :title="t('Create a problem')"
+      :description="t('Turn this feedback into a structured design problem.')"
     >
       <template #body>
         <div class="space-y-5">
           <UFormField
-            label="Title"
+            :label="t('Title')"
             name="title"
             required
-            description="At least 10 characters."
+            :description="t('At least 10 characters.')"
           >
             <UInput
               v-model="newProblem.title"
-              placeholder="Rail networks have no niche once elytra flight is available"
+              :placeholder="t('Rail networks have no niche once elytra flight is available')"
               class="w-full"
             />
           </UFormField>
 
           <UFormField
-            label="Summary"
+            :label="t('Summary')"
             name="summary"
             required
-            description="One paragraph describing the design problem, not the report."
+            :description="t('One paragraph describing the design problem, not the report.')"
           >
             <UTextarea
               v-model="newProblem.summary"
@@ -411,7 +414,7 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
           </UFormField>
 
           <UFormField
-            label="Context"
+            :label="t('Context')"
             name="context"
           >
             <UTextarea
@@ -423,23 +426,23 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
 
           <div class="grid gap-4 sm:grid-cols-2">
             <UFormField
-              label="Status"
+              :label="t('Status')"
               name="status"
             >
               <USelect
                 v-model="newProblem.status"
-                :items="[...PROBLEM_STATUSES]"
+                :items="PROBLEM_STATUSES.map(value => ({ label: t(PROBLEM_STATUS_LABELS[value]), value }))"
                 class="w-full"
               />
             </UFormField>
             <UFormField
-              label="Severity"
+              :label="t('Severity')"
               name="severity"
             >
               <USelect
                 v-model="newProblem.severity"
-                :items="[...PROBLEM_SEVERITIES]"
-                placeholder="Unset"
+                :items="PROBLEM_SEVERITIES.map(value => ({ label: t(value), value }))"
+                :placeholder="t('Unset')"
                 class="w-full"
               />
             </UFormField>
@@ -452,14 +455,14 @@ useSeoMeta({ title: 'Feedback triage', robots: 'noindex' })
           variant="ghost"
           @click="createTarget = null"
         >
-          Cancel
+          {{ t('Cancel') }}
         </UButton>
         <UButton
           :loading="creating"
           :disabled="newProblem.title.length < 10 || newProblem.summary.length < 20"
           @click="confirmCreate"
         >
-          Create problem
+          {{ t('Create problem') }}
         </UButton>
       </template>
     </UModal>

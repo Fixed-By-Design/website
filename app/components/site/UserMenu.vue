@@ -2,6 +2,8 @@
 import type { DropdownMenuItem } from '@nuxt/ui'
 import { ROLE_RANK } from '#shared/constants/workflow'
 
+const { t, localPath } = useSiteLocale()
+
 const { mobile = false, signedInOnly = false } = defineProps<{
   mobile?: boolean
   /** Renders nothing when signed out. The header uses this so players never meet a maintainer control. */
@@ -18,13 +20,13 @@ const signInTo = computed(() => (githubConfigured.value ? '/auth/github' : '/sig
 const items = computed<DropdownMenuItem[][]>(() => [
   [{ label: user.value?.name || user.value?.login || '', type: 'label' }],
   [
-    { label: 'Dashboard', icon: 'i-lucide-layout-dashboard', to: '/dashboard' },
+    { label: t('Dashboard'), icon: 'i-lucide-layout-dashboard', to: localPath('/dashboard') },
     ...(canTriage.value
-      ? [{ label: 'Feedback triage', icon: 'i-lucide-inbox', to: '/dashboard/feedback' }]
+      ? [{ label: t('Feedback triage'), icon: 'i-lucide-inbox', to: localPath('/dashboard/feedback') }]
       : []),
-    { label: 'Problems', icon: 'i-lucide-target', to: '/dashboard/problems' },
+    { label: t('Problems'), icon: 'i-lucide-target', to: localPath('/dashboard/problems') },
   ],
-  [{ label: 'Sign out', icon: 'i-lucide-log-out', onSelect: () => clear() }],
+  [{ label: t('Sign out'), icon: 'i-lucide-log-out', onSelect: () => clear() }],
 ])
 </script>
 
@@ -43,13 +45,13 @@ const items = computed<DropdownMenuItem[][]>(() => [
         {{ user.name || user.login }}
       </div>
       <UButton
-        to="/dashboard"
+        :to="localPath('/dashboard')"
         color="neutral"
         variant="subtle"
         icon="i-lucide-layout-dashboard"
         block
       >
-        Dashboard
+        {{ t('Dashboard') }}
       </UButton>
       <UButton
         color="neutral"
@@ -58,20 +60,20 @@ const items = computed<DropdownMenuItem[][]>(() => [
         block
         @click="clear()"
       >
-        Sign out
+        {{ t('Sign out') }}
       </UButton>
     </template>
 
     <UButton
       v-else
-      :to="signInTo"
+      :to="localPath(signInTo)"
       :external="githubConfigured"
       color="neutral"
       variant="ghost"
       icon="i-lucide-log-in"
       block
     >
-      Maintainer sign-in
+      {{ t('Maintainer sign-in') }}
     </UButton>
   </div>
 
@@ -84,7 +86,7 @@ const items = computed<DropdownMenuItem[][]>(() => [
       color="neutral"
       variant="ghost"
       class="p-1"
-      :aria-label="`Account menu for ${user.login}`"
+      :aria-label="t('Account menu for {name}', { name: user.login })"
     >
       <UAvatar
         :src="user.avatarUrl ?? undefined"
@@ -96,12 +98,12 @@ const items = computed<DropdownMenuItem[][]>(() => [
 
   <UButton
     v-else-if="!signedInOnly"
-    :to="signInTo"
+    :to="localPath(signInTo)"
     :external="githubConfigured"
     color="neutral"
     variant="ghost"
     icon="i-lucide-log-in"
     class="shrink-0 whitespace-nowrap"
-    aria-label="Sign in with GitHub"
+    :aria-label="t('Sign in with GitHub')"
   />
 </template>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { LINKS, MODPACK_AVAILABLE } from '#shared/constants/project'
 
+const { t, localPath } = useSiteLocale()
+
 const links = usePrimaryNavigation()
 </script>
 
@@ -14,9 +16,9 @@ const links = usePrimaryNavigation()
   >
     <template #left>
       <NuxtLink
-        to="/"
+        :to="localPath('/')"
         class="flex items-center gap-2"
-        aria-label="Fixed by Design, home"
+        :aria-label="t('Fixed by Design, home')"
       >
         <SiteLogo :height="26" />
       </NuxtLink>
@@ -28,28 +30,29 @@ const links = usePrimaryNavigation()
     />
 
     <template #right>
+      <SiteLanguageSwitch />
       <UContentSearchButton
         collapsed
         class="size-11 justify-center lg:hidden"
       />
       <UContentSearchButton
         :collapsed="false"
-        class="hidden lg:flex w-40 shrink-0"
+        class="hidden lg:flex w-44 shrink-0"
       />
 
       <UButton
-        to="/feedback"
+        :to="localPath('/feedback')"
         color="primary"
         variant="subtle"
         icon="i-lucide-message-square"
         class="h-11 shrink-0 font-medium lg:h-8"
       >
-        Feedback
+        {{ t('Feedback') }}
       </UButton>
 
       <SiteDownloadButton
         v-if="MODPACK_AVAILABLE"
-        label="Download"
+        :label="t('Download')"
         class="hidden shrink-0 sm:inline-flex"
       />
 
@@ -70,17 +73,17 @@ const links = usePrimaryNavigation()
 
       <div class="flex flex-col gap-2">
         <UButton
-          to="/feedback"
+          :to="localPath('/feedback')"
           color="primary"
           variant="solid"
           icon="i-lucide-message-square"
           block
         >
-          Send feedback
+          {{ t('Send feedback') }}
         </UButton>
         <SiteDownloadButton block />
         <UButton
-          :to="LINKS.github"
+          :to="localPath(LINKS.github)"
           target="_blank"
           rel="noopener"
           color="neutral"
@@ -88,7 +91,7 @@ const links = usePrimaryNavigation()
           icon="i-simple-icons-github"
           block
         >
-          View on GitHub
+          {{ t('View on GitHub') }}
         </UButton>
       </div>
 

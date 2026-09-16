@@ -3,6 +3,8 @@ import type { ContentNavigationItem, TocLink } from '@nuxt/content'
 import { LINKS } from '#shared/constants/project'
 import type { WikiNavigationSection } from '~/composables/useWikiNavigation'
 
+const { t, localPath } = useSiteLocale()
+
 const props = defineProps<{
   page: { title: string, section: string, stem: string, body?: { toc?: { links?: TocLink[] } } }
   sections: WikiNavigationSection[]
@@ -12,8 +14,8 @@ const props = defineProps<{
 
 const breadcrumb = computed(() =>
   props.isRoot
-    ? [{ label: 'Wiki', to: '/wiki' }]
-    : [{ label: 'Wiki', to: '/wiki' }, { label: props.page.section }, { label: props.page.title }])
+    ? [{ label: 'Wiki', to: localPath('/wiki') }]
+    : [{ label: 'Wiki', to: localPath('/wiki') }, { label: props.page.section }, { label: props.page.title }])
 
 const editUrl = computed(() => `${LINKS.githubWebsite}/edit/dev/content/${props.page.stem}.md`)
 </script>
@@ -36,7 +38,7 @@ const editUrl = computed(() => `${LINKS.githubWebsite}/edit/dev/content/${props.
         <slot />
 
         <SiteFeedbackPrompt
-          subject="this"
+          :subject="t('this')"
           class="mt-12"
         />
 
@@ -49,12 +51,12 @@ const editUrl = computed(() => `${LINKS.githubWebsite}/edit/dev/content/${props.
 
         <p class="mt-8 text-sm text-[var(--ui-text-dimmed)]">
           <ULink
-            :to="editUrl"
+            :to="localPath(editUrl)"
             target="_blank"
             rel="noopener"
             class="underline-offset-2 hover:text-gold-400 hover:underline"
           >
-            Edit this page on GitHub
+            {{ t('Edit this page on GitHub') }}
           </ULink>
         </p>
       </UPageBody>

@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import type { PublicRoadmapItem } from '#shared/types/roadmap'
 
-const { data: items } = await useFetch<PublicRoadmapItem[]>('/api/roadmap', { default: () => [] })
+const { t, locale } = useSiteLocale()
+
+const { data: items } = await useFetch<PublicRoadmapItem[]>('/api/roadmap', { query: { locale }, default: () => [] })
 
 const milestones = computed(() => buildRoadmapTimeline(items.value))
 const rejected = computed(() => items.value.filter(item => item.status === 'rejected'))
 
 useSeoMeta({
-  title: 'Roadmap',
-  description: 'What Fixed by Design is building next, what is being explored, and what has already shipped.',
+  title: t('Roadmap'),
+  description: t('What Fixed by Design is building next, what is being explored, and what has already shipped.'),
 })
 </script>
 
@@ -17,8 +19,8 @@ useSeoMeta({
     <div class="border-b border-[var(--ui-border)]">
       <UContainer>
         <UPageHeader
-          title="Roadmap"
-          description="Product and game design initiatives, in the order we expect to reach them. Development tasks live on GitHub."
+          :title="t('Roadmap')"
+          :description="t('Product and game design initiatives, in the order we expect to reach them. Development tasks live on GitHub.')"
         />
       </UContainer>
     </div>
@@ -45,13 +47,13 @@ useSeoMeta({
               class="text-xs font-semibold uppercase tracking-wider"
               :class="milestone.shipped ? 'text-[var(--ui-text-dimmed)]' : 'text-gold-400'"
             >
-              {{ milestone.horizon }}
+              {{ t(milestone.horizon) }}
             </p>
             <h2 class="mt-1 text-xl font-semibold text-[var(--ui-text-highlighted)]">
-              {{ milestone.version ? `Version ${milestone.version}` : 'Unscheduled' }}
+              {{ milestone.version === 'Released' ? t('Released') : milestone.version ? `Version ${milestone.version}` : t('Unscheduled') }}
             </h2>
             <p class="mt-1 text-sm text-[var(--ui-text-muted)]">
-              {{ milestone.description }}
+              {{ t(milestone.description) }}
             </p>
           </header>
 
@@ -69,8 +71,8 @@ useSeoMeta({
       <UEmpty
         v-else
         class="mt-16"
-        title="Nothing on the roadmap"
-        description="Initiatives appear here as they are picked up."
+        :title="t('Nothing on the roadmap')"
+        :description="t('Initiatives appear here as they are picked up.')"
       />
 
       <section
@@ -78,10 +80,10 @@ useSeoMeta({
         class="mt-16 border-t border-[var(--ui-border)] pt-10"
       >
         <h2 class="text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-          Not planned
+          {{ t('Not planned') }}
         </h2>
         <p class="mt-2 max-w-2xl text-sm text-[var(--ui-text-muted)]">
-          Considered and turned down. Kept public so the reasoning is not lost.
+          {{ t('Considered and turned down. Kept public so the reasoning is not lost.') }}
         </p>
         <div class="mt-4 grid gap-3 lg:grid-cols-2">
           <RoadmapCard

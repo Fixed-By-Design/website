@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { ROADMAP_STATUS_LABELS, type RoadmapStatus } from '#shared/constants/workflow'
 
+const { t } = useSiteLocale()
+
 const props = defineProps<{ status: RoadmapStatus }>()
 
 const colors: Record<RoadmapStatus, 'neutral' | 'info' | 'primary' | 'warning' | 'success' | 'error'> = {
@@ -18,7 +20,7 @@ const color = computed(() => colors[props.status])
 
 <template>
   <UBadge
-    :label="ROADMAP_STATUS_LABELS[status]"
+    :label="t(ROADMAP_STATUS_LABELS[status])"
     :color="color"
     variant="subtle"
     size="sm"
