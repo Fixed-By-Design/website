@@ -1,24 +1,19 @@
 import { queryCollection } from '@nuxt/content/server'
-import { asc } from 'drizzle-orm'
 import type { SitemapUrlInput } from '#sitemap/types'
+import { localizedPath } from '#shared/i18n/translate'
 
 export default defineSitemapEventHandler(async (event): Promise<SitemapUrlInput[]> => {
-  const [features, wiki, design] = await Promise.all([
-    queryCollection(event, 'features').select('path').all(),
-    queryCollection(event, 'wiki').select('path').all(),
-    queryCollection(event, 'design').select('path').all(),
-  ])
+  const collections = ['features', 'wiki', 'design', 'features_fr', 'wiki_fr', 'design_fr'] as const
+  const content = (await Promise.all(collections.map(name => queryCollection(event, name).select('path').all()))).flat()
+  const pages = ['/', '/features', '/wiki', '/design', '/modpack', '/contribute', '/feedback', '/roadmap', '/changelog']
+  const paths = new Set([...content.map(item => item.path), ...pages, ...pages.map(path => localizedPath(path, 'fr'))])
 
-  const roadmap = await useDatabase()
-    .select({ updatedAt: tables.roadmapItems.updatedAt })
-    .from(tables.roadmapItems)
-    .orderBy(asc(tables.roadmapItems.updatedAt))
-    .limit(1)
-
-  return [
-    ...features.map(item => ({ loc: item.path, priority: 0.8 as const, changefreq: 'monthly' as const })),
-    ...wiki.map(item => ({ loc: item.path, priority: 0.7 as const, changefreq: 'monthly' as const })),
-    ...design.map(item => ({ loc: item.path, priority: 0.6 as const, changefreq: 'yearly' as const })),
-    ...(roadmap.length ? [{ loc: '/roadmap', priority: 0.7 as const, changefreq: 'weekly' as const }] : []),
-  ]
+  return [...paths].map(path => ({
+    loc: path,
+    alternatives: [
+      { hreflang: 'en', href: localizedPath(path, 'en') },
+      { hreflang: 'fr', href: localizedPath(path, 'fr') },
+      { hreflang: 'x-default', href: localizedPath(path, 'en') },
+    ],
+  }))
 })

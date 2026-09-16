@@ -2,11 +2,13 @@
 import { LINKS, MODPACK_AVAILABLE, PROJECT } from '#shared/constants/project'
 import { PILLAR_DEFINITIONS } from '#shared/constants/pillars'
 
+const { t, localPath, locale, collection } = useSiteLocale()
+
 const VISIBLE_EXAMPLES = 4
 const expanded = ref(false)
 
-const { data: examples } = await useAsyncData('home-examples', () =>
-  queryCollection('features')
+const { data: examples } = await useAsyncData(`home-examples-${locale.value}`, () =>
+  queryCollection(collection('features'))
     .select('path', 'title', 'vanilla', 'problem', 'solution', 'order')
     .where('featured', '=', true)
     .order('order', 'ASC')
@@ -18,14 +20,14 @@ const visibleExamples = computed(() =>
 const hiddenCount = computed(() => Math.max(examples.value.length - VISIBLE_EXAMPLES, 0))
 
 useSeoMeta({
-  title: 'Minecraft Survival, fixed by design',
-  description: PROJECT.description,
-  ogTitle: `${PROJECT.name} - ${PROJECT.tagline}`,
-  ogDescription: PROJECT.description,
+  title: t('Minecraft Survival, fixed by design'),
+  description: t(PROJECT.description),
+  ogTitle: `${PROJECT.name} - ${t(PROJECT.tagline)}`,
+  ogDescription: t(PROJECT.description),
   ogImage: '/media/og-catalogue.png',
   ogImageWidth: 1200,
   ogImageHeight: 630,
-  ogImageAlt: 'The Catalogue enchanting screen in Fixed by Design',
+  ogImageAlt: t('The Catalogue enchanting screen in Fixed by Design'),
 })
 </script>
 
@@ -52,41 +54,41 @@ useSeoMeta({
           />
 
           <h1 class="mt-10 text-4xl font-bold tracking-tight text-balance sm:text-6xl">
-            Minecraft Survival, <span class="brand-gradient-text">fixed by design</span>.
+            {{ t('Minecraft Survival,') }} <span class="brand-gradient-text">{{ t('fixed by design') }}</span>.
           </h1>
 
           <p class="mx-auto mt-6 max-w-2xl text-lg text-pretty text-[var(--ui-text-muted)]">
-            {{ PROJECT.description }}
+            {{ t(PROJECT.description) }}
           </p>
 
           <div class="mt-10 flex flex-col items-center justify-center gap-3 sm:flex-row">
             <UButton
-              to="/features"
+              :to="localPath('/features')"
               size="xl"
               :color="MODPACK_AVAILABLE ? 'neutral' : 'primary'"
               :variant="MODPACK_AVAILABLE ? 'subtle' : 'solid'"
               trailing-icon="i-lucide-arrow-right"
               class="font-semibold"
             >
-              Explore the changes
+              {{ t('Explore the changes') }}
             </UButton>
             <SiteDownloadButton size="xl" />
           </div>
 
           <p class="mt-6 text-sm text-[var(--ui-text-dimmed)]">
             <ULink
-              :to="LINKS.github"
+              :to="localPath(LINKS.github)"
               target="_blank"
               rel="noopener"
               class="hover:text-gold-400"
             >
-              View on GitHub
+              {{ t('View on GitHub') }}
             </ULink>
             <span
               class="mx-2"
               aria-hidden="true"
             >&middot;</span>
-            Fabric {{ PROJECT.fabricLoaderVersion }} on Minecraft {{ PROJECT.minecraftVersion }}
+            Fabric {{ PROJECT.fabricLoaderVersion }} {{ t('on Minecraft') }} {{ PROJECT.minecraftVersion }}
           </p>
         </div>
 
@@ -96,7 +98,7 @@ useSeoMeta({
         >
           <NuxtImg
             src="/media/catalogue-screen.png"
-            alt="The Catalogue in game: an enchanting table screen listing enchantments from the surrounding chiseled bookshelves, with a tooltip showing the reagent, experience and slot cost of Mending I"
+            :alt="t('The Catalogue in game: an enchanting table screen listing enchantments from the surrounding chiseled bookshelves, with a tooltip showing the reagent, experience and slot cost of Mending I')"
             width="2000"
             height="1081"
             sizes="100vw md:768px lg:1024px"
@@ -105,7 +107,7 @@ useSeoMeta({
             class="w-full rounded-xl border border-[var(--ui-border-accented)]"
           />
           <figcaption class="mt-3 text-center text-sm text-[var(--ui-text-dimmed)]">
-            The Catalogue: every enchantment your bookshelves can teach, with its exact price.
+            {{ t('The Catalogue: every enchantment your bookshelves can teach, with its exact price.') }}
           </figcaption>
         </figure>
       </UContainer>
@@ -116,20 +118,16 @@ useSeoMeta({
         <div class="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:gap-20">
           <div v-reveal>
             <p class="text-sm font-semibold uppercase tracking-wider text-gold-400">
-              The idea
+              {{ t('The idea') }}
             </p>
             <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-              Minecraft Survival has incredible foundations.
+              {{ t('Minecraft Survival has incredible foundations.') }}
             </h2>
             <p class="mt-6 leading-relaxed text-[var(--ui-text-muted)]">
-              Fixed by Design rethinks the systems that get in their way. It is not a different game, a kitchen-sink
-              modpack, or a collection of buffs. It is a redesign that keeps every system's original purpose and fixes
-              what that system actually encourages you to do.
+              {{ t('Fixed by Design rethinks the systems that get in their way. It is not a different game, a kitchen-sink modpack, or a collection of buffs. It is a redesign that keeps every system\'s original purpose and fixes what that system actually encourages you to do.') }}
             </p>
             <p class="mt-4 leading-relaxed text-[var(--ui-text-muted)]">
-              Every change starts from the same four questions: what was this system trying to achieve, what behaviour
-              does it actually reward, where does it become tedious or dominant, and can it be improved without making
-              Minecraft feel like something else.
+              {{ t('Every change starts from the same four questions: what was this system trying to achieve, what behaviour does it actually reward, where does it become tedious or dominant, and can it be improved without making Minecraft feel like something else.') }}
             </p>
           </div>
 
@@ -139,12 +137,12 @@ useSeoMeta({
           >
             <li
               v-for="item in [
-                { label: 'Dominant strategies', text: 'One correct answer crowds out every alternative.' },
-                { label: 'Trivialised progression', text: 'A single item ends a whole progression curve.' },
-                { label: 'Multiplayer friction', text: 'Rules built for one player, applied to twenty.' },
-                { label: 'Forgotten mechanics', text: 'Whole systems nobody has a reason to touch.' },
-                { label: 'Tedium without decisions', text: 'Time spent that never asks you to choose.' },
-                { label: 'Systems undermining systems', text: 'One feature quietly deleting another.' },
+                { label: t('Dominant strategies'), text: t('One correct answer crowds out every alternative.') },
+                { label: t('Trivialised progression'), text: t('A single item ends a whole progression curve.') },
+                { label: t('Multiplayer friction'), text: t('Rules built for one player, applied to twenty.') },
+                { label: t('Forgotten mechanics'), text: t('Whole systems nobody has a reason to touch.') },
+                { label: t('Tedium without decisions'), text: t('Time spent that never asks you to choose.') },
+                { label: t('Systems undermining systems'), text: t('One feature quietly deleting another.') },
               ]"
               :key="item.label"
               class="rounded-lg border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-4"
@@ -168,10 +166,10 @@ useSeoMeta({
           class="max-w-2xl"
         >
           <p class="text-sm font-semibold uppercase tracking-wider text-gold-400">
-            Designed systems
+            {{ t('Designed systems') }}
           </p>
           <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-            Four pillars, rebuilt system by system.
+            {{ t('Four pillars, rebuilt system by system.') }}
           </h2>
         </div>
 
@@ -191,17 +189,70 @@ useSeoMeta({
     <section class="border-b border-[var(--ui-border)]">
       <UContainer class="py-20">
         <div
+          v-reveal.children="{ stagger: 0.1 }"
+          class="grid gap-5 md:grid-cols-2"
+        >
+          <div class="rounded-xl border border-gold-500/25 bg-gold-500/[0.06] p-8">
+            <h2 class="text-2xl font-bold tracking-tight">
+              {{ t('Play it') }}
+            </h2>
+            <p class="mt-3 text-[var(--ui-text-muted)]">
+              {{ t('The') }} {{ PROJECT.modpackName }} {{ t('modpack bundles the four first-party mods with a curated set of third-party mods, shaders and quality-of-life improvements. It is not published yet.') }}
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <SiteDownloadButton :label="t('Download')" />
+              <UButton
+                :to="localPath('/wiki/getting-started')"
+                color="neutral"
+                variant="subtle"
+              >
+                {{ t('Installation guide') }}
+              </UButton>
+            </div>
+          </div>
+
+          <div class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-8">
+            <h2 class="text-2xl font-bold tracking-tight">
+              {{ t('Shape it') }}
+            </h2>
+            <p class="mt-3 text-[var(--ui-text-muted)]">
+              {{ t('Fixed by Design runs on playtesting. Feedback becomes design problems, design problems become decisions, and the reasoning is published.') }}
+            </p>
+            <div class="mt-6 flex flex-wrap gap-3">
+              <UButton
+                :to="localPath('/feedback')"
+                color="neutral"
+                variant="solid"
+                icon="i-lucide-message-square"
+              >
+                {{ t('Send feedback') }}
+              </UButton>
+              <UButton
+                :to="localPath('/contribute')"
+                color="neutral"
+                variant="subtle"
+              >
+                {{ t('Contribute') }}
+              </UButton>
+            </div>
+          </div>
+        </div>
+      </UContainer>
+    </section>
+    <section>
+      <UContainer class="py-20">
+        <div
           v-reveal
           class="max-w-2xl"
         >
           <p class="text-sm font-semibold uppercase tracking-wider text-gold-400">
-            How a change is made
+            {{ t('How a change is made') }}
           </p>
           <h2 class="mt-3 text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-            Vanilla, the problem, and the fix.
+            {{ t('Vanilla, the problem, and the fix.') }}
           </h2>
           <p class="mt-4 text-[var(--ui-text-muted)]">
-            Every feature is documented the same way. Here is what that looks like in practice.
+            {{ t('Every feature is documented the same way. Here is what that looks like in practice.') }}
           </p>
         </div>
 
@@ -216,7 +267,7 @@ useSeoMeta({
             :vanilla="example.vanilla"
             :problem="example.problem"
             :solution="example.solution"
-            :to="example.path"
+            :to="localPath(example.path)"
           />
         </div>
 
@@ -230,64 +281,25 @@ useSeoMeta({
             :trailing-icon="expanded ? 'i-lucide-chevron-up' : 'i-lucide-chevron-down'"
             @click="expanded = !expanded"
           >
-            {{ expanded ? 'Show less' : `Show ${hiddenCount} more` }}
+            {{ expanded ? t('Show less') : t('Show {count} more', { count: hiddenCount }) }}
           </UButton>
         </div>
-      </UContainer>
-    </section>
 
-    <section>
-      <UContainer class="py-20">
         <div
-          v-reveal.children="{ stagger: 0.1 }"
-          class="grid gap-5 md:grid-cols-2"
+          v-reveal
+          class="mt-14 flex flex-col items-center gap-4 border-t border-[var(--ui-border)] pt-10 text-center"
         >
-          <div class="rounded-xl border border-gold-500/25 bg-gold-500/[0.06] p-8">
-            <h2 class="text-2xl font-bold tracking-tight">
-              Play it
-            </h2>
-            <p class="mt-3 text-[var(--ui-text-muted)]">
-              {{ PROJECT.modpackName }} {{ PROJECT.modpackVersion }} bundles the four first-party mods with a curated set
-              of third-party mods, shaders and quality-of-life improvements. It is not published yet.
-            </p>
-            <div class="mt-6 flex flex-wrap gap-3">
-              <SiteDownloadButton label="Download" />
-              <UButton
-                to="/wiki/getting-started"
-                color="neutral"
-                variant="subtle"
-              >
-                Installation guide
-              </UButton>
-            </div>
-          </div>
-
-          <div class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-8">
-            <h2 class="text-2xl font-bold tracking-tight">
-              Shape it
-            </h2>
-            <p class="mt-3 text-[var(--ui-text-muted)]">
-              Fixed by Design runs on playtesting. Feedback becomes design problems, design problems become decisions,
-              and the reasoning is published.
-            </p>
-            <div class="mt-6 flex flex-wrap gap-3">
-              <UButton
-                to="/feedback"
-                color="neutral"
-                variant="solid"
-                icon="i-lucide-message-square"
-              >
-                Send feedback
-              </UButton>
-              <UButton
-                to="/contribute"
-                color="neutral"
-                variant="subtle"
-              >
-                Contribute
-              </UButton>
-            </div>
-          </div>
+          <p class="max-w-xl text-[var(--ui-text-muted)]">
+            {{ t('Every change on this list has a page explaining what vanilla did, why it was a problem, and what replaced it.') }}
+          </p>
+          <UButton
+            :to="localPath('/features')"
+            size="lg"
+            trailing-icon="i-lucide-arrow-right"
+            class="font-semibold"
+          >
+            {{ t('Read every change') }}
+          </UButton>
         </div>
       </UContainer>
     </section>

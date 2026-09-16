@@ -1,8 +1,12 @@
 <script setup lang="ts">
 import { LINKS, MODPACK_AVAILABLE, PROJECT } from '#shared/constants/project'
 
+const { t, localPath } = useSiteLocale()
+
 const columns = useFooterNavigation()
 const { discordUrl, hasDiscord } = useCommunityLinks()
+const { githubConfigured } = useAuthAvailability()
+const { loggedIn } = useUserSession()
 const year = new Date().getFullYear()
 </script>
 
@@ -14,11 +18,11 @@ const year = new Date().getFullYear()
           <div class="space-y-4">
             <SiteLogo :height="30" />
             <p class="max-w-sm text-sm text-[var(--ui-text-muted)]">
-              {{ PROJECT.description }} Built on Fabric for Minecraft {{ PROJECT.minecraftVersion }}.
+              {{ t(PROJECT.description) }} {{ t('Built on Fabric for Minecraft') }} {{ PROJECT.minecraftVersion }}.
             </p>
             <div class="flex gap-2">
               <UButton
-                :to="LINKS.github"
+                :to="localPath(LINKS.github)"
                 target="_blank"
                 rel="noopener"
                 icon="i-simple-icons-github"
@@ -29,7 +33,7 @@ const year = new Date().getFullYear()
               />
               <UButton
                 v-if="MODPACK_AVAILABLE"
-                :to="LINKS.modrinth"
+                :to="localPath(LINKS.modrinth)"
                 target="_blank"
                 rel="noopener"
                 icon="i-simple-icons-modrinth"
@@ -40,7 +44,7 @@ const year = new Date().getFullYear()
               />
               <UButton
                 v-if="hasDiscord"
-                :to="discordUrl"
+                :to="localPath(discordUrl)"
                 target="_blank"
                 rel="noopener"
                 icon="i-simple-icons-discord"
@@ -59,13 +63,21 @@ const year = new Date().getFullYear()
 
     <template #left>
       <p class="text-sm text-[var(--ui-text-dimmed)]">
-        &copy; {{ year }} Fixed by Design. Not affiliated with Mojang or Microsoft.
+        &copy; {{ year }} {{ t('Fixed by Design. Not affiliated with Mojang or Microsoft.') }}
+        <ULink
+          v-if="!loggedIn"
+          :to="localPath(githubConfigured ? '/auth/github' : '/signin')"
+          :external="githubConfigured"
+          class="ms-1 underline-offset-2 hover:text-gold-400 hover:underline"
+        >
+          {{ t('Maintainer sign-in') }}
+        </ULink>
       </p>
     </template>
 
     <template #right>
       <p class="text-sm text-[var(--ui-text-dimmed)]">
-        {{ PROJECT.modpackName }} {{ PROJECT.modpackVersion }} &middot; Minecraft {{ PROJECT.minecraftVersion }}
+        Minecraft {{ PROJECT.minecraftVersion }} &middot; Fabric {{ PROJECT.fabricLoaderVersion }}
       </p>
     </template>
   </UFooter>

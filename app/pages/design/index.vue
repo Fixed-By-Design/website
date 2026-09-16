@@ -1,13 +1,14 @@
 <script setup lang="ts">
-const { data: decisions } = await useAsyncData('design-index', () =>
-  queryCollection('design').select('path', 'title', 'summary', 'decidedOn', 'systems').order('decidedOn', 'DESC').all(),
+const { t, localPath, locale, collection } = useSiteLocale()
+const { data: decisions } = await useAsyncData(`design-index-${locale.value}`, () =>
+  queryCollection(collection('design')).select('path', 'title', 'summary', 'decidedOn', 'systems').order('decidedOn', 'DESC').all(),
 { default: () => [] })
 
-const formatter = new Intl.DateTimeFormat('en', { dateStyle: 'long' })
+const formatter = new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' })
 
 useSeoMeta({
-  title: 'Design decisions',
-  description: 'Published reasoning behind the changes Fixed by Design makes: the problem, the evidence, the constraints, the alternatives and the consequences.',
+  title: t('Design decisions'),
+  description: t('Published reasoning behind the changes Fixed by Design makes: the problem, the evidence, the constraints, the alternatives and the consequences.'),
 })
 </script>
 
@@ -16,8 +17,8 @@ useSeoMeta({
     <div class="border-b border-[var(--ui-border)]">
       <UContainer>
         <UPageHeader
-          title="Design decisions"
-          description="Why a change was made, what else was considered, and what it cost. Published so players and contributors can argue with the reasoning, not just the result."
+          :title="t('Design decisions')"
+          :description="t('Why a change was made, what else was considered, and what it cost. Published so players and contributors can argue with the reasoning, not just the result.')"
         />
       </UContainer>
     </div>
@@ -30,7 +31,7 @@ useSeoMeta({
         <NuxtLink
           v-for="decision in decisions"
           :key="decision.path"
-          :to="decision.path"
+          :to="localPath(decision.path)"
           class="group flex flex-col gap-3 rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-6 transition-colors hover:border-gold-500/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500"
         >
           <time

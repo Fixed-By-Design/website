@@ -2,6 +2,8 @@
 import { FEEDBACK_STATUS_LABELS, FEEDBACK_TYPE_LABELS } from '#shared/constants/workflow'
 import type { FeedbackEntry } from '#shared/types/dashboard'
 
+const { t, locale } = useSiteLocale()
+
 defineProps<{ entry: FeedbackEntry, pending?: boolean }>()
 
 const emit = defineEmits<{
@@ -11,7 +13,7 @@ const emit = defineEmits<{
   markDuplicate: []
 }>()
 
-const formatter = new Intl.DateTimeFormat('en', { dateStyle: 'medium', timeStyle: 'short' })
+const formatter = new Intl.DateTimeFormat(locale.value, { dateStyle: 'medium', timeStyle: 'short' })
 
 const statusColor: Record<string, 'primary' | 'success' | 'neutral' | 'warning'> = {
   new: 'primary',
@@ -31,19 +33,19 @@ function coordinates(entry: FeedbackEntry) {
   <article class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-5">
     <header class="flex flex-wrap items-center gap-2">
       <UBadge
-        :label="FEEDBACK_STATUS_LABELS[entry.status]"
+        :label="t(FEEDBACK_STATUS_LABELS[entry.status])"
         :color="statusColor[entry.status] ?? 'neutral'"
         variant="subtle"
         size="sm"
       />
       <UBadge
-        :label="FEEDBACK_TYPE_LABELS[entry.type]"
+        :label="t(FEEDBACK_TYPE_LABELS[entry.type])"
         color="neutral"
         variant="soft"
         size="sm"
       />
       <UBadge
-        :label="entry.source === 'minecraft' ? 'In game' : 'Website'"
+        :label="entry.source === 'minecraft' ? t('In game') : t('Website')"
         :icon="entry.source === 'minecraft' ? 'i-lucide-gamepad-2' : 'i-lucide-globe'"
         color="neutral"
         variant="outline"
@@ -74,7 +76,7 @@ function coordinates(entry: FeedbackEntry) {
         class="flex gap-1.5"
       >
         <dt class="sr-only">
-          Player
+          {{ t('Player') }}
         </dt>
         <UIcon
           name="i-lucide-user"
@@ -100,7 +102,7 @@ function coordinates(entry: FeedbackEntry) {
         class="flex gap-1.5"
       >
         <dt class="sr-only">
-          Coordinates
+          {{ t('Coordinates') }}
         </dt>
         <UIcon
           name="i-lucide-map-pin"
@@ -119,7 +121,7 @@ function coordinates(entry: FeedbackEntry) {
       <UBadge
         v-for="tag in entry.tags"
         :key="tag.slug"
-        :label="tag.label"
+        :label="t(tag.label)"
         color="neutral"
         variant="soft"
         size="sm"
@@ -135,7 +137,7 @@ function coordinates(entry: FeedbackEntry) {
         class="size-4 shrink-0 text-gold-400"
       />
       <span class="text-[var(--ui-text-toned)]">
-        Problem #{{ entry.problem.publicId }}: {{ entry.problem.title }}
+        {{ t('Problem #') }}{{ entry.problem.publicId }}: {{ entry.problem.title }}
       </span>
       <UButton
         size="xs"
@@ -145,7 +147,7 @@ function coordinates(entry: FeedbackEntry) {
         :loading="pending"
         @click="emit('triage', 'detach-problem')"
       >
-        Detach
+        {{ t('Detach') }}
       </UButton>
     </div>
 
@@ -157,7 +159,7 @@ function coordinates(entry: FeedbackEntry) {
           :loading="pending"
           @click="emit('attach')"
         >
-          Attach to problem
+          {{ t('Attach to problem') }}
         </UButton>
         <UButton
           size="sm"
@@ -167,7 +169,7 @@ function coordinates(entry: FeedbackEntry) {
           :loading="pending"
           @click="emit('createProblem')"
         >
-          Create problem
+          {{ t('Create problem') }}
         </UButton>
         <UButton
           size="sm"
@@ -177,7 +179,7 @@ function coordinates(entry: FeedbackEntry) {
           :loading="pending"
           @click="emit('markDuplicate')"
         >
-          Mark duplicate
+          {{ t('Mark duplicate') }}
         </UButton>
         <UButton
           size="sm"
@@ -187,7 +189,7 @@ function coordinates(entry: FeedbackEntry) {
           :loading="pending"
           @click="emit('triage', 'archive')"
         >
-          Archive
+          {{ t('Archive') }}
         </UButton>
         <UButton
           size="sm"
@@ -197,7 +199,7 @@ function coordinates(entry: FeedbackEntry) {
           :loading="pending"
           @click="emit('triage', 'dismiss')"
         >
-          Dismiss
+          {{ t('Dismiss') }}
         </UButton>
       </template>
       <template v-else>
@@ -209,7 +211,7 @@ function coordinates(entry: FeedbackEntry) {
           :loading="pending"
           @click="emit('triage', 'reopen')"
         >
-          Return to inbox
+          {{ t('Return to inbox') }}
         </UButton>
         <UButton
           v-if="!entry.problem"
@@ -220,7 +222,7 @@ function coordinates(entry: FeedbackEntry) {
           :loading="pending"
           @click="emit('attach')"
         >
-          Attach to problem
+          {{ t('Attach to problem') }}
         </UButton>
       </template>
     </footer>

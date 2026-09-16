@@ -12,3 +12,7 @@ dist
 .idea
 coverage
 .playwright-mcp
+
+# Playwright MCP screenshots
+ux-*.png
+.playwright-mcp/

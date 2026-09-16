@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { FEATURE_CATEGORY_LABELS, MOD_LABELS, type FeatureCategory, type FeatureStatus, type ModId } from '#shared/constants/features'
 
+const { t, localPath } = useSiteLocale()
+
 defineProps<{
   path: string
   title: string
@@ -13,7 +15,7 @@ defineProps<{
 
 <template>
   <NuxtLink
-    :to="path"
+    :to="localPath(path)"
     class="group flex h-full flex-col gap-3 rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-5 transition-colors hover:border-gold-500/50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-500"
   >
     <div class="flex items-start justify-between gap-3">
@@ -28,9 +30,9 @@ defineProps<{
     </p>
 
     <div class="mt-auto flex flex-wrap items-center gap-x-3 gap-y-1 pt-2 text-xs text-[var(--ui-text-dimmed)]">
-      <span>{{ FEATURE_CATEGORY_LABELS[category] }}</span>
+      <span>{{ t(FEATURE_CATEGORY_LABELS[category]) }}</span>
       <span aria-hidden="true">&middot;</span>
-      <span>{{ MOD_LABELS[mod] }}</span>
+      <span>{{ t(MOD_LABELS[mod]) }}</span>
     </div>
   </NuxtLink>
 </template>

@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { LINKS } from '#shared/constants/project'
 
-const { data: releases } = await useAsyncData('changelog', () =>
-  queryCollection('changelog').order('date', 'DESC').all(), { default: () => [] })
+const { t, localPath, locale, collection } = useSiteLocale()
 
-const formatter = new Intl.DateTimeFormat('en', { dateStyle: 'long' })
+const { data: releases } = await useAsyncData(`changelog-${locale.value}`, () =>
+  queryCollection(collection('changelog')).order('date', 'DESC').all(), { default: () => [] })
+
+const formatter = new Intl.DateTimeFormat(locale.value, { dateStyle: 'long' })
 
 useSeoMeta({
-  title: 'Changelog',
-  description: 'Player-readable release notes for Fixed by Design, newest first.',
+  title: t('Changelog'),
+  description: t('Player-readable release notes for Fixed by Design, newest first.'),
 })
 </script>
 
@@ -17,8 +19,8 @@ useSeoMeta({
     <div class="border-b border-[var(--ui-border)]">
       <UContainer>
         <UPageHeader
-          title="Changelog"
-          description="Player-readable release notes. Raw commits live on GitHub."
+          :title="t('Changelog')"
+          :description="t('Player-readable release notes. Raw commits live on GitHub.')"
         />
       </UContainer>
     </div>
@@ -39,7 +41,7 @@ useSeoMeta({
               {{ release.title }}
             </h2>
             <UBadge
-              :label="release.channel === 'stable' ? 'Stable' : 'Beta'"
+              :label="t(release.channel === 'stable' ? 'Stable' : 'Beta')"
               :color="release.channel === 'stable' ? 'success' : 'warning'"
               variant="subtle"
               size="sm"
@@ -65,12 +67,12 @@ useSeoMeta({
           <div class="mt-6 flex flex-wrap gap-2">
             <SiteDownloadButton
               v-if="release.modrinth"
-              :label="`Download ${release.version}`"
+              :label="t('Download {version}', { version: release.version })"
               size="sm"
             />
             <UButton
               v-if="release.github"
-              :to="release.github"
+              :to="localPath(release.github)"
               target="_blank"
               rel="noopener"
               size="sm"
@@ -91,7 +93,7 @@ useSeoMeta({
               class="rounded-xl border border-gold-500/25 bg-gold-500/[0.05] p-5"
             >
               <h3 class="text-sm font-semibold uppercase tracking-wider text-gold-400">
-                Highlights
+                {{ t('Highlights') }}
               </h3>
               <ul class="mt-3 space-y-2 text-sm text-[var(--ui-text-toned)]">
                 <li
@@ -109,7 +111,7 @@ useSeoMeta({
               class="rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)] p-5"
             >
               <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-                Fixes
+                {{ t('Fixes') }}
               </h3>
               <ul class="mt-3 space-y-2 text-sm text-[var(--ui-text-muted)]">
                 <li
@@ -127,7 +129,7 @@ useSeoMeta({
               class="rounded-xl border border-red-500/25 bg-red-500/[0.05] p-5"
             >
               <h3 class="text-sm font-semibold uppercase tracking-wider text-red-400">
-                Breaking changes
+                {{ t('Breaking changes') }}
               </h3>
               <ul class="mt-3 space-y-2 text-sm text-[var(--ui-text-toned)]">
                 <li
@@ -149,19 +151,19 @@ useSeoMeta({
 
       <UEmpty
         v-else
-        title="No releases yet"
-        description="Release notes appear here as versions ship."
+        :title="t('No releases yet')"
+        :description="t('Release notes appear here as versions ship.')"
       />
 
       <div class="mt-16 rounded-xl border border-[var(--ui-border)] p-6">
         <h2 class="font-semibold">
-          Looking for the technical history?
+          {{ t('Looking for the technical history?') }}
         </h2>
         <p class="mt-2 text-sm text-[var(--ui-text-muted)]">
-          Commits, pull requests and per-mod releases live on GitHub.
+          {{ t('Commits, pull requests and per-mod releases live on GitHub.') }}
         </p>
         <UButton
-          :to="LINKS.github"
+          :to="localPath(LINKS.github)"
           target="_blank"
           rel="noopener"
           color="neutral"
@@ -170,7 +172,7 @@ useSeoMeta({
           icon="i-simple-icons-github"
           class="mt-4"
         >
-          Fixed by Design on GitHub
+          {{ t('Fixed by Design on GitHub') }}
         </UButton>
       </div>
     </UContainer>

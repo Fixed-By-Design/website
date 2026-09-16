@@ -1,19 +1,20 @@
 <script setup lang="ts">
-const { data: page } = await useAsyncData('wiki-overview', () =>
-  queryCollection('wiki').path('/wiki').first())
+const { t, localPath, locale, collection } = useSiteLocale()
+const { data: page } = await useAsyncData(`wiki-overview-${locale.value}`, () =>
+  queryCollection(collection('wiki')).path(localPath('/wiki')).first())
 
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Wiki overview not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: t('Wiki overview not found'), fatal: true })
 }
 
 const { data: sections } = await useWikiNavigation()
 
-const contents = computed(() => sections.value.filter(section => section.items.some(item => item.path !== '/wiki')))
+const contents = computed(() => sections.value.filter(section => section.items.some(item => item.path !== localPath('/wiki'))))
 
 useSeoMeta({
   title: 'Wiki',
   description: page.value.description,
-  ogTitle: 'Fixed by Design wiki',
+  ogTitle: t('Fixed by Design wiki'),
   ogDescription: page.value.description,
 })
 </script>
@@ -29,7 +30,7 @@ useSeoMeta({
 
     <section class="mt-12">
       <h2 class="text-xl font-semibold">
-        Everything in this wiki
+        {{ t('Everything in this wiki') }}
       </h2>
 
       <div
@@ -45,11 +46,11 @@ useSeoMeta({
           class="mt-3 space-y-3"
         >
           <li
-            v-for="item in section.items.filter(entry => entry.path !== '/wiki')"
+            v-for="item in section.items.filter(entry => entry.path !== localPath('/wiki'))"
             :key="item.path"
           >
             <ULink
-              :to="item.path"
+              :to="localPath(item.path)"
               class="font-medium text-[var(--ui-text-highlighted)] underline-offset-2 hover:text-gold-400 hover:underline"
             >
               {{ item.title }}

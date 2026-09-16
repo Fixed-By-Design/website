@@ -2,6 +2,7 @@ export default defineNuxtConfig({
   modules: [
     '@nuxt/ui',
     '@nuxt/content',
+    '@nuxtjs/i18n',
     '@nuxt/image',
     '@nuxt/eslint',
     'nuxt-auth-utils',
@@ -46,6 +47,13 @@ export default defineNuxtConfig({
   routeRules: {
     '/': { prerender: true },
     '/contribute': { prerender: true },
+    '/fr': { prerender: true },
+    '/fr/contribute': { prerender: true },
+    '/fr/features/**': { isr: 3600 },
+    '/fr/wiki/**': { isr: 3600 },
+    '/fr/design/**': { isr: 3600 },
+    '/fr/changelog': { isr: 3600 },
+    '/fr/dashboard/**': { ssr: false, robots: false },
     '/features/**': { isr: 3600 },
     '/wiki/**': { isr: 3600 },
     '/design/**': { isr: 3600 },
@@ -57,6 +65,17 @@ export default defineNuxtConfig({
 
   eslint: {
     config: { stylistic: true },
+  },
+
+  i18n: {
+    baseUrl: process.env.NUXT_PUBLIC_SITE_URL || 'https://fixedbydesign.com',
+    defaultLocale: 'en',
+    strategy: 'prefix_except_default',
+    locales: [
+      { code: 'en', language: 'en', name: 'English' },
+      { code: 'fr', language: 'fr', name: 'Français' },
+    ],
+    detectBrowserLanguage: false,
   },
 
   icon: {
@@ -71,6 +90,6 @@ export default defineNuxtConfig({
 
   sitemap: {
     sources: ['/api/__sitemap__/urls'],
-    exclude: ['/dashboard/**', '/signin', '/changelog/**'],
+    exclude: ['/dashboard/**', '/signin', '/changelog/**', '/fr/dashboard/**', '/fr/signin', '/fr/changelog/**'],
   },
 })
