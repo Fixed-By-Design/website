@@ -11,6 +11,9 @@ Fixed by Design is an opinionated Fabric modpack that redesigns Minecraft Surviv
 
 This wiki documents those places.
 
+::wiki-figure{src="/media/wiki/world-panorama.png" alt="A wide aerial view of a Fixed by Design survival world, with rivers, forests, mountains and player-built landmarks." caption="The pack keeps the familiar Minecraft world intact, then changes the systems that shape how you move through it."}
+::
+
 ## What the project is trying to do
 
 Minecraft Survival has excellent foundations. Over fifteen years, several of its systems accumulated problems that have nothing to do with the ideas underneath them: dominant strategies that crowd out every alternative, progressions that one item trivialises, rules written for one player and then applied to twenty, whole mechanics nobody has a reason to touch, and features that quietly delete other features.

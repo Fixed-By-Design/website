@@ -11,6 +11,9 @@ Fixed by Design est un modpack Fabric qui repense la survie Minecraft avec des c
 
 Ce wiki documente ces changements.
 
+::wiki-figure{src="/media/wiki/world-panorama.png" alt="Vue aérienne d’un monde de survie Fixed by Design, avec ses rivières, ses forêts, ses montagnes et plusieurs constructions." caption="Le pack conserve le monde familier de Minecraft, puis repense les systèmes qui déterminent la manière de l’explorer."}
+::
+
 ## Ce que le projet cherche à faire
 
 La survie Minecraft repose sur d’excellentes bases. En quinze ans, certains systèmes ont accumulé des problèmes sans rapport avec leur intention d’origine : stratégies qui écrasent les alternatives, progressions qu’un seul objet rend inutiles, règles pensées pour un joueur et appliquées à vingt, mécaniques oubliées et fonctionnalités qui en effacent d’autres.
@@ -30,7 +33,7 @@ Fixed by Design assume ses choix. Quand un changement fait débat, ses raisons s
 
 ## Où trouver quoi
 
-Le wiki répond à **comment utiliser cette mécanique**. C’est la référence à garder ouverte pendant une partie.
+Le wiki répond à la question **« comment utiliser cette mécanique ? »**. C’est la référence à garder ouverte pendant une partie.
 
 Les [changements](/features) expliquent **ce qui a changé et pourquoi**. Chaque fiche présente le fonctionnement d’origine, le problème et la solution.
 
