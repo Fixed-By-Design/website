@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { LINKS, MODPACK_AVAILABLE } from '#shared/constants/project'
 
+const { t, localPath } = useSiteLocale()
+
 withDefaults(defineProps<{
   label?: string
   pendingLabel?: string
@@ -19,7 +21,7 @@ withDefaults(defineProps<{
 <template>
   <UButton
     v-if="MODPACK_AVAILABLE"
-    :to="LINKS.modrinth"
+    :to="localPath(LINKS.modrinth)"
     target="_blank"
     rel="noopener"
     :size="size"
@@ -28,7 +30,7 @@ withDefaults(defineProps<{
     icon="i-simple-icons-modrinth"
     class="font-medium"
   >
-    {{ label }}
+    {{ t(label) }}
   </UButton>
 
   <UButton
@@ -39,8 +41,8 @@ withDefaults(defineProps<{
     variant="subtle"
     disabled
     class="font-medium"
-    aria-label="The modpack is not released yet"
+    :aria-label="t('The modpack is not released yet')"
   >
-    {{ pendingLabel }}
+    {{ t(pendingLabel) }}
   </UButton>
 </template>

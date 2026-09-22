@@ -2,21 +2,23 @@
 import { FEATURE_CATEGORY_LABELS, MOD_LABELS, type FeatureCategory, type FeatureStatus, type ModId } from '#shared/constants/features'
 import { MOD_LINKS } from '#shared/constants/project'
 
+const { t, localPath, locale, collection } = useSiteLocale()
+
 const route = useRoute()
 
 const { data: feature } = await useAsyncData(`feature-${route.path}`, () =>
-  queryCollection('features').path(route.path).first())
+  queryCollection(collection('features')).path(route.path).first())
 
 if (!feature.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Feature not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: t('Feature not found'), fatal: true })
 }
 
 const { data: related } = await useAsyncData(`feature-related-${route.path}`, () => {
   const slugs = feature.value?.related ?? []
   if (!slugs.length) return Promise.resolve([])
-  return queryCollection('features')
+  return queryCollection(collection('features'))
     .select('path', 'title', 'summary', 'category', 'status', 'mod')
-    .where('stem', 'IN', slugs.map(slug => `features/${slug}`))
+    .where('stem', 'IN', slugs.map(slug => `${locale.value === 'fr' ? 'fr/' : ''}features/${slug}`))
     .all()
 }, { default: () => [] })
 
@@ -26,10 +28,10 @@ const { data: sideLinks } = await useAsyncData(`feature-links-${route.path}`, as
 
   const [wiki, decisions] = await Promise.all([
     wikiPaths.length
-      ? queryCollection('wiki').select('path', 'title').where('path', 'IN', wikiPaths).all()
+      ? queryCollection(collection('wiki')).select('path', 'title').where('path', 'IN', wikiPaths.map(localPath)).all()
       : Promise.resolve([]),
     decisionPaths.length
-      ? queryCollection('design').select('path', 'title').where('path', 'IN', decisionPaths).all()
+      ? queryCollection(collection('design')).select('path', 'title').where('path', 'IN', decisionPaths.map(localPath)).all()
       : Promise.resolve([]),
   ])
 
@@ -39,8 +41,8 @@ const { data: sideLinks } = await useAsyncData(`feature-links-${route.path}`, as
 const modLinks = computed(() => MOD_LINKS[feature.value!.mod])
 
 const breadcrumb = computed(() => [
-  { label: 'Features', to: '/features' },
-  { label: FEATURE_CATEGORY_LABELS[feature.value!.category as FeatureCategory], to: `/features?category=${feature.value!.category}` },
+  { label: t('Features'), to: localPath('/features') },
+  { label: t(FEATURE_CATEGORY_LABELS[feature.value!.category as FeatureCategory]), to: localPath(`/features?category=${feature.value!.category}`) },
   { label: feature.value!.title },
 ])
 
@@ -70,13 +72,13 @@ useSeoMeta({
             size="md"
           />
           <UBadge
-            :label="MOD_LABELS[feature.mod as ModId]"
+            :label="t(MOD_LABELS[feature.mod as ModId])"
             color="neutral"
             variant="subtle"
           />
           <UBadge
             v-if="feature.since"
-            :label="`Since ${feature.since}`"
+            :label="t('Since {version}', { version: feature.since })"
             color="neutral"
             variant="subtle"
           />
@@ -97,7 +99,7 @@ useSeoMeta({
           <SiteRedesignExample
             v-reveal="{ y: 22 }"
             :heading-level="2"
-            :title="`${feature.title}: the reasoning`"
+            :title="t('{title}: the reasoning', { title: feature.title })"
             :vanilla="feature.vanilla"
             :problem="feature.problem"
             :solution="feature.solution"
@@ -112,7 +114,7 @@ useSeoMeta({
             class="mt-12"
           >
             <h2 class="text-xl font-semibold">
-              Details
+              {{ t('Details') }}
             </h2>
             <dl class="mt-4 divide-y divide-[var(--ui-border)] rounded-xl border border-[var(--ui-border)] bg-[var(--ui-bg-muted)]">
               <div
@@ -135,7 +137,7 @@ useSeoMeta({
             class="mt-12"
           >
             <h2 class="text-xl font-semibold">
-              Related systems
+              {{ t('Related systems') }}
             </h2>
 
             <div
@@ -163,7 +165,7 @@ useSeoMeta({
                 class="rounded-xl border border-[var(--ui-border)] p-5"
               >
                 <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-                  How to use it
+                  {{ t('How to use it') }}
                 </h3>
                 <ul class="mt-3 space-y-2">
                   <li
@@ -171,7 +173,7 @@ useSeoMeta({
                     :key="link.path"
                   >
                     <ULink
-                      :to="link.path"
+                      :to="localPath(link.path)"
                       class="text-[var(--ui-text-muted)] underline-offset-2 hover:text-gold-400 hover:underline"
                     >
                       {{ link.title }}
@@ -185,7 +187,7 @@ useSeoMeta({
                 class="rounded-xl border border-[var(--ui-border)] p-5"
               >
                 <h3 class="text-sm font-semibold uppercase tracking-wider text-[var(--ui-text-dimmed)]">
-                  Why it works this way
+                  {{ t('Why it works this way') }}
                 </h3>
                 <ul class="mt-3 space-y-2">
                   <li
@@ -193,7 +195,7 @@ useSeoMeta({
                     :key="link.path"
                   >
                     <ULink
-                      :to="link.path"
+                      :to="localPath(link.path)"
                       class="text-[var(--ui-text-muted)] underline-offset-2 hover:text-gold-400 hover:underline"
                     >
                       {{ link.title }}
@@ -209,10 +211,10 @@ useSeoMeta({
             class="mt-12 rounded-xl border border-gold-500/25 bg-gold-500/[0.05] p-6"
           >
             <h2 class="text-lg font-semibold text-[var(--ui-text-highlighted)]">
-              Built on the work of others
+              {{ t('Built on the work of others') }}
             </h2>
             <p class="mt-1 text-sm text-[var(--ui-text-muted)]">
-              This system exists because someone else solved it first.
+              {{ t('This system exists because someone else solved it first.') }}
             </p>
 
             <ul class="mt-5 space-y-5">
@@ -222,14 +224,14 @@ useSeoMeta({
               >
                 <p class="flex flex-wrap items-baseline gap-x-2">
                   <ULink
-                    :to="entry.url"
+                    :to="localPath(entry.url)"
                     target="_blank"
                     rel="noopener"
                     class="font-semibold text-gold-400 underline-offset-2 hover:underline"
                   >
                     {{ entry.name }}
                   </ULink>
-                  <span class="text-sm text-[var(--ui-text-muted)]">by {{ entry.author }}</span>
+                  <span class="text-sm text-[var(--ui-text-muted)]">{{ t('by') }} {{ entry.author }}</span>
                   <UBadge
                     v-if="entry.license"
                     :label="entry.license"
@@ -247,14 +249,14 @@ useSeoMeta({
 
           <section class="mt-12 rounded-xl border border-[var(--ui-border)] p-6">
             <h2 class="text-lg font-semibold">
-              Implementation
+              {{ t('Implementation') }}
             </h2>
             <p class="mt-1 text-sm text-[var(--ui-text-dimmed)]">
-              For contributors. Development happens on GitHub.
+              {{ t('For contributors. Development happens on GitHub.') }}
             </p>
             <div class="mt-4 flex flex-wrap gap-3">
               <UButton
-                :to="modLinks?.github"
+                :to="localPath(modLinks?.github)"
                 target="_blank"
                 rel="noopener"
                 icon="i-simple-icons-github"
@@ -262,11 +264,11 @@ useSeoMeta({
                 variant="subtle"
                 size="sm"
               >
-                {{ MOD_LABELS[feature.mod as ModId] }} repository
+                {{ t(MOD_LABELS[feature.mod as ModId]) }} {{ t('repository') }}
               </UButton>
               <UButton
                 v-if="feature.issue"
-                :to="feature.issue.url"
+                :to="localPath(feature.issue.url)"
                 target="_blank"
                 rel="noopener"
                 icon="i-lucide-circle-dot"
@@ -274,11 +276,11 @@ useSeoMeta({
                 variant="subtle"
                 size="sm"
               >
-                Issue #{{ feature.issue.number }}
+                {{ t('Issue #{number}', { number: feature.issue.number }) }}
               </UButton>
               <UButton
                 v-if="feature.pullRequest"
-                :to="feature.pullRequest.url"
+                :to="localPath(feature.pullRequest.url)"
                 target="_blank"
                 rel="noopener"
                 icon="i-lucide-git-pull-request"
@@ -286,10 +288,15 @@ useSeoMeta({
                 variant="subtle"
                 size="sm"
               >
-                PR #{{ feature.pullRequest.number }}
+                {{ t('PR #{number}', { number: feature.pullRequest.number }) }}
               </UButton>
             </div>
           </section>
+
+          <SiteFeedbackPrompt
+            :subject="t('this change')"
+            class="mt-12"
+          />
         </UPageBody>
 
         <template #right>

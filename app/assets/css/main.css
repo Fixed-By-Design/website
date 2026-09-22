@@ -33,6 +33,9 @@
   --brand-gold: #ebac22;
   --brand-gold-light: #f3c947;
   --brand-gold-deep: #dd7709;
+
+  /* Modrinth's own green, so a link to a Modrinth page is recognisable as one. */
+  --color-modrinth: #1bd96a;
 }
 
 :root {
@@ -96,4 +99,12 @@ body {
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+.text-modrinth {
+  color: var(--color-modrinth);
+}
+
+.hover\:border-modrinth:hover {
+  border-color: var(--color-modrinth);
 }

@@ -1,13 +1,11 @@
 ---
 title: The modpack
-description: What ships in Fixed SMP, and a clear line between what Fixed by Design designed and what it only bundles.
+description: What ships in the Fixed by Design modpack, and a clear line between what the project designed and what it only bundles.
 ---
 
-# The modpack
+The **Fixed by Design modpack** is the distribution. It combines the four first-party mods with a curated set of third-party mods, resource packs, shaders and configuration.
 
-**Fixed SMP** is the distribution. It combines the four first-party Fixed by Design mods with a curated set of third-party mods, resource packs, shaders and configuration.
-
-Three variants are published for every release: **server**, **client** and **full**. The full pack is what the Modrinth page offers by default.
+Three variants are planned for every release: **server**, **client** and **full**. The full pack will be what the Modrinth page offers by default.
 
 ::warning
 The pack is not published yet. Everything below describes what it contains; the download will appear here when it ships.
@@ -15,7 +13,6 @@ The pack is not published yet. Everything below describes what it contains; the 
 
 | | |
 | :-- | :-- |
-| Version | 1.8.0 |
 | Minecraft | 26.1.2 |
 | Fabric Loader | 0.19.2 |
 | Mods | 89 |
@@ -53,6 +50,8 @@ Everything below is made by other people. Fixed by Design bundles and configures
 
 **Gameplay.** Additional Additions, Horseman, Cut Through, Debugify, NetherPortalFix, Old Combat Mod, Emotecraft.
 
+The wiki page [Bundled Mods](/wiki/bundled-mods) goes through the ones that change how the game plays, what each one actually does, and who made it.
+
 **Libraries.** Fabric API, Fabric Language Kotlin, Cloth Config API, Balm, CreativeCore, Forge Config API Port, Puzzles Lib, Prickle, M.R.U, Text Placeholder API, YetAnotherConfigLib, Language Reload.
 
 ## Standing on other people's work
@@ -75,7 +74,7 @@ Beyond bundling, the pack ships configuration that changes how things feel.
 
 **Horses** get step-up, smoother ledges, hitching, a summoning horn, full mining speed while mounted and a mounted HUD, through Horseman.
 
-**Information** is exposed through Jade in toggle mode, covering harvest tools, crop progress, mob breeding, horse stats, storage previews and enchantment power, with display entities and barriers hidden so builds stay clean.
+**Information** is exposed through Jade in toggle mode, covering harvest tools, crop progress, mob breeding, horse stats, storage previews and enchantment power, with text displays, interaction entities and barriers hidden so builds stay clean.
 
 **Audio** uses full occlusion and reverb, with proximity voice chat at 48 blocks and a raised simultaneous-sound cap so dense bases do not drop audio.
 

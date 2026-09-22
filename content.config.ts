@@ -16,7 +16,7 @@ const githubRef = z.object({
   url: z.string(),
 })
 
-const features = defineCollection({
+const features = {
   type: 'page',
   source: 'features/**/*.md',
   schema: z.object({
@@ -42,9 +42,9 @@ const features = defineCollection({
     order: z.number().default(100),
     featured: z.boolean().default(false),
   }),
-})
+} as const
 
-const wiki = defineCollection({
+const wiki = {
   type: 'page',
   source: 'wiki/**/*.md',
   schema: z.object({
@@ -54,9 +54,9 @@ const wiki = defineCollection({
     order: z.number().default(100),
     features: z.array(z.string()).default([]),
   }),
-})
+} as const
 
-const design = defineCollection({
+const design = {
   type: 'page',
   source: 'design/**/*.md',
   schema: z.object({
@@ -67,9 +67,9 @@ const design = defineCollection({
     features: z.array(z.string()).default([]),
     issue: githubRef.optional(),
   }),
-})
+} as const
 
-const changelog = defineCollection({
+const changelog = {
   type: 'page',
   source: 'changelog/**/*.md',
   schema: z.object({
@@ -85,17 +85,28 @@ const changelog = defineCollection({
     modrinth: z.string().optional(),
     github: z.string().optional(),
   }),
-})
+} as const
 
-const pages = defineCollection({
+const pages = {
   type: 'page',
   source: 'pages/**/*.md',
   schema: z.object({
     title: z.string(),
     description: z.string(),
   }),
-})
+} as const
 
 export default defineContentConfig({
-  collections: { features, wiki, design, changelog, pages },
+  collections: {
+    features: defineCollection(features),
+    wiki: defineCollection(wiki),
+    design: defineCollection(design),
+    changelog: defineCollection(changelog),
+    pages: defineCollection(pages),
+    features_fr: defineCollection({ ...features, source: { include: 'fr/features/**/*.md', prefix: '/fr/features' } }),
+    wiki_fr: defineCollection({ ...wiki, source: { include: 'fr/wiki/**/*.md', prefix: '/fr/wiki' } }),
+    design_fr: defineCollection({ ...design, source: { include: 'fr/design/**/*.md', prefix: '/fr/design' } }),
+    changelog_fr: defineCollection({ ...changelog, source: { include: 'fr/changelog/**/*.md', prefix: '/fr/changelog' } }),
+    pages_fr: defineCollection({ ...pages, source: { include: 'fr/pages/**/*.md', prefix: '/fr/pages' } }),
+  },
 })

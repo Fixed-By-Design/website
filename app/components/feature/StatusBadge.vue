@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { FEATURE_STATUS_LABELS, type FeatureStatus } from '#shared/constants/features'
 
+const { t } = useSiteLocale()
+
 const props = defineProps<{ status: FeatureStatus, size?: 'sm' | 'md' }>()
 
 const colors: Record<FeatureStatus, 'success' | 'warning' | 'info' | 'neutral' | 'error'> = {
@@ -16,7 +18,7 @@ const color = computed(() => colors[props.status])
 
 <template>
   <UBadge
-    :label="FEATURE_STATUS_LABELS[status]"
+    :label="t(FEATURE_STATUS_LABELS[status])"
     :color="color"
     variant="subtle"
     :size="size ?? 'sm'"

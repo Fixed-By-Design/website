@@ -112,3 +112,15 @@ No Discord clone, no GitHub Issues clone, no Modrinth clone, no generic CMS. Ext
 ## Not yet implemented
 
 GitHub issue synchronisation, automatic Modrinth release fetching, a proposal and design decision editor, and contributor assignment. The schema and routing are prepared for all of them; the current implementation uses external links and Git-based content.
+
+## English and French
+
+English URLs stay unchanged; French pages live under `/fr`. The language switch keeps the current page. Set `NUXT_PUBLIC_SITE_URL=https://fixedbydesign.com` in production for canonical URLs, language alternatives and the sitemap.
+
+Every document has a counterpart at `content/fr/<collection>/<same-file>.md`. Keep the filename, mod names, IDs, enum fields and commands identical; translate editorial fields and the body. Internal Markdown links can use the original English path: `ProseA` selects the current language. Add the French document whenever publishing or updating English content.
+
+Interface copy lives in `shared/i18n/fr.json`, keyed by its English source. Use `useSiteLocale().t()` in components and `translate()` on the server. Public roadmap titles, summaries, domains and link labels also use this dictionary, so add or update their French entries when publishing database content. Player feedback and other user-authored text remain as submitted. Unknown source text falls back to English.
+
+The French teleportation diagrams are generated from the original SVGs with `python3 scripts/localize-teleportation-diagrams.py`; their wording lives in `scripts/teleportation-fr.json`. Regenerate them after changing the English diagrams.
+
+`pnpm test` checks document parity, translation placeholders, language navigation and accent-insensitive search. Also run `pnpm lint`, `pnpm typecheck` and `pnpm build` before publishing.

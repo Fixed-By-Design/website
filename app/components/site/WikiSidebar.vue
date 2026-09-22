@@ -1,13 +1,15 @@
 <script setup lang="ts">
 import type { WikiNavigationSection } from '~/composables/useWikiNavigation'
 
+const { t, localPath } = useSiteLocale()
+
 defineProps<{ sections: WikiNavigationSection[] }>()
 const route = useRoute()
 </script>
 
 <template>
   <nav
-    aria-label="Wiki navigation"
+    :aria-label="t('Wiki navigation')"
     class="space-y-6"
   >
     <div
@@ -23,12 +25,12 @@ const route = useRoute()
           :key="item.path"
         >
           <NuxtLink
-            :to="item.path"
+            :to="localPath(item.path)"
             class="-ms-px block border-s-2 py-1.5 ps-3 text-sm transition-colors"
-            :class="route.path === item.path
+            :class="route.path === localPath(item.path)
               ? 'border-gold-500 font-medium text-gold-400'
               : 'border-transparent text-[var(--ui-text-muted)] hover:border-[var(--ui-border-accented)] hover:text-[var(--ui-text-highlighted)]'"
-            :aria-current="route.path === item.path ? 'page' : undefined"
+            :aria-current="route.path === localPath(item.path) ? 'page' : undefined"
           >
             {{ item.title }}
           </NuxtLink>

@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import type { PublicRoadmapItem } from '#shared/types/roadmap'
 
+const { t, localPath } = useSiteLocale()
+
 defineProps<{ item: PublicRoadmapItem, muted?: boolean }>()
 </script>
 
@@ -25,7 +27,7 @@ defineProps<{ item: PublicRoadmapItem, muted?: boolean }>()
       <span>{{ item.domain }}</span>
       <template v-if="item.problem">
         <span aria-hidden="true">&middot;</span>
-        <span>Problem #{{ item.problem.publicId }}</span>
+        <span>{{ t('Problem #') }}{{ item.problem.publicId }}</span>
       </template>
       <template
         v-for="link in item.links"
@@ -33,12 +35,12 @@ defineProps<{ item: PublicRoadmapItem, muted?: boolean }>()
       >
         <span aria-hidden="true">&middot;</span>
         <ULink
-          :to="link.url"
+          :to="localPath(link.url)"
           target="_blank"
           rel="noopener"
           class="text-[var(--ui-text-dimmed)] underline-offset-2 hover:text-gold-400 hover:underline"
         >
-          {{ link.number ? `Issue #${link.number}` : link.label }}
+          {{ link.number ? t('Issue #{number}', { number: link.number }) : link.label }}
         </ULink>
       </template>
     </p>

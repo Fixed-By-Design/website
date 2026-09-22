@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import { normalizeSearch } from '#shared/utils/searchScore'
 import {
   FEATURE_CATEGORY_LABELS,
   FEATURE_STATUSES,
@@ -10,11 +11,13 @@ import {
   type ModId,
 } from '#shared/constants/features'
 
+const { t, locale, collection } = useSiteLocale()
+
 const route = useRoute()
 const router = useRouter()
 
-const { data: features } = await useAsyncData('features-index', () =>
-  queryCollection('features')
+const { data: features } = await useAsyncData(`features-index-${locale.value}`, () =>
+  queryCollection(collection('features'))
     .select('path', 'title', 'summary', 'category', 'status', 'mod', 'order')
     .order('order', 'ASC')
     .all(), { default: () => [] })
@@ -37,30 +40,30 @@ watch([category, mod, status], () => {
 const usedCategories = computed(() => {
   const present = new Set(features.value.map(f => f.category))
   return [
-    { label: 'All categories', value: 'all' },
+    { label: t('All categories'), value: 'all' },
     ...Object.entries(FEATURE_CATEGORY_LABELS)
       .filter(([key]) => present.has(key as FeatureCategory))
-      .map(([value, label]) => ({ label, value })),
+      .map(([value, label]) => ({ label: t(label), value })),
   ]
 })
 
 const modOptions = [
-  { label: 'All mods', value: 'all' },
+  { label: t('All mods'), value: 'all' },
   ...MODS.map(value => ({ label: MOD_LABELS[value], value })),
 ]
 
 const statusOptions = [
-  { label: 'Any status', value: 'all' },
-  ...FEATURE_STATUSES.map(value => ({ label: FEATURE_STATUS_LABELS[value], value })),
+  { label: t('Any status'), value: 'all' },
+  ...FEATURE_STATUSES.map(value => ({ label: t(FEATURE_STATUS_LABELS[value]), value })),
 ]
 
 const filtered = computed(() => {
-  const term = search.value.trim().toLowerCase()
+  const term = normalizeSearch(search.value.trim())
   return features.value.filter((feature) => {
     if (category.value !== 'all' && feature.category !== category.value) return false
     if (mod.value !== 'all' && feature.mod !== mod.value) return false
     if (status.value !== 'all' && feature.status !== status.value) return false
-    if (term && !`${feature.title} ${feature.summary}`.toLowerCase().includes(term)) return false
+    if (term && !normalizeSearch(`${feature.title} ${feature.summary}`).includes(term)) return false
     return true
   })
 })
@@ -83,8 +86,8 @@ function reset() {
 }
 
 useSeoMeta({
-  title: 'Features',
-  description: 'Every gameplay system Fixed by Design changes, grouped by what it affects in game rather than by which mod implements it.',
+  title: t('Features'),
+  description: t('Every gameplay system Fixed by Design changes, grouped by what it affects in game rather than by which mod implements it.'),
 })
 </script>
 
@@ -93,8 +96,8 @@ useSeoMeta({
     <div class="border-b border-[var(--ui-border)]">
       <UContainer>
         <UPageHeader
-          title="Features"
-          description="What actually changes in the game. Grouped by gameplay system, not by repository."
+          :title="t('Features')"
+          :description="t('What actually changes in the game. Grouped by gameplay system, not by repository.')"
         />
       </UContainer>
     </div>
@@ -104,32 +107,32 @@ useSeoMeta({
         <UInput
           v-model="search"
           icon="i-lucide-search"
-          placeholder="Filter features"
+          :placeholder="t('Filter features')"
           class="lg:max-w-xs"
-          aria-label="Filter features by name"
+          :aria-label="t('Filter features by name')"
         />
         <div class="flex flex-wrap gap-3">
           <USelect
             v-model="category"
             :items="usedCategories"
             class="w-52"
-            aria-label="Filter by category"
+            :aria-label="t('Filter by category')"
           />
           <USelect
             v-model="mod"
             :items="modOptions"
             class="w-52"
-            aria-label="Filter by mod"
+            :aria-label="t('Filter by mod')"
           />
           <USelect
             v-model="status"
             :items="statusOptions"
             class="w-40"
-            aria-label="Filter by status"
+            :aria-label="t('Filter by status')"
           />
         </div>
         <p class="text-sm text-[var(--ui-text-dimmed)] lg:ml-auto">
-          {{ filtered.length }} of {{ features.length }}
+          {{ filtered.length }} {{ t('of') }} {{ features.length }}
         </p>
       </div>
 
@@ -142,7 +145,7 @@ useSeoMeta({
           :key="key"
         >
           <h2 class="mb-4 text-sm font-semibold uppercase tracking-wider text-gold-400">
-            {{ FEATURE_CATEGORY_LABELS[key] }}
+            {{ t(FEATURE_CATEGORY_LABELS[key]) }}
           </h2>
           <div
             v-reveal.children="{ stagger: 0.05 }"
@@ -166,8 +169,8 @@ useSeoMeta({
         v-else
         class="mt-16"
         icon="i-lucide-search-x"
-        title="No features match those filters"
-        description="Try widening the category, mod or status filter."
+        :title="t('No features match those filters')"
+        :description="t('Try widening the category, mod or status filter.')"
       >
         <template #actions>
           <UButton
@@ -175,7 +178,7 @@ useSeoMeta({
             variant="subtle"
             @click="reset"
           >
-            Clear filters
+            {{ t('Clear filters') }}
           </UButton>
         </template>
       </UEmpty>

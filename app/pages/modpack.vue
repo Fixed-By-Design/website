@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import { PROJECT } from '#shared/constants/project'
-
-const { data: page } = await useAsyncData('modpack', () => queryCollection('pages').path('/pages/modpack').first())
+const { t, locale, collection } = useSiteLocale()
+const { data: page } = await useAsyncData(`modpack-${locale.value}`, () => queryCollection(collection('pages')).path(locale.value === 'fr' ? '/fr/pages/modpack' : '/pages/modpack').first())
 
 if (!page.value) {
-  throw createError({ statusCode: 404, statusMessage: 'Page not found', fatal: true })
+  throw createError({ statusCode: 404, statusMessage: t('Page not found'), fatal: true })
 }
 
 useSeoMeta({
@@ -22,7 +21,7 @@ useSeoMeta({
           :description="page.description"
         >
           <template #links>
-            <SiteDownloadButton :label="`Download ${PROJECT.modpackVersion}`" />
+            <SiteDownloadButton />
           </template>
         </UPageHeader>
       </UContainer>

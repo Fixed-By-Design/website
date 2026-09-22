@@ -41,7 +41,7 @@ export default defineOAuthGitHubEventHandler({
       loggedInAt: new Date().toISOString(),
     })
 
-    return sendRedirect(event, '/dashboard')
+    return sendRedirect(event, getCookie(event, 'site_locale') === 'fr' ? '/fr/dashboard' : '/dashboard')
   },
 
   onError(event, error) {
@@ -51,6 +51,6 @@ export default defineOAuthGitHubEventHandler({
       ? 'not-configured'
       : 'failed'
 
-    return sendRedirect(event, `/signin?error=${reason}`)
+    return sendRedirect(event, `${getCookie(event, 'site_locale') === 'fr' ? '/fr' : ''}/signin?error=${reason}`)
   },
 })
