@@ -21,7 +21,7 @@ details:
   - label: Reagent discount
     value: 3.33% per regular bookshelf, capped at 15 shelves for 50%
   - label: Reagent quantity
-    value: Level x 2, from 2 at level I up to 10 at level V
+    value: Each enchantment has its own price curve, from one Cobweb for Silk Touch to 36 Emeralds for Fortune III
   - label: Experience cost
     value: 2 / 4 / 7 / 10 levels for I to IV, Mending a flat 8
 ---
@@ -38,9 +38,9 @@ An enchantment appears in that list only if a book containing it sits in a chise
 
 **Pick an enchantment and a level.** Each row in the list shows one clickable Roman numeral per level. Green means you already have it, bright means you can afford it, dimmed means you cannot.
 
-**Pay the reagent.** Every enchantment demands its own material rather than lapis. Fire Aspect wants Blaze Powder, Channeling wants a Lightning Rod, Silk Touch wants Cobweb, Looting wants a Rabbit's Foot. Anything without a listed reagent falls back to Lapis Lazuli.
+**Pay the reagent.** Every enchantment demands its own material rather than lapis, tied to what it does: Fire Aspect wants Blaze Powder, Channeling a Lightning Rod, Silk Touch Cobweb. Stronger enchantments ask for rarer reagents or more of them, so Mending costs Ghast Tears and Swift Sneak costs Sculk Sensors while Knockback only costs Pistons. Enchantments added by other mods fall back to Lapis Lazuli.
 
-**Pay the levels.** Experience is charged per enchantment, and an upgrade only ever charges the difference between what the item has and what you asked for.
+**Pay the levels.** Experience is charged per enchantment, and an upgrade only ever charges the difference between what the item has and what you asked for. The same goes for the reagent, so stepping up one level at a time costs exactly as much as going straight to the top.
 
 ::note
 Regular bookshelves still matter. Each one cuts reagent cost by 3.33%, up to fifteen shelves for a 50% discount. The Catalogue shows the running total as you build.
@@ -60,8 +60,13 @@ A selection of the reagent table:
 | Silk Touch | Cobweb |
 | Luck of the Sea | Nautilus Shell |
 | Infinity | Spectral Arrow |
-| Riptide | Heart of the Sea |
-| Mending and anything unlisted | Lapis Lazuli |
+| Swift Sneak | Sculk Sensor |
+| Riptide | Prismarine Crystals |
+| Lunge | Wind Charge |
+| Mending | Ghast Tear |
+| Enchantments from other mods | Lapis Lazuli |
+
+The [full reagent table](https://github.com/Fixed-By-Design/enchantment-overhaul/blob/dev/docs/Enchantment-List.md#reagent-table) lists every enchantment with its price at each level.
 
 ## Why the names are still scrambled
 

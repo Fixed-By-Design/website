@@ -1,6 +1,6 @@
 ---
 title: Enchantment Slots
-summary: Every item has a slot budget, every enchantment costs slots, and the grindstone permanently scars whatever you strip.
+summary: Every item has a slot budget, every enchantment costs slots, and curses buy extra room at a price.
 category: enchanting
 pillar: equipment-enchanting
 mod: enchantment-overhaul
@@ -47,21 +47,10 @@ An enchantment costs slots equal to its level. Protection IV would cost four, Fi
 
 Curses are free. They cost zero slots and each one grants an extra slot on top. Accepting Curse of Binding on a chestplate is a genuine bargain rather than a joke.
 
-## The grindstone leaves a mark
+## Starting over
 
-Vanilla's grindstone strips enchantments and refunds a little experience, with no downside. Here it strips everything including curses, and stamps the item with a permanent penalty that removes one maximum slot per use.
+Vanilla's grindstone strips every enchantment but the curses. Here it strips curses too, and the item keeps its whole budget, so a build that did not work out can be rebuilt from scratch on the same piece.
 
-An anvil can buy one of those slots back. Put the scarred item in with its repair material and pay the levels:
-
-| Material | Levels |
-| :-- | :-- |
-| Netherite | 10 |
-| Diamond | 8 |
-| Gold | 5 |
-| Iron, chainmail | 5 |
-| Copper | 3 |
-| Anything else | 2 |
-
-::warning
-The penalty is stored on the item itself, so it survives repairs, renaming and trading. A twice-ground sword is permanently a worse sword until you pay to restore it.
+::note
+Older versions of the mod removed one maximum slot each time an item went through the grindstone. Items marked that way have their slots back.
 ::
